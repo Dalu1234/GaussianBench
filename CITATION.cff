@@ -11,4 +11,4 @@ version: 0.6.0
 abstract: >-
   GaussianBench is a state-level physics-fidelity benchmark for
   physics-integrated Gaussian scene representations.
-repository-code: "https://github.com/Dalu1234/GaussianBench-public"
+repository-code: "https://github.com/Dalu1234/GaussianBench"
