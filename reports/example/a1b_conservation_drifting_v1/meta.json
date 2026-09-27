@@ -1,0 +1,16 @@
+{
+  "system_name": "example-analytic",
+  "system_version": "0",
+  "spec_version": "1.0.0",
+  "columns_present": [
+    "vx",
+    "vy",
+    "vz"
+  ],
+  "wall_clock_seconds": 0.0,
+  "hardware": "none",
+  "notes": {
+    "domain_handling": "mesh_free",
+    "text": "Closed-form rigid motion, bundled example, not a simulator; no computational domain exists, so mesh_free is the honest category."
+  }
+}

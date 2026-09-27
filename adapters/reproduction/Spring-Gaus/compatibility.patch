@@ -1,0 +1,47 @@
+diff --git a/lib/models/spring_mass/Spring_Mass.py b/lib/models/spring_mass/Spring_Mass.py
+index 5b361aa..736791d 100644
+--- a/lib/models/spring_mass/Spring_Mass.py
++++ b/lib/models/spring_mass/Spring_Mass.py
+@@ -3,9 +3,23 @@ import torch
+ import torch.nn as nn
+ import numpy as np
+ 
+-from termcolor import colored
++try:
++    from termcolor import colored
++except ImportError:
++    def colored(value, *args, **kwargs):
++        return str(value)
+ from copy import deepcopy
+-from pytorch3d.ops import knn_points
++try:
++    from pytorch3d.ops import knn_points
++except ImportError:
++    def knn_points(x, ref, K, return_nn=True):
++        """API-compatible exact fallback for benchmark-sized point sets."""
++        distances = torch.cdist(x, ref).square()
++        dist, index = torch.topk(distances, K, dim=-1, largest=False)
++        neighbors = torch.gather(
++            ref[:, None].expand(-1, x.shape[1], -1, -1), 2,
++            index[..., None].expand(-1, -1, -1, ref.shape[-1]))
++        return dist, index, neighbors
+ from lib.utils.builder import SIMULATOR
+ from lib.utils.logger import logger
+ from lib.utils.misc import param_size
+diff --git a/lib/utils/misc.py b/lib/utils/misc.py
+index 05a0529..66e2351 100644
+--- a/lib/utils/misc.py
++++ b/lib/utils/misc.py
+@@ -6,7 +6,11 @@ from enum import Enum
+ import numpy as np
+ import yaml
+ import socket
+-from termcolor import colored
++try:
++    from termcolor import colored
++except ImportError:
++    def colored(value, *args, **kwargs):
++        return str(value)
+ from contextlib import closing
+ import collections.abc as abc
+ 

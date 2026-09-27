@@ -1,0 +1,48 @@
+diff --git a/physdreamer/warp_mpm/mpm_solver_diff.py b/physdreamer/warp_mpm/mpm_solver_diff.py
+index 619684b..0dc132d 100644
+--- a/physdreamer/warp_mpm/mpm_solver_diff.py
++++ b/physdreamer/warp_mpm/mpm_solver_diff.py
+@@ -7,7 +7,16 @@ sys.path.append(os.path.dirname(os.path.realpath(__file__)))
+ from mpm_data_structure import *
+ from mpm_utils import *
+ from typing import Optional, Union, Sequence, Any, Tuple
+-from jaxtyping import Float, Int, Shaped
++try:
++    from jaxtyping import Float, Int, Shaped
++except ImportError:
++    # The annotations are documentation only. Keep the released solver usable in
++    # lightweight benchmark environments where jaxtyping is not installed.
++    class _Annotation:
++        def __class_getitem__(cls, item):
++            return Any
++
++    Float = Int = Shaped = _Annotation
+ 
+ 
+ class MPMWARPDiff(object):
+diff --git a/physdreamer/warp_mpm/warp_utils.py b/physdreamer/warp_mpm/warp_utils.py
+index 7977d62..d4af351 100644
+--- a/physdreamer/warp_mpm/warp_utils.py
++++ b/physdreamer/warp_mpm/warp_utils.py
+@@ -21,6 +21,14 @@ def from_torch_safe(t, dtype=None, requires_grad=None, grad=None):
+     Returns:
+         warp.array: The wrapped array.
+     """
++    # Modern Warp exposes the same ownership-safe conversion through its public
++    # torch bridge. The released manual constructor used the removed `owner`
++    # keyword, so prefer the maintained implementation when available.
++    if hasattr(wp, "from_torch"):
++        return wp.from_torch(
++            t, dtype=dtype, requires_grad=requires_grad, grad=grad
++        )
++
+     if dtype is None:
+         dtype = dtype_from_torch(t.dtype)
+     elif not dtype_is_compatible(t.dtype, dtype):
+@@ -139,4 +147,4 @@ class CondTape(object):
+ 
+     def __exit__(self, exc_type, exc_value, traceback):
+         if self.tape is not None and self.cond:
+-            self.tape.__exit__(exc_type, exc_value, traceback)
+\ No newline at end of file
++            self.tape.__exit__(exc_type, exc_value, traceback)

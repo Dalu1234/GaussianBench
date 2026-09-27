@@ -1,0 +1,4268 @@
+{
+  "interpretation": "scale multiplies allowed error; <1 stricter, >1 looser",
+  "regime_gates_frozen": [
+    "min_com_travel",
+    "min_frames",
+    "min_peak_area_p95",
+    "prescribed_face_tolerance_rel",
+    "regime_max_tip_deflection_frac_of_length",
+    "squash_verify_height_frac_max"
+  ],
+  "entries": {
+    "PhysGaussian": "results/PhysGaussian_native_2026-08-27",
+    "GaussianFluent": "results/GaussianFluent_full",
+    "OmniPhysGS": "results/OmniPhysGS_full",
+    "PhysDreamer": "results/PhysDreamer_full",
+    "Physics3D": "results/Physics3D_broad",
+    "GASP": "results/GASP_broad"
+  },
+  "scales": [
+    0.5,
+    0.75,
+    1.0,
+    1.25,
+    2.0
+  ],
+  "rows": [
+    {
+      "system": "PhysGaussian",
+      "scene_id": "a1a_conservation_inplace_v1",
+      "scale": 0.5,
+      "status": "FAIL",
+      "measured": {
+        "linear_momentum_rel_drift": 8.947606551132118e-06,
+        "angular_momentum_rel_drift": 7.297899810172015e-05,
+        "kinetic_energy_rel_change_final": -0.00016961196688103364
+      },
+      "tolerance": {
+        "linear_momentum_rel_drift": 5e-07,
+        "angular_momentum_rel_drift": 0.0005,
+        "velocities_derived": false
+      }
+    },
+    {
+      "system": "PhysGaussian",
+      "scene_id": "a1b_conservation_drifting_v1",
+      "scale": 0.5,
+      "status": "PASS",
+      "measured": {
+        "linear_momentum_rel_drift": 1.0230158733820911e-06,
+        "angular_momentum_rel_drift": 6.953906626699454e-05,
+        "kinetic_energy_rel_change_final": -9.645003773428584e-07,
+        "declared_domain_handling": "co_moving"
+      },
+      "tolerance": {
+        "linear_momentum_rel_drift": 0.0005,
+        "angular_momentum_rel_drift": 0.005,
+        "velocities_derived": false
+      }
+    },
+    {
+      "system": "PhysGaussian",
+      "scene_id": "a2_beam_frequency_v1",
+      "scale": 0.5,
+      "status": "PASS",
+      "measured": {
+        "fundamental_frequency_hz": 1.1765202680017997,
+        "rel_error": 0.04227933780823153,
+        "damping_ratio": 0.005627723676990941,
+        "max_tip_deflection_m": 0.007002046215735996
+      },
+      "tolerance": {
+        "rel_tolerance": 0.05
+      }
+    },
+    {
+      "system": "PhysGaussian",
+      "scene_id": "a3_wavespeed_v1",
+      "scale": 0.5,
+      "status": "FAIL",
+      "measured": {
+        "bar_wave_speed_m_s": 24.085365853658537,
+        "arrival_time_s": 0.041,
+        "travel_distance_m": 0.9875,
+        "rel_error": 0.07713030623465476
+      },
+      "tolerance": {
+        "rel_tolerance": 0.075
+      }
+    },
+    {
+      "system": "PhysGaussian",
+      "scene_id": "a5_stiffness_v1",
+      "scale": 0.5,
+      "status": "PASS",
+      "measured": {
+        "lateral_strain": -0.006450456247798053,
+        "axial_strain": 0.0210440064731397,
+        "rel_error": 0.02174083881972647
+      },
+      "tolerance": {
+        "rel_tolerance": 0.05
+      }
+    },
+    {
+      "system": "PhysGaussian",
+      "scene_id": "c1_covariance_v1",
+      "scale": 0.5,
+      "status": "PASS",
+      "measured": {
+        "kinematic_median_rel_frobenius_error": 0.008656049072558071,
+        "kinematic_p95_rel_frobenius_error": 0.015626015958374845,
+        "transport_median_rel_frobenius_error": 0.00013629222060830624,
+        "transport_p95_rel_frobenius_error": 0.0003375431471412109,
+        "kinematic_status": "PASS",
+        "transport_status": "PASS",
+        "n_particles_scored": 3375
+      },
+      "tolerance": {
+        "kinematic_median_max": 0.025,
+        "kinematic_p95_max": 0.05,
+        "transport_median_max": 0.0005,
+        "transport_p95_max": 0.005
+      }
+    },
+    {
+      "system": "PhysGaussian",
+      "scene_id": "c2_blobhealth_shear_v1",
+      "scale": 0.5,
+      "status": "INVALID",
+      "measured": {
+        "peak_kinematic_median_rel_frobenius_error": 0.4530285284460568,
+        "peak_kinematic_p95_rel_frobenius_error": 0.646080179247936,
+        "peak_transport_median_rel_frobenius_error": 0.0007468887644474288,
+        "peak_transport_p95_rel_frobenius_error": 0.0028055178904700406,
+        "kinematic_status": "FAIL",
+        "transport_status": "FAIL",
+        "health_status": "PASS",
+        "min_eigenvalue_ratio": 0.14163445979421488,
+        "degenerate_fraction": 0.0,
+        "worst_particle_id": 996
+      },
+      "tolerance": {
+        "peak_kinematic_median_rel_frobenius_max": 0.025,
+        "peak_kinematic_p95_rel_frobenius_max": 0.05,
+        "peak_transport_median_rel_frobenius_max": 0.0005,
+        "peak_transport_p95_rel_frobenius_max": 0.005,
+        "peak_transport_boundary_exclusion_spacings": 2.0,
+        "min_eigenvalue_ratio": 0.002,
+        "condition_number_max": 5000.0,
+        "degenerate_fraction_max": 0.0005
+      }
+    },
+    {
+      "system": "PhysGaussian",
+      "scene_id": "c3_roundtrip_v1",
+      "scale": 0.5,
+      "status": "FAIL",
+      "measured": {
+        "psnr_db": 31.628940916421826,
+        "ssim": 0.9922023222085172,
+        "min_height_frac_during_run": 0.7999928673438241
+      },
+      "tolerance": {
+        "psnr_min_db": 38.01029995663981,
+        "ssim_min": 0.985
+      }
+    },
+    {
+      "system": "PhysGaussian",
+      "scene_id": "c4_captured_frequency_v1",
+      "scale": 0.5,
+      "status": "PASS",
+      "measured": {
+        "fundamental_frequency_hz": 0.9136862664144104,
+        "rel_error": 0.00690523521547692,
+        "damping_ratio": 0.007951040704374985
+      },
+      "tolerance": {
+        "rel_tolerance": 0.1
+      }
+    },
+    {
+      "system": "PhysGaussian",
+      "scene_id": "m1_material_validation_v1",
+      "scale": 0.5,
+      "status": "PASS",
+      "measured": {
+        "median_rel_error": 0.053965066222740915,
+        "p95_rel_error": 0.08729287566782694,
+        "max_stretch_scored": 2.5,
+        "max_strain_scored": 1.5,
+        "n_points": 45
+      },
+      "tolerance": {
+        "median_rel_tolerance": 0.075,
+        "max_stretch": 2.5
+      }
+    },
+    {
+      "system": "PhysGaussian",
+      "scene_id": "a1a_conservation_inplace_v1",
+      "scale": 0.75,
+      "status": "FAIL",
+      "measured": {
+        "linear_momentum_rel_drift": 8.947606551132118e-06,
+        "angular_momentum_rel_drift": 7.297899810172015e-05,
+        "kinetic_energy_rel_change_final": -0.00016961196688103364
+      },
+      "tolerance": {
+        "linear_momentum_rel_drift": 7.5e-07,
+        "angular_momentum_rel_drift": 0.00075,
+        "velocities_derived": false
+      }
+    },
+    {
+      "system": "PhysGaussian",
+      "scene_id": "a1b_conservation_drifting_v1",
+      "scale": 0.75,
+      "status": "PASS",
+      "measured": {
+        "linear_momentum_rel_drift": 1.0230158733820911e-06,
+        "angular_momentum_rel_drift": 6.953906626699454e-05,
+        "kinetic_energy_rel_change_final": -9.645003773428584e-07,
+        "declared_domain_handling": "co_moving"
+      },
+      "tolerance": {
+        "linear_momentum_rel_drift": 0.00075,
+        "angular_momentum_rel_drift": 0.0075,
+        "velocities_derived": false
+      }
+    },
+    {
+      "system": "PhysGaussian",
+      "scene_id": "a2_beam_frequency_v1",
+      "scale": 0.75,
+      "status": "PASS",
+      "measured": {
+        "fundamental_frequency_hz": 1.1765202680017997,
+        "rel_error": 0.04227933780823153,
+        "damping_ratio": 0.005627723676990941,
+        "max_tip_deflection_m": 0.007002046215735996
+      },
+      "tolerance": {
+        "rel_tolerance": 0.07500000000000001
+      }
+    },
+    {
+      "system": "PhysGaussian",
+      "scene_id": "a3_wavespeed_v1",
+      "scale": 0.75,
+      "status": "PASS",
+      "measured": {
+        "bar_wave_speed_m_s": 24.085365853658537,
+        "arrival_time_s": 0.041,
+        "travel_distance_m": 0.9875,
+        "rel_error": 0.07713030623465476
+      },
+      "tolerance": {
+        "rel_tolerance": 0.11249999999999999
+      }
+    },
+    {
+      "system": "PhysGaussian",
+      "scene_id": "a5_stiffness_v1",
+      "scale": 0.75,
+      "status": "PASS",
+      "measured": {
+        "lateral_strain": -0.006450456247798053,
+        "axial_strain": 0.0210440064731397,
+        "rel_error": 0.02174083881972647
+      },
+      "tolerance": {
+        "rel_tolerance": 0.07500000000000001
+      }
+    },
+    {
+      "system": "PhysGaussian",
+      "scene_id": "c1_covariance_v1",
+      "scale": 0.75,
+      "status": "PASS",
+      "measured": {
+        "kinematic_median_rel_frobenius_error": 0.008656049072558071,
+        "kinematic_p95_rel_frobenius_error": 0.015626015958374845,
+        "transport_median_rel_frobenius_error": 0.00013629222060830624,
+        "transport_p95_rel_frobenius_error": 0.0003375431471412109,
+        "kinematic_status": "PASS",
+        "transport_status": "PASS",
+        "n_particles_scored": 3375
+      },
+      "tolerance": {
+        "kinematic_median_max": 0.037500000000000006,
+        "kinematic_p95_max": 0.07500000000000001,
+        "transport_median_max": 0.00075,
+        "transport_p95_max": 0.0075
+      }
+    },
+    {
+      "system": "PhysGaussian",
+      "scene_id": "c2_blobhealth_shear_v1",
+      "scale": 0.75,
+      "status": "INVALID",
+      "measured": {
+        "peak_kinematic_median_rel_frobenius_error": 0.4530285284460568,
+        "peak_kinematic_p95_rel_frobenius_error": 0.646080179247936,
+        "peak_transport_median_rel_frobenius_error": 0.0007468887644474288,
+        "peak_transport_p95_rel_frobenius_error": 0.0028055178904700406,
+        "kinematic_status": "FAIL",
+        "transport_status": "PASS",
+        "health_status": "PASS",
+        "min_eigenvalue_ratio": 0.14163445979421488,
+        "degenerate_fraction": 0.0,
+        "worst_particle_id": 996
+      },
+      "tolerance": {
+        "peak_kinematic_median_rel_frobenius_max": 0.037500000000000006,
+        "peak_kinematic_p95_rel_frobenius_max": 0.07500000000000001,
+        "peak_transport_median_rel_frobenius_max": 0.00075,
+        "peak_transport_p95_rel_frobenius_max": 0.0075,
+        "peak_transport_boundary_exclusion_spacings": 2.0,
+        "min_eigenvalue_ratio": 0.0013333333333333333,
+        "condition_number_max": 7500.0,
+        "degenerate_fraction_max": 0.00075
+      }
+    },
+    {
+      "system": "PhysGaussian",
+      "scene_id": "c3_roundtrip_v1",
+      "scale": 0.75,
+      "status": "FAIL",
+      "measured": {
+        "psnr_db": 31.628940916421826,
+        "ssim": 0.9922023222085172,
+        "min_height_frac_during_run": 0.7999928673438241
+      },
+      "tolerance": {
+        "psnr_min_db": 36.249387366083,
+        "ssim_min": 0.9775
+      }
+    },
+    {
+      "system": "PhysGaussian",
+      "scene_id": "c4_captured_frequency_v1",
+      "scale": 0.75,
+      "status": "PASS",
+      "measured": {
+        "fundamental_frequency_hz": 0.9136862664144104,
+        "rel_error": 0.00690523521547692,
+        "damping_ratio": 0.007951040704374985
+      },
+      "tolerance": {
+        "rel_tolerance": 0.15000000000000002
+      }
+    },
+    {
+      "system": "PhysGaussian",
+      "scene_id": "m1_material_validation_v1",
+      "scale": 0.75,
+      "status": "PASS",
+      "measured": {
+        "median_rel_error": 0.053965066222740915,
+        "p95_rel_error": 0.08729287566782694,
+        "max_stretch_scored": 2.5,
+        "max_strain_scored": 1.5,
+        "n_points": 45
+      },
+      "tolerance": {
+        "median_rel_tolerance": 0.11249999999999999,
+        "max_stretch": 2.5
+      }
+    },
+    {
+      "system": "PhysGaussian",
+      "scene_id": "a1a_conservation_inplace_v1",
+      "scale": 1.0,
+      "status": "FAIL",
+      "measured": {
+        "linear_momentum_rel_drift": 8.947606551132118e-06,
+        "angular_momentum_rel_drift": 7.297899810172015e-05,
+        "kinetic_energy_rel_change_final": -0.00016961196688103364
+      },
+      "tolerance": {
+        "linear_momentum_rel_drift": 1e-06,
+        "angular_momentum_rel_drift": 0.001,
+        "velocities_derived": false
+      }
+    },
+    {
+      "system": "PhysGaussian",
+      "scene_id": "a1b_conservation_drifting_v1",
+      "scale": 1.0,
+      "status": "PASS",
+      "measured": {
+        "linear_momentum_rel_drift": 1.0230158733820911e-06,
+        "angular_momentum_rel_drift": 6.953906626699454e-05,
+        "kinetic_energy_rel_change_final": -9.645003773428584e-07,
+        "declared_domain_handling": "co_moving"
+      },
+      "tolerance": {
+        "linear_momentum_rel_drift": 0.001,
+        "angular_momentum_rel_drift": 0.01,
+        "velocities_derived": false
+      }
+    },
+    {
+      "system": "PhysGaussian",
+      "scene_id": "a2_beam_frequency_v1",
+      "scale": 1.0,
+      "status": "PASS",
+      "measured": {
+        "fundamental_frequency_hz": 1.1765202680017997,
+        "rel_error": 0.04227933780823153,
+        "damping_ratio": 0.005627723676990941,
+        "max_tip_deflection_m": 0.007002046215735996
+      },
+      "tolerance": {
+        "rel_tolerance": 0.1
+      }
+    },
+    {
+      "system": "PhysGaussian",
+      "scene_id": "a3_wavespeed_v1",
+      "scale": 1.0,
+      "status": "PASS",
+      "measured": {
+        "bar_wave_speed_m_s": 24.085365853658537,
+        "arrival_time_s": 0.041,
+        "travel_distance_m": 0.9875,
+        "rel_error": 0.07713030623465476
+      },
+      "tolerance": {
+        "rel_tolerance": 0.15
+      }
+    },
+    {
+      "system": "PhysGaussian",
+      "scene_id": "a5_stiffness_v1",
+      "scale": 1.0,
+      "status": "PASS",
+      "measured": {
+        "lateral_strain": -0.006450456247798053,
+        "axial_strain": 0.0210440064731397,
+        "rel_error": 0.02174083881972647
+      },
+      "tolerance": {
+        "rel_tolerance": 0.1
+      }
+    },
+    {
+      "system": "PhysGaussian",
+      "scene_id": "c1_covariance_v1",
+      "scale": 1.0,
+      "status": "PASS",
+      "measured": {
+        "kinematic_median_rel_frobenius_error": 0.008656049072558071,
+        "kinematic_p95_rel_frobenius_error": 0.015626015958374845,
+        "transport_median_rel_frobenius_error": 0.00013629222060830624,
+        "transport_p95_rel_frobenius_error": 0.0003375431471412109,
+        "kinematic_status": "PASS",
+        "transport_status": "PASS",
+        "n_particles_scored": 3375
+      },
+      "tolerance": {
+        "kinematic_median_max": 0.05,
+        "kinematic_p95_max": 0.1,
+        "transport_median_max": 0.001,
+        "transport_p95_max": 0.01
+      }
+    },
+    {
+      "system": "PhysGaussian",
+      "scene_id": "c2_blobhealth_shear_v1",
+      "scale": 1.0,
+      "status": "INVALID",
+      "measured": {
+        "peak_kinematic_median_rel_frobenius_error": 0.4530285284460568,
+        "peak_kinematic_p95_rel_frobenius_error": 0.646080179247936,
+        "peak_transport_median_rel_frobenius_error": 0.0007468887644474288,
+        "peak_transport_p95_rel_frobenius_error": 0.0028055178904700406,
+        "kinematic_status": "FAIL",
+        "transport_status": "PASS",
+        "health_status": "PASS",
+        "min_eigenvalue_ratio": 0.14163445979421488,
+        "degenerate_fraction": 0.0,
+        "worst_particle_id": 996
+      },
+      "tolerance": {
+        "peak_kinematic_median_rel_frobenius_max": 0.05,
+        "peak_kinematic_p95_rel_frobenius_max": 0.1,
+        "peak_transport_median_rel_frobenius_max": 0.001,
+        "peak_transport_p95_rel_frobenius_max": 0.01,
+        "peak_transport_boundary_exclusion_spacings": 2.0,
+        "min_eigenvalue_ratio": 0.001,
+        "condition_number_max": 10000.0,
+        "degenerate_fraction_max": 0.001
+      }
+    },
+    {
+      "system": "PhysGaussian",
+      "scene_id": "c3_roundtrip_v1",
+      "scale": 1.0,
+      "status": "FAIL",
+      "measured": {
+        "psnr_db": 31.628940916421826,
+        "ssim": 0.9922023222085172,
+        "min_height_frac_during_run": 0.7999928673438241
+      },
+      "tolerance": {
+        "psnr_min_db": 35.0,
+        "ssim_min": 0.97
+      }
+    },
+    {
+      "system": "PhysGaussian",
+      "scene_id": "c4_captured_frequency_v1",
+      "scale": 1.0,
+      "status": "PASS",
+      "measured": {
+        "fundamental_frequency_hz": 0.9136862664144104,
+        "rel_error": 0.00690523521547692,
+        "damping_ratio": 0.007951040704374985
+      },
+      "tolerance": {
+        "rel_tolerance": 0.2
+      }
+    },
+    {
+      "system": "PhysGaussian",
+      "scene_id": "m1_material_validation_v1",
+      "scale": 1.0,
+      "status": "PASS",
+      "measured": {
+        "median_rel_error": 0.053965066222740915,
+        "p95_rel_error": 0.08729287566782694,
+        "max_stretch_scored": 2.5,
+        "max_strain_scored": 1.5,
+        "n_points": 45
+      },
+      "tolerance": {
+        "median_rel_tolerance": 0.15,
+        "max_stretch": 2.5
+      }
+    },
+    {
+      "system": "PhysGaussian",
+      "scene_id": "a1a_conservation_inplace_v1",
+      "scale": 1.25,
+      "status": "FAIL",
+      "measured": {
+        "linear_momentum_rel_drift": 8.947606551132118e-06,
+        "angular_momentum_rel_drift": 7.297899810172015e-05,
+        "kinetic_energy_rel_change_final": -0.00016961196688103364
+      },
+      "tolerance": {
+        "linear_momentum_rel_drift": 1.2499999999999999e-06,
+        "angular_momentum_rel_drift": 0.00125,
+        "velocities_derived": false
+      }
+    },
+    {
+      "system": "PhysGaussian",
+      "scene_id": "a1b_conservation_drifting_v1",
+      "scale": 1.25,
+      "status": "PASS",
+      "measured": {
+        "linear_momentum_rel_drift": 1.0230158733820911e-06,
+        "angular_momentum_rel_drift": 6.953906626699454e-05,
+        "kinetic_energy_rel_change_final": -9.645003773428584e-07,
+        "declared_domain_handling": "co_moving"
+      },
+      "tolerance": {
+        "linear_momentum_rel_drift": 0.00125,
+        "angular_momentum_rel_drift": 0.0125,
+        "velocities_derived": false
+      }
+    },
+    {
+      "system": "PhysGaussian",
+      "scene_id": "a2_beam_frequency_v1",
+      "scale": 1.25,
+      "status": "PASS",
+      "measured": {
+        "fundamental_frequency_hz": 1.1765202680017997,
+        "rel_error": 0.04227933780823153,
+        "damping_ratio": 0.005627723676990941,
+        "max_tip_deflection_m": 0.007002046215735996
+      },
+      "tolerance": {
+        "rel_tolerance": 0.125
+      }
+    },
+    {
+      "system": "PhysGaussian",
+      "scene_id": "a3_wavespeed_v1",
+      "scale": 1.25,
+      "status": "PASS",
+      "measured": {
+        "bar_wave_speed_m_s": 24.085365853658537,
+        "arrival_time_s": 0.041,
+        "travel_distance_m": 0.9875,
+        "rel_error": 0.07713030623465476
+      },
+      "tolerance": {
+        "rel_tolerance": 0.1875
+      }
+    },
+    {
+      "system": "PhysGaussian",
+      "scene_id": "a5_stiffness_v1",
+      "scale": 1.25,
+      "status": "PASS",
+      "measured": {
+        "lateral_strain": -0.006450456247798053,
+        "axial_strain": 0.0210440064731397,
+        "rel_error": 0.02174083881972647
+      },
+      "tolerance": {
+        "rel_tolerance": 0.125
+      }
+    },
+    {
+      "system": "PhysGaussian",
+      "scene_id": "c1_covariance_v1",
+      "scale": 1.25,
+      "status": "PASS",
+      "measured": {
+        "kinematic_median_rel_frobenius_error": 0.008656049072558071,
+        "kinematic_p95_rel_frobenius_error": 0.015626015958374845,
+        "transport_median_rel_frobenius_error": 0.00013629222060830624,
+        "transport_p95_rel_frobenius_error": 0.0003375431471412109,
+        "kinematic_status": "PASS",
+        "transport_status": "PASS",
+        "n_particles_scored": 3375
+      },
+      "tolerance": {
+        "kinematic_median_max": 0.0625,
+        "kinematic_p95_max": 0.125,
+        "transport_median_max": 0.00125,
+        "transport_p95_max": 0.0125
+      }
+    },
+    {
+      "system": "PhysGaussian",
+      "scene_id": "c2_blobhealth_shear_v1",
+      "scale": 1.25,
+      "status": "INVALID",
+      "measured": {
+        "peak_kinematic_median_rel_frobenius_error": 0.4530285284460568,
+        "peak_kinematic_p95_rel_frobenius_error": 0.646080179247936,
+        "peak_transport_median_rel_frobenius_error": 0.0007468887644474288,
+        "peak_transport_p95_rel_frobenius_error": 0.0028055178904700406,
+        "kinematic_status": "FAIL",
+        "transport_status": "PASS",
+        "health_status": "PASS",
+        "min_eigenvalue_ratio": 0.14163445979421488,
+        "degenerate_fraction": 0.0,
+        "worst_particle_id": 996
+      },
+      "tolerance": {
+        "peak_kinematic_median_rel_frobenius_max": 0.0625,
+        "peak_kinematic_p95_rel_frobenius_max": 0.125,
+        "peak_transport_median_rel_frobenius_max": 0.00125,
+        "peak_transport_p95_rel_frobenius_max": 0.0125,
+        "peak_transport_boundary_exclusion_spacings": 2.0,
+        "min_eigenvalue_ratio": 0.0008,
+        "condition_number_max": 12500.0,
+        "degenerate_fraction_max": 0.00125
+      }
+    },
+    {
+      "system": "PhysGaussian",
+      "scene_id": "c3_roundtrip_v1",
+      "scale": 1.25,
+      "status": "FAIL",
+      "measured": {
+        "psnr_db": 31.628940916421826,
+        "ssim": 0.9922023222085172,
+        "min_height_frac_during_run": 0.7999928673438241
+      },
+      "tolerance": {
+        "psnr_min_db": 34.03089986991944,
+        "ssim_min": 0.9624999999999999
+      }
+    },
+    {
+      "system": "PhysGaussian",
+      "scene_id": "c4_captured_frequency_v1",
+      "scale": 1.25,
+      "status": "PASS",
+      "measured": {
+        "fundamental_frequency_hz": 0.9136862664144104,
+        "rel_error": 0.00690523521547692,
+        "damping_ratio": 0.007951040704374985
+      },
+      "tolerance": {
+        "rel_tolerance": 0.25
+      }
+    },
+    {
+      "system": "PhysGaussian",
+      "scene_id": "m1_material_validation_v1",
+      "scale": 1.25,
+      "status": "PASS",
+      "measured": {
+        "median_rel_error": 0.053965066222740915,
+        "p95_rel_error": 0.08729287566782694,
+        "max_stretch_scored": 2.5,
+        "max_strain_scored": 1.5,
+        "n_points": 45
+      },
+      "tolerance": {
+        "median_rel_tolerance": 0.1875,
+        "max_stretch": 2.5
+      }
+    },
+    {
+      "system": "PhysGaussian",
+      "scene_id": "a1a_conservation_inplace_v1",
+      "scale": 2.0,
+      "status": "FAIL",
+      "measured": {
+        "linear_momentum_rel_drift": 8.947606551132118e-06,
+        "angular_momentum_rel_drift": 7.297899810172015e-05,
+        "kinetic_energy_rel_change_final": -0.00016961196688103364
+      },
+      "tolerance": {
+        "linear_momentum_rel_drift": 2e-06,
+        "angular_momentum_rel_drift": 0.002,
+        "velocities_derived": false
+      }
+    },
+    {
+      "system": "PhysGaussian",
+      "scene_id": "a1b_conservation_drifting_v1",
+      "scale": 2.0,
+      "status": "PASS",
+      "measured": {
+        "linear_momentum_rel_drift": 1.0230158733820911e-06,
+        "angular_momentum_rel_drift": 6.953906626699454e-05,
+        "kinetic_energy_rel_change_final": -9.645003773428584e-07,
+        "declared_domain_handling": "co_moving"
+      },
+      "tolerance": {
+        "linear_momentum_rel_drift": 0.002,
+        "angular_momentum_rel_drift": 0.02,
+        "velocities_derived": false
+      }
+    },
+    {
+      "system": "PhysGaussian",
+      "scene_id": "a2_beam_frequency_v1",
+      "scale": 2.0,
+      "status": "PASS",
+      "measured": {
+        "fundamental_frequency_hz": 1.1765202680017997,
+        "rel_error": 0.04227933780823153,
+        "damping_ratio": 0.005627723676990941,
+        "max_tip_deflection_m": 0.007002046215735996
+      },
+      "tolerance": {
+        "rel_tolerance": 0.2
+      }
+    },
+    {
+      "system": "PhysGaussian",
+      "scene_id": "a3_wavespeed_v1",
+      "scale": 2.0,
+      "status": "PASS",
+      "measured": {
+        "bar_wave_speed_m_s": 24.085365853658537,
+        "arrival_time_s": 0.041,
+        "travel_distance_m": 0.9875,
+        "rel_error": 0.07713030623465476
+      },
+      "tolerance": {
+        "rel_tolerance": 0.3
+      }
+    },
+    {
+      "system": "PhysGaussian",
+      "scene_id": "a5_stiffness_v1",
+      "scale": 2.0,
+      "status": "PASS",
+      "measured": {
+        "lateral_strain": -0.006450456247798053,
+        "axial_strain": 0.0210440064731397,
+        "rel_error": 0.02174083881972647
+      },
+      "tolerance": {
+        "rel_tolerance": 0.2
+      }
+    },
+    {
+      "system": "PhysGaussian",
+      "scene_id": "c1_covariance_v1",
+      "scale": 2.0,
+      "status": "PASS",
+      "measured": {
+        "kinematic_median_rel_frobenius_error": 0.008656049072558071,
+        "kinematic_p95_rel_frobenius_error": 0.015626015958374845,
+        "transport_median_rel_frobenius_error": 0.00013629222060830624,
+        "transport_p95_rel_frobenius_error": 0.0003375431471412109,
+        "kinematic_status": "PASS",
+        "transport_status": "PASS",
+        "n_particles_scored": 3375
+      },
+      "tolerance": {
+        "kinematic_median_max": 0.1,
+        "kinematic_p95_max": 0.2,
+        "transport_median_max": 0.002,
+        "transport_p95_max": 0.02
+      }
+    },
+    {
+      "system": "PhysGaussian",
+      "scene_id": "c2_blobhealth_shear_v1",
+      "scale": 2.0,
+      "status": "INVALID",
+      "measured": {
+        "peak_kinematic_median_rel_frobenius_error": 0.4530285284460568,
+        "peak_kinematic_p95_rel_frobenius_error": 0.646080179247936,
+        "peak_transport_median_rel_frobenius_error": 0.0007468887644474288,
+        "peak_transport_p95_rel_frobenius_error": 0.0028055178904700406,
+        "kinematic_status": "FAIL",
+        "transport_status": "PASS",
+        "health_status": "PASS",
+        "min_eigenvalue_ratio": 0.14163445979421488,
+        "degenerate_fraction": 0.0,
+        "worst_particle_id": 996
+      },
+      "tolerance": {
+        "peak_kinematic_median_rel_frobenius_max": 0.1,
+        "peak_kinematic_p95_rel_frobenius_max": 0.2,
+        "peak_transport_median_rel_frobenius_max": 0.002,
+        "peak_transport_p95_rel_frobenius_max": 0.02,
+        "peak_transport_boundary_exclusion_spacings": 2.0,
+        "min_eigenvalue_ratio": 0.0005,
+        "condition_number_max": 20000.0,
+        "degenerate_fraction_max": 0.002
+      }
+    },
+    {
+      "system": "PhysGaussian",
+      "scene_id": "c3_roundtrip_v1",
+      "scale": 2.0,
+      "status": "FAIL",
+      "measured": {
+        "psnr_db": 31.628940916421826,
+        "ssim": 0.9922023222085172,
+        "min_height_frac_during_run": 0.7999928673438241
+      },
+      "tolerance": {
+        "psnr_min_db": 31.989700043360187,
+        "ssim_min": 0.94
+      }
+    },
+    {
+      "system": "PhysGaussian",
+      "scene_id": "c4_captured_frequency_v1",
+      "scale": 2.0,
+      "status": "PASS",
+      "measured": {
+        "fundamental_frequency_hz": 0.9136862664144104,
+        "rel_error": 0.00690523521547692,
+        "damping_ratio": 0.007951040704374985
+      },
+      "tolerance": {
+        "rel_tolerance": 0.4
+      }
+    },
+    {
+      "system": "PhysGaussian",
+      "scene_id": "m1_material_validation_v1",
+      "scale": 2.0,
+      "status": "PASS",
+      "measured": {
+        "median_rel_error": 0.053965066222740915,
+        "p95_rel_error": 0.08729287566782694,
+        "max_stretch_scored": 2.5,
+        "max_strain_scored": 1.5,
+        "n_points": 45
+      },
+      "tolerance": {
+        "median_rel_tolerance": 0.3,
+        "max_stretch": 2.5
+      }
+    },
+    {
+      "system": "GaussianFluent",
+      "scene_id": "a1a_conservation_inplace_v1",
+      "scale": 0.5,
+      "status": "FAIL",
+      "measured": {
+        "linear_momentum_rel_drift": 0.033533309789989384,
+        "angular_momentum_rel_drift": 1.0190646475212677,
+        "kinetic_energy_rel_change_final": -0.9990481972679927
+      },
+      "tolerance": {
+        "linear_momentum_rel_drift": 5e-07,
+        "angular_momentum_rel_drift": 0.0005,
+        "velocities_derived": false
+      }
+    },
+    {
+      "system": "GaussianFluent",
+      "scene_id": "a1b_conservation_drifting_v1",
+      "scale": 0.5,
+      "status": "FAIL",
+      "measured": {
+        "linear_momentum_rel_drift": 0.0027791674591497967,
+        "angular_momentum_rel_drift": 1.0190647177374308,
+        "kinetic_energy_rel_change_final": -0.011726511745983381,
+        "declared_domain_handling": "co_moving"
+      },
+      "tolerance": {
+        "linear_momentum_rel_drift": 0.0005,
+        "angular_momentum_rel_drift": 0.005,
+        "velocities_derived": false
+      }
+    },
+    {
+      "system": "GaussianFluent",
+      "scene_id": "a2_beam_frequency_v1",
+      "scale": 0.5,
+      "status": "FAIL",
+      "measured": {
+        "fundamental_frequency_hz": 0.24375248880258754,
+        "rel_error": 0.7840596634601448,
+        "damping_ratio": 0.36399854080109895,
+        "max_tip_deflection_m": 0.015335926820213596
+      },
+      "tolerance": {
+        "rel_tolerance": 0.05
+      }
+    },
+    {
+      "system": "GaussianFluent",
+      "scene_id": "a3_wavespeed_v1",
+      "scale": 0.5,
+      "status": "FAIL",
+      "measured": {
+        "arrival_detected": false
+      },
+      "tolerance": {
+        "rel_tolerance": 0.075
+      }
+    },
+    {
+      "system": "GaussianFluent",
+      "scene_id": "a5_stiffness_v1",
+      "scale": 0.5,
+      "status": "PASS",
+      "measured": {
+        "lateral_strain": -0.0062966118167553375,
+        "axial_strain": 0.021044034118715072,
+        "rel_error": 0.002629156679362232
+      },
+      "tolerance": {
+        "rel_tolerance": 0.05
+      }
+    },
+    {
+      "system": "GaussianFluent",
+      "scene_id": "c1_covariance_v1",
+      "scale": 0.5,
+      "status": "PASS",
+      "measured": {
+        "kinematic_median_rel_frobenius_error": 0.008642338379543913,
+        "kinematic_p95_rel_frobenius_error": 0.011747104422256311,
+        "transport_median_rel_frobenius_error": 0.00011191764849527124,
+        "transport_p95_rel_frobenius_error": 0.0003135785147199022,
+        "kinematic_status": "PASS",
+        "transport_status": "PASS",
+        "n_particles_scored": 3375
+      },
+      "tolerance": {
+        "kinematic_median_max": 0.025,
+        "kinematic_p95_max": 0.05,
+        "transport_median_max": 0.0005,
+        "transport_p95_max": 0.005
+      }
+    },
+    {
+      "system": "GaussianFluent",
+      "scene_id": "c2_blobhealth_shear_v1",
+      "scale": 0.5,
+      "status": "INVALID",
+      "measured": {
+        "peak_kinematic_median_rel_frobenius_error": 0.12366084810812611,
+        "peak_kinematic_p95_rel_frobenius_error": 0.19968841336673387,
+        "peak_transport_median_rel_frobenius_error": 0.0008146143477826043,
+        "peak_transport_p95_rel_frobenius_error": 0.001464752611197784,
+        "kinematic_status": "FAIL",
+        "transport_status": "FAIL",
+        "health_status": "PASS",
+        "min_eigenvalue_ratio": 0.1800171028916413,
+        "degenerate_fraction": 0.0,
+        "worst_particle_id": 999
+      },
+      "tolerance": {
+        "peak_kinematic_median_rel_frobenius_max": 0.025,
+        "peak_kinematic_p95_rel_frobenius_max": 0.05,
+        "peak_transport_median_rel_frobenius_max": 0.0005,
+        "peak_transport_p95_rel_frobenius_max": 0.005,
+        "peak_transport_boundary_exclusion_spacings": 2.0,
+        "min_eigenvalue_ratio": 0.002,
+        "condition_number_max": 5000.0,
+        "degenerate_fraction_max": 0.0005
+      }
+    },
+    {
+      "system": "GaussianFluent",
+      "scene_id": "a1a_conservation_inplace_v1",
+      "scale": 0.75,
+      "status": "FAIL",
+      "measured": {
+        "linear_momentum_rel_drift": 0.033533309789989384,
+        "angular_momentum_rel_drift": 1.0190646475212677,
+        "kinetic_energy_rel_change_final": -0.9990481972679927
+      },
+      "tolerance": {
+        "linear_momentum_rel_drift": 7.5e-07,
+        "angular_momentum_rel_drift": 0.00075,
+        "velocities_derived": false
+      }
+    },
+    {
+      "system": "GaussianFluent",
+      "scene_id": "a1b_conservation_drifting_v1",
+      "scale": 0.75,
+      "status": "FAIL",
+      "measured": {
+        "linear_momentum_rel_drift": 0.0027791674591497967,
+        "angular_momentum_rel_drift": 1.0190647177374308,
+        "kinetic_energy_rel_change_final": -0.011726511745983381,
+        "declared_domain_handling": "co_moving"
+      },
+      "tolerance": {
+        "linear_momentum_rel_drift": 0.00075,
+        "angular_momentum_rel_drift": 0.0075,
+        "velocities_derived": false
+      }
+    },
+    {
+      "system": "GaussianFluent",
+      "scene_id": "a2_beam_frequency_v1",
+      "scale": 0.75,
+      "status": "FAIL",
+      "measured": {
+        "fundamental_frequency_hz": 0.24375248880258754,
+        "rel_error": 0.7840596634601448,
+        "damping_ratio": 0.36399854080109895,
+        "max_tip_deflection_m": 0.015335926820213596
+      },
+      "tolerance": {
+        "rel_tolerance": 0.07500000000000001
+      }
+    },
+    {
+      "system": "GaussianFluent",
+      "scene_id": "a3_wavespeed_v1",
+      "scale": 0.75,
+      "status": "FAIL",
+      "measured": {
+        "arrival_detected": false
+      },
+      "tolerance": {
+        "rel_tolerance": 0.11249999999999999
+      }
+    },
+    {
+      "system": "GaussianFluent",
+      "scene_id": "a5_stiffness_v1",
+      "scale": 0.75,
+      "status": "PASS",
+      "measured": {
+        "lateral_strain": -0.0062966118167553375,
+        "axial_strain": 0.021044034118715072,
+        "rel_error": 0.002629156679362232
+      },
+      "tolerance": {
+        "rel_tolerance": 0.07500000000000001
+      }
+    },
+    {
+      "system": "GaussianFluent",
+      "scene_id": "c1_covariance_v1",
+      "scale": 0.75,
+      "status": "PASS",
+      "measured": {
+        "kinematic_median_rel_frobenius_error": 0.008642338379543913,
+        "kinematic_p95_rel_frobenius_error": 0.011747104422256311,
+        "transport_median_rel_frobenius_error": 0.00011191764849527124,
+        "transport_p95_rel_frobenius_error": 0.0003135785147199022,
+        "kinematic_status": "PASS",
+        "transport_status": "PASS",
+        "n_particles_scored": 3375
+      },
+      "tolerance": {
+        "kinematic_median_max": 0.037500000000000006,
+        "kinematic_p95_max": 0.07500000000000001,
+        "transport_median_max": 0.00075,
+        "transport_p95_max": 0.0075
+      }
+    },
+    {
+      "system": "GaussianFluent",
+      "scene_id": "c2_blobhealth_shear_v1",
+      "scale": 0.75,
+      "status": "INVALID",
+      "measured": {
+        "peak_kinematic_median_rel_frobenius_error": 0.12366084810812611,
+        "peak_kinematic_p95_rel_frobenius_error": 0.19968841336673387,
+        "peak_transport_median_rel_frobenius_error": 0.0008146143477826043,
+        "peak_transport_p95_rel_frobenius_error": 0.001464752611197784,
+        "kinematic_status": "FAIL",
+        "transport_status": "FAIL",
+        "health_status": "PASS",
+        "min_eigenvalue_ratio": 0.1800171028916413,
+        "degenerate_fraction": 0.0,
+        "worst_particle_id": 999
+      },
+      "tolerance": {
+        "peak_kinematic_median_rel_frobenius_max": 0.037500000000000006,
+        "peak_kinematic_p95_rel_frobenius_max": 0.07500000000000001,
+        "peak_transport_median_rel_frobenius_max": 0.00075,
+        "peak_transport_p95_rel_frobenius_max": 0.0075,
+        "peak_transport_boundary_exclusion_spacings": 2.0,
+        "min_eigenvalue_ratio": 0.0013333333333333333,
+        "condition_number_max": 7500.0,
+        "degenerate_fraction_max": 0.00075
+      }
+    },
+    {
+      "system": "GaussianFluent",
+      "scene_id": "a1a_conservation_inplace_v1",
+      "scale": 1.0,
+      "status": "FAIL",
+      "measured": {
+        "linear_momentum_rel_drift": 0.033533309789989384,
+        "angular_momentum_rel_drift": 1.0190646475212677,
+        "kinetic_energy_rel_change_final": -0.9990481972679927
+      },
+      "tolerance": {
+        "linear_momentum_rel_drift": 1e-06,
+        "angular_momentum_rel_drift": 0.001,
+        "velocities_derived": false
+      }
+    },
+    {
+      "system": "GaussianFluent",
+      "scene_id": "a1b_conservation_drifting_v1",
+      "scale": 1.0,
+      "status": "FAIL",
+      "measured": {
+        "linear_momentum_rel_drift": 0.0027791674591497967,
+        "angular_momentum_rel_drift": 1.0190647177374308,
+        "kinetic_energy_rel_change_final": -0.011726511745983381,
+        "declared_domain_handling": "co_moving"
+      },
+      "tolerance": {
+        "linear_momentum_rel_drift": 0.001,
+        "angular_momentum_rel_drift": 0.01,
+        "velocities_derived": false
+      }
+    },
+    {
+      "system": "GaussianFluent",
+      "scene_id": "a2_beam_frequency_v1",
+      "scale": 1.0,
+      "status": "FAIL",
+      "measured": {
+        "fundamental_frequency_hz": 0.24375248880258754,
+        "rel_error": 0.7840596634601448,
+        "damping_ratio": 0.36399854080109895,
+        "max_tip_deflection_m": 0.015335926820213596
+      },
+      "tolerance": {
+        "rel_tolerance": 0.1
+      }
+    },
+    {
+      "system": "GaussianFluent",
+      "scene_id": "a3_wavespeed_v1",
+      "scale": 1.0,
+      "status": "FAIL",
+      "measured": {
+        "arrival_detected": false
+      },
+      "tolerance": {
+        "rel_tolerance": 0.15
+      }
+    },
+    {
+      "system": "GaussianFluent",
+      "scene_id": "a5_stiffness_v1",
+      "scale": 1.0,
+      "status": "PASS",
+      "measured": {
+        "lateral_strain": -0.0062966118167553375,
+        "axial_strain": 0.021044034118715072,
+        "rel_error": 0.002629156679362232
+      },
+      "tolerance": {
+        "rel_tolerance": 0.1
+      }
+    },
+    {
+      "system": "GaussianFluent",
+      "scene_id": "c1_covariance_v1",
+      "scale": 1.0,
+      "status": "PASS",
+      "measured": {
+        "kinematic_median_rel_frobenius_error": 0.008642338379543913,
+        "kinematic_p95_rel_frobenius_error": 0.011747104422256311,
+        "transport_median_rel_frobenius_error": 0.00011191764849527124,
+        "transport_p95_rel_frobenius_error": 0.0003135785147199022,
+        "kinematic_status": "PASS",
+        "transport_status": "PASS",
+        "n_particles_scored": 3375
+      },
+      "tolerance": {
+        "kinematic_median_max": 0.05,
+        "kinematic_p95_max": 0.1,
+        "transport_median_max": 0.001,
+        "transport_p95_max": 0.01
+      }
+    },
+    {
+      "system": "GaussianFluent",
+      "scene_id": "c2_blobhealth_shear_v1",
+      "scale": 1.0,
+      "status": "INVALID",
+      "measured": {
+        "peak_kinematic_median_rel_frobenius_error": 0.12366084810812611,
+        "peak_kinematic_p95_rel_frobenius_error": 0.19968841336673387,
+        "peak_transport_median_rel_frobenius_error": 0.0008146143477826043,
+        "peak_transport_p95_rel_frobenius_error": 0.001464752611197784,
+        "kinematic_status": "FAIL",
+        "transport_status": "PASS",
+        "health_status": "PASS",
+        "min_eigenvalue_ratio": 0.1800171028916413,
+        "degenerate_fraction": 0.0,
+        "worst_particle_id": 999
+      },
+      "tolerance": {
+        "peak_kinematic_median_rel_frobenius_max": 0.05,
+        "peak_kinematic_p95_rel_frobenius_max": 0.1,
+        "peak_transport_median_rel_frobenius_max": 0.001,
+        "peak_transport_p95_rel_frobenius_max": 0.01,
+        "peak_transport_boundary_exclusion_spacings": 2.0,
+        "min_eigenvalue_ratio": 0.001,
+        "condition_number_max": 10000.0,
+        "degenerate_fraction_max": 0.001
+      }
+    },
+    {
+      "system": "GaussianFluent",
+      "scene_id": "a1a_conservation_inplace_v1",
+      "scale": 1.25,
+      "status": "FAIL",
+      "measured": {
+        "linear_momentum_rel_drift": 0.033533309789989384,
+        "angular_momentum_rel_drift": 1.0190646475212677,
+        "kinetic_energy_rel_change_final": -0.9990481972679927
+      },
+      "tolerance": {
+        "linear_momentum_rel_drift": 1.2499999999999999e-06,
+        "angular_momentum_rel_drift": 0.00125,
+        "velocities_derived": false
+      }
+    },
+    {
+      "system": "GaussianFluent",
+      "scene_id": "a1b_conservation_drifting_v1",
+      "scale": 1.25,
+      "status": "FAIL",
+      "measured": {
+        "linear_momentum_rel_drift": 0.0027791674591497967,
+        "angular_momentum_rel_drift": 1.0190647177374308,
+        "kinetic_energy_rel_change_final": -0.011726511745983381,
+        "declared_domain_handling": "co_moving"
+      },
+      "tolerance": {
+        "linear_momentum_rel_drift": 0.00125,
+        "angular_momentum_rel_drift": 0.0125,
+        "velocities_derived": false
+      }
+    },
+    {
+      "system": "GaussianFluent",
+      "scene_id": "a2_beam_frequency_v1",
+      "scale": 1.25,
+      "status": "FAIL",
+      "measured": {
+        "fundamental_frequency_hz": 0.24375248880258754,
+        "rel_error": 0.7840596634601448,
+        "damping_ratio": 0.36399854080109895,
+        "max_tip_deflection_m": 0.015335926820213596
+      },
+      "tolerance": {
+        "rel_tolerance": 0.125
+      }
+    },
+    {
+      "system": "GaussianFluent",
+      "scene_id": "a3_wavespeed_v1",
+      "scale": 1.25,
+      "status": "FAIL",
+      "measured": {
+        "arrival_detected": false
+      },
+      "tolerance": {
+        "rel_tolerance": 0.1875
+      }
+    },
+    {
+      "system": "GaussianFluent",
+      "scene_id": "a5_stiffness_v1",
+      "scale": 1.25,
+      "status": "PASS",
+      "measured": {
+        "lateral_strain": -0.0062966118167553375,
+        "axial_strain": 0.021044034118715072,
+        "rel_error": 0.002629156679362232
+      },
+      "tolerance": {
+        "rel_tolerance": 0.125
+      }
+    },
+    {
+      "system": "GaussianFluent",
+      "scene_id": "c1_covariance_v1",
+      "scale": 1.25,
+      "status": "PASS",
+      "measured": {
+        "kinematic_median_rel_frobenius_error": 0.008642338379543913,
+        "kinematic_p95_rel_frobenius_error": 0.011747104422256311,
+        "transport_median_rel_frobenius_error": 0.00011191764849527124,
+        "transport_p95_rel_frobenius_error": 0.0003135785147199022,
+        "kinematic_status": "PASS",
+        "transport_status": "PASS",
+        "n_particles_scored": 3375
+      },
+      "tolerance": {
+        "kinematic_median_max": 0.0625,
+        "kinematic_p95_max": 0.125,
+        "transport_median_max": 0.00125,
+        "transport_p95_max": 0.0125
+      }
+    },
+    {
+      "system": "GaussianFluent",
+      "scene_id": "c2_blobhealth_shear_v1",
+      "scale": 1.25,
+      "status": "INVALID",
+      "measured": {
+        "peak_kinematic_median_rel_frobenius_error": 0.12366084810812611,
+        "peak_kinematic_p95_rel_frobenius_error": 0.19968841336673387,
+        "peak_transport_median_rel_frobenius_error": 0.0008146143477826043,
+        "peak_transport_p95_rel_frobenius_error": 0.001464752611197784,
+        "kinematic_status": "FAIL",
+        "transport_status": "PASS",
+        "health_status": "PASS",
+        "min_eigenvalue_ratio": 0.1800171028916413,
+        "degenerate_fraction": 0.0,
+        "worst_particle_id": 999
+      },
+      "tolerance": {
+        "peak_kinematic_median_rel_frobenius_max": 0.0625,
+        "peak_kinematic_p95_rel_frobenius_max": 0.125,
+        "peak_transport_median_rel_frobenius_max": 0.00125,
+        "peak_transport_p95_rel_frobenius_max": 0.0125,
+        "peak_transport_boundary_exclusion_spacings": 2.0,
+        "min_eigenvalue_ratio": 0.0008,
+        "condition_number_max": 12500.0,
+        "degenerate_fraction_max": 0.00125
+      }
+    },
+    {
+      "system": "GaussianFluent",
+      "scene_id": "a1a_conservation_inplace_v1",
+      "scale": 2.0,
+      "status": "FAIL",
+      "measured": {
+        "linear_momentum_rel_drift": 0.033533309789989384,
+        "angular_momentum_rel_drift": 1.0190646475212677,
+        "kinetic_energy_rel_change_final": -0.9990481972679927
+      },
+      "tolerance": {
+        "linear_momentum_rel_drift": 2e-06,
+        "angular_momentum_rel_drift": 0.002,
+        "velocities_derived": false
+      }
+    },
+    {
+      "system": "GaussianFluent",
+      "scene_id": "a1b_conservation_drifting_v1",
+      "scale": 2.0,
+      "status": "FAIL",
+      "measured": {
+        "linear_momentum_rel_drift": 0.0027791674591497967,
+        "angular_momentum_rel_drift": 1.0190647177374308,
+        "kinetic_energy_rel_change_final": -0.011726511745983381,
+        "declared_domain_handling": "co_moving"
+      },
+      "tolerance": {
+        "linear_momentum_rel_drift": 0.002,
+        "angular_momentum_rel_drift": 0.02,
+        "velocities_derived": false
+      }
+    },
+    {
+      "system": "GaussianFluent",
+      "scene_id": "a2_beam_frequency_v1",
+      "scale": 2.0,
+      "status": "FAIL",
+      "measured": {
+        "fundamental_frequency_hz": 0.24375248880258754,
+        "rel_error": 0.7840596634601448,
+        "damping_ratio": 0.36399854080109895,
+        "max_tip_deflection_m": 0.015335926820213596
+      },
+      "tolerance": {
+        "rel_tolerance": 0.2
+      }
+    },
+    {
+      "system": "GaussianFluent",
+      "scene_id": "a3_wavespeed_v1",
+      "scale": 2.0,
+      "status": "FAIL",
+      "measured": {
+        "arrival_detected": false
+      },
+      "tolerance": {
+        "rel_tolerance": 0.3
+      }
+    },
+    {
+      "system": "GaussianFluent",
+      "scene_id": "a5_stiffness_v1",
+      "scale": 2.0,
+      "status": "PASS",
+      "measured": {
+        "lateral_strain": -0.0062966118167553375,
+        "axial_strain": 0.021044034118715072,
+        "rel_error": 0.002629156679362232
+      },
+      "tolerance": {
+        "rel_tolerance": 0.2
+      }
+    },
+    {
+      "system": "GaussianFluent",
+      "scene_id": "c1_covariance_v1",
+      "scale": 2.0,
+      "status": "PASS",
+      "measured": {
+        "kinematic_median_rel_frobenius_error": 0.008642338379543913,
+        "kinematic_p95_rel_frobenius_error": 0.011747104422256311,
+        "transport_median_rel_frobenius_error": 0.00011191764849527124,
+        "transport_p95_rel_frobenius_error": 0.0003135785147199022,
+        "kinematic_status": "PASS",
+        "transport_status": "PASS",
+        "n_particles_scored": 3375
+      },
+      "tolerance": {
+        "kinematic_median_max": 0.1,
+        "kinematic_p95_max": 0.2,
+        "transport_median_max": 0.002,
+        "transport_p95_max": 0.02
+      }
+    },
+    {
+      "system": "GaussianFluent",
+      "scene_id": "c2_blobhealth_shear_v1",
+      "scale": 2.0,
+      "status": "INVALID",
+      "measured": {
+        "peak_kinematic_median_rel_frobenius_error": 0.12366084810812611,
+        "peak_kinematic_p95_rel_frobenius_error": 0.19968841336673387,
+        "peak_transport_median_rel_frobenius_error": 0.0008146143477826043,
+        "peak_transport_p95_rel_frobenius_error": 0.001464752611197784,
+        "kinematic_status": "FAIL",
+        "transport_status": "PASS",
+        "health_status": "PASS",
+        "min_eigenvalue_ratio": 0.1800171028916413,
+        "degenerate_fraction": 0.0,
+        "worst_particle_id": 999
+      },
+      "tolerance": {
+        "peak_kinematic_median_rel_frobenius_max": 0.1,
+        "peak_kinematic_p95_rel_frobenius_max": 0.2,
+        "peak_transport_median_rel_frobenius_max": 0.002,
+        "peak_transport_p95_rel_frobenius_max": 0.02,
+        "peak_transport_boundary_exclusion_spacings": 2.0,
+        "min_eigenvalue_ratio": 0.0005,
+        "condition_number_max": 20000.0,
+        "degenerate_fraction_max": 0.002
+      }
+    },
+    {
+      "system": "OmniPhysGS",
+      "scene_id": "a1a_conservation_inplace_v1",
+      "scale": 0.5,
+      "status": "FAIL",
+      "measured": {
+        "linear_momentum_rel_drift": 4.1635624510810675e-06,
+        "angular_momentum_rel_drift": 0.00035106243427202683,
+        "kinetic_energy_rel_change_final": -0.0008191085932740538
+      },
+      "tolerance": {
+        "linear_momentum_rel_drift": 5e-07,
+        "angular_momentum_rel_drift": 0.0005,
+        "velocities_derived": false
+      }
+    },
+    {
+      "system": "OmniPhysGS",
+      "scene_id": "a2_beam_frequency_v1",
+      "scale": 0.5,
+      "status": "FAIL",
+      "measured": {
+        "fundamental_frequency_hz": 1.2197357019092767,
+        "rel_error": 0.08056389189643334,
+        "damping_ratio": 0.0024361290369128313,
+        "max_tip_deflection_m": 0.0068123236298561094
+      },
+      "tolerance": {
+        "rel_tolerance": 0.05
+      }
+    },
+    {
+      "system": "OmniPhysGS",
+      "scene_id": "a3_wavespeed_v1",
+      "scale": 0.5,
+      "status": "FAIL",
+      "measured": {
+        "bar_wave_speed_m_s": 24.382716049382715,
+        "arrival_time_s": 0.0405,
+        "travel_distance_m": 0.9875,
+        "rel_error": 0.09042821124989735
+      },
+      "tolerance": {
+        "rel_tolerance": 0.075
+      }
+    },
+    {
+      "system": "OmniPhysGS",
+      "scene_id": "a5_stiffness_v1",
+      "scale": 0.5,
+      "status": "FAIL",
+      "measured": {
+        "lateral_strain": -0.006832300339426389,
+        "axial_strain": 0.021052661694978405,
+        "rel_error": 0.08177933957808707
+      },
+      "tolerance": {
+        "rel_tolerance": 0.05
+      }
+    },
+    {
+      "system": "OmniPhysGS",
+      "scene_id": "b1_bimaterial_bar_v1",
+      "scale": 0.5,
+      "status": "FAIL",
+      "measured": {
+        "left_strain": 0.019550468772649765,
+        "right_strain": 0.008630935102701187,
+        "left_strain_rel_error": 0.16079081760565497,
+        "right_strain_rel_error": 1.0498148317715201,
+        "left_inferred_traction_pa": 977.5234386324883,
+        "right_inferred_traction_pa": 1726.1870205402374,
+        "interface_traction_jump_rel": 0.5538045535666,
+        "face_displacement_m": 0.0010000157356262196
+      },
+      "tolerance": {
+        "regional_strain_rel": 0.075,
+        "interface_traction_jump_rel": 0.075
+      }
+    },
+    {
+      "system": "OmniPhysGS",
+      "scene_id": "c1_covariance_v1",
+      "scale": 0.5,
+      "status": "FAIL",
+      "measured": {
+        "kinematic_median_rel_frobenius_error": 0.271004426321519,
+        "kinematic_p95_rel_frobenius_error": 0.7361493369302514,
+        "transport_median_rel_frobenius_error": 3.662297007706949e-08,
+        "transport_p95_rel_frobenius_error": 6.360517628229089e-08,
+        "kinematic_status": "FAIL",
+        "transport_status": "PASS",
+        "n_particles_scored": 3375
+      },
+      "tolerance": {
+        "kinematic_median_max": 0.025,
+        "kinematic_p95_max": 0.05,
+        "transport_median_max": 0.0005,
+        "transport_p95_max": 0.005
+      }
+    },
+    {
+      "system": "OmniPhysGS",
+      "scene_id": "c2_blobhealth_shear_v1",
+      "scale": 0.5,
+      "status": "INVALID",
+      "measured": {
+        "peak_kinematic_median_rel_frobenius_error": 0.36893323474280426,
+        "peak_kinematic_p95_rel_frobenius_error": 0.402675044647058,
+        "peak_transport_median_rel_frobenius_error": 4.414838754151595e-08,
+        "peak_transport_p95_rel_frobenius_error": 6.394450652954958e-08,
+        "kinematic_status": "FAIL",
+        "transport_status": "PASS",
+        "health_status": "PASS",
+        "min_eigenvalue_ratio": 0.8431709402690906,
+        "degenerate_fraction": 0.0,
+        "worst_particle_id": 973
+      },
+      "tolerance": {
+        "peak_kinematic_median_rel_frobenius_max": 0.025,
+        "peak_kinematic_p95_rel_frobenius_max": 0.05,
+        "peak_transport_median_rel_frobenius_max": 0.0005,
+        "peak_transport_p95_rel_frobenius_max": 0.005,
+        "peak_transport_boundary_exclusion_spacings": 2.0,
+        "min_eigenvalue_ratio": 0.002,
+        "condition_number_max": 5000.0,
+        "degenerate_fraction_max": 0.0005
+      }
+    },
+    {
+      "system": "OmniPhysGS",
+      "scene_id": "c4_captured_frequency_v1",
+      "scale": 0.5,
+      "status": "PASS",
+      "measured": {
+        "fundamental_frequency_hz": 0.969330823760804,
+        "rel_error": 0.06822693628821605,
+        "damping_ratio": 0.0021558754972648758
+      },
+      "tolerance": {
+        "rel_tolerance": 0.1
+      }
+    },
+    {
+      "system": "OmniPhysGS",
+      "scene_id": "a1a_conservation_inplace_v1",
+      "scale": 0.75,
+      "status": "FAIL",
+      "measured": {
+        "linear_momentum_rel_drift": 4.1635624510810675e-06,
+        "angular_momentum_rel_drift": 0.00035106243427202683,
+        "kinetic_energy_rel_change_final": -0.0008191085932740538
+      },
+      "tolerance": {
+        "linear_momentum_rel_drift": 7.5e-07,
+        "angular_momentum_rel_drift": 0.00075,
+        "velocities_derived": false
+      }
+    },
+    {
+      "system": "OmniPhysGS",
+      "scene_id": "a2_beam_frequency_v1",
+      "scale": 0.75,
+      "status": "FAIL",
+      "measured": {
+        "fundamental_frequency_hz": 1.2197357019092767,
+        "rel_error": 0.08056389189643334,
+        "damping_ratio": 0.0024361290369128313,
+        "max_tip_deflection_m": 0.0068123236298561094
+      },
+      "tolerance": {
+        "rel_tolerance": 0.07500000000000001
+      }
+    },
+    {
+      "system": "OmniPhysGS",
+      "scene_id": "a3_wavespeed_v1",
+      "scale": 0.75,
+      "status": "PASS",
+      "measured": {
+        "bar_wave_speed_m_s": 24.382716049382715,
+        "arrival_time_s": 0.0405,
+        "travel_distance_m": 0.9875,
+        "rel_error": 0.09042821124989735
+      },
+      "tolerance": {
+        "rel_tolerance": 0.11249999999999999
+      }
+    },
+    {
+      "system": "OmniPhysGS",
+      "scene_id": "a5_stiffness_v1",
+      "scale": 0.75,
+      "status": "FAIL",
+      "measured": {
+        "lateral_strain": -0.006832300339426389,
+        "axial_strain": 0.021052661694978405,
+        "rel_error": 0.08177933957808707
+      },
+      "tolerance": {
+        "rel_tolerance": 0.07500000000000001
+      }
+    },
+    {
+      "system": "OmniPhysGS",
+      "scene_id": "b1_bimaterial_bar_v1",
+      "scale": 0.75,
+      "status": "FAIL",
+      "measured": {
+        "left_strain": 0.019550468772649765,
+        "right_strain": 0.008630935102701187,
+        "left_strain_rel_error": 0.16079081760565497,
+        "right_strain_rel_error": 1.0498148317715201,
+        "left_inferred_traction_pa": 977.5234386324883,
+        "right_inferred_traction_pa": 1726.1870205402374,
+        "interface_traction_jump_rel": 0.5538045535666,
+        "face_displacement_m": 0.0010000157356262196
+      },
+      "tolerance": {
+        "regional_strain_rel": 0.11249999999999999,
+        "interface_traction_jump_rel": 0.11249999999999999
+      }
+    },
+    {
+      "system": "OmniPhysGS",
+      "scene_id": "c1_covariance_v1",
+      "scale": 0.75,
+      "status": "FAIL",
+      "measured": {
+        "kinematic_median_rel_frobenius_error": 0.271004426321519,
+        "kinematic_p95_rel_frobenius_error": 0.7361493369302514,
+        "transport_median_rel_frobenius_error": 3.662297007706949e-08,
+        "transport_p95_rel_frobenius_error": 6.360517628229089e-08,
+        "kinematic_status": "FAIL",
+        "transport_status": "PASS",
+        "n_particles_scored": 3375
+      },
+      "tolerance": {
+        "kinematic_median_max": 0.037500000000000006,
+        "kinematic_p95_max": 0.07500000000000001,
+        "transport_median_max": 0.00075,
+        "transport_p95_max": 0.0075
+      }
+    },
+    {
+      "system": "OmniPhysGS",
+      "scene_id": "c2_blobhealth_shear_v1",
+      "scale": 0.75,
+      "status": "INVALID",
+      "measured": {
+        "peak_kinematic_median_rel_frobenius_error": 0.36893323474280426,
+        "peak_kinematic_p95_rel_frobenius_error": 0.402675044647058,
+        "peak_transport_median_rel_frobenius_error": 4.414838754151595e-08,
+        "peak_transport_p95_rel_frobenius_error": 6.394450652954958e-08,
+        "kinematic_status": "FAIL",
+        "transport_status": "PASS",
+        "health_status": "PASS",
+        "min_eigenvalue_ratio": 0.8431709402690906,
+        "degenerate_fraction": 0.0,
+        "worst_particle_id": 973
+      },
+      "tolerance": {
+        "peak_kinematic_median_rel_frobenius_max": 0.037500000000000006,
+        "peak_kinematic_p95_rel_frobenius_max": 0.07500000000000001,
+        "peak_transport_median_rel_frobenius_max": 0.00075,
+        "peak_transport_p95_rel_frobenius_max": 0.0075,
+        "peak_transport_boundary_exclusion_spacings": 2.0,
+        "min_eigenvalue_ratio": 0.0013333333333333333,
+        "condition_number_max": 7500.0,
+        "degenerate_fraction_max": 0.00075
+      }
+    },
+    {
+      "system": "OmniPhysGS",
+      "scene_id": "c4_captured_frequency_v1",
+      "scale": 0.75,
+      "status": "PASS",
+      "measured": {
+        "fundamental_frequency_hz": 0.969330823760804,
+        "rel_error": 0.06822693628821605,
+        "damping_ratio": 0.0021558754972648758
+      },
+      "tolerance": {
+        "rel_tolerance": 0.15000000000000002
+      }
+    },
+    {
+      "system": "OmniPhysGS",
+      "scene_id": "a1a_conservation_inplace_v1",
+      "scale": 1.0,
+      "status": "FAIL",
+      "measured": {
+        "linear_momentum_rel_drift": 4.1635624510810675e-06,
+        "angular_momentum_rel_drift": 0.00035106243427202683,
+        "kinetic_energy_rel_change_final": -0.0008191085932740538
+      },
+      "tolerance": {
+        "linear_momentum_rel_drift": 1e-06,
+        "angular_momentum_rel_drift": 0.001,
+        "velocities_derived": false
+      }
+    },
+    {
+      "system": "OmniPhysGS",
+      "scene_id": "a2_beam_frequency_v1",
+      "scale": 1.0,
+      "status": "PASS",
+      "measured": {
+        "fundamental_frequency_hz": 1.2197357019092767,
+        "rel_error": 0.08056389189643334,
+        "damping_ratio": 0.0024361290369128313,
+        "max_tip_deflection_m": 0.0068123236298561094
+      },
+      "tolerance": {
+        "rel_tolerance": 0.1
+      }
+    },
+    {
+      "system": "OmniPhysGS",
+      "scene_id": "a3_wavespeed_v1",
+      "scale": 1.0,
+      "status": "PASS",
+      "measured": {
+        "bar_wave_speed_m_s": 24.382716049382715,
+        "arrival_time_s": 0.0405,
+        "travel_distance_m": 0.9875,
+        "rel_error": 0.09042821124989735
+      },
+      "tolerance": {
+        "rel_tolerance": 0.15
+      }
+    },
+    {
+      "system": "OmniPhysGS",
+      "scene_id": "a5_stiffness_v1",
+      "scale": 1.0,
+      "status": "PASS",
+      "measured": {
+        "lateral_strain": -0.006832300339426389,
+        "axial_strain": 0.021052661694978405,
+        "rel_error": 0.08177933957808707
+      },
+      "tolerance": {
+        "rel_tolerance": 0.1
+      }
+    },
+    {
+      "system": "OmniPhysGS",
+      "scene_id": "b1_bimaterial_bar_v1",
+      "scale": 1.0,
+      "status": "FAIL",
+      "measured": {
+        "left_strain": 0.019550468772649765,
+        "right_strain": 0.008630935102701187,
+        "left_strain_rel_error": 0.16079081760565497,
+        "right_strain_rel_error": 1.0498148317715201,
+        "left_inferred_traction_pa": 977.5234386324883,
+        "right_inferred_traction_pa": 1726.1870205402374,
+        "interface_traction_jump_rel": 0.5538045535666,
+        "face_displacement_m": 0.0010000157356262196
+      },
+      "tolerance": {
+        "regional_strain_rel": 0.15,
+        "interface_traction_jump_rel": 0.15
+      }
+    },
+    {
+      "system": "OmniPhysGS",
+      "scene_id": "c1_covariance_v1",
+      "scale": 1.0,
+      "status": "FAIL",
+      "measured": {
+        "kinematic_median_rel_frobenius_error": 0.271004426321519,
+        "kinematic_p95_rel_frobenius_error": 0.7361493369302514,
+        "transport_median_rel_frobenius_error": 3.662297007706949e-08,
+        "transport_p95_rel_frobenius_error": 6.360517628229089e-08,
+        "kinematic_status": "FAIL",
+        "transport_status": "PASS",
+        "n_particles_scored": 3375
+      },
+      "tolerance": {
+        "kinematic_median_max": 0.05,
+        "kinematic_p95_max": 0.1,
+        "transport_median_max": 0.001,
+        "transport_p95_max": 0.01
+      }
+    },
+    {
+      "system": "OmniPhysGS",
+      "scene_id": "c2_blobhealth_shear_v1",
+      "scale": 1.0,
+      "status": "INVALID",
+      "measured": {
+        "peak_kinematic_median_rel_frobenius_error": 0.36893323474280426,
+        "peak_kinematic_p95_rel_frobenius_error": 0.402675044647058,
+        "peak_transport_median_rel_frobenius_error": 4.414838754151595e-08,
+        "peak_transport_p95_rel_frobenius_error": 6.394450652954958e-08,
+        "kinematic_status": "FAIL",
+        "transport_status": "PASS",
+        "health_status": "PASS",
+        "min_eigenvalue_ratio": 0.8431709402690906,
+        "degenerate_fraction": 0.0,
+        "worst_particle_id": 973
+      },
+      "tolerance": {
+        "peak_kinematic_median_rel_frobenius_max": 0.05,
+        "peak_kinematic_p95_rel_frobenius_max": 0.1,
+        "peak_transport_median_rel_frobenius_max": 0.001,
+        "peak_transport_p95_rel_frobenius_max": 0.01,
+        "peak_transport_boundary_exclusion_spacings": 2.0,
+        "min_eigenvalue_ratio": 0.001,
+        "condition_number_max": 10000.0,
+        "degenerate_fraction_max": 0.001
+      }
+    },
+    {
+      "system": "OmniPhysGS",
+      "scene_id": "c4_captured_frequency_v1",
+      "scale": 1.0,
+      "status": "PASS",
+      "measured": {
+        "fundamental_frequency_hz": 0.969330823760804,
+        "rel_error": 0.06822693628821605,
+        "damping_ratio": 0.0021558754972648758
+      },
+      "tolerance": {
+        "rel_tolerance": 0.2
+      }
+    },
+    {
+      "system": "OmniPhysGS",
+      "scene_id": "a1a_conservation_inplace_v1",
+      "scale": 1.25,
+      "status": "FAIL",
+      "measured": {
+        "linear_momentum_rel_drift": 4.1635624510810675e-06,
+        "angular_momentum_rel_drift": 0.00035106243427202683,
+        "kinetic_energy_rel_change_final": -0.0008191085932740538
+      },
+      "tolerance": {
+        "linear_momentum_rel_drift": 1.2499999999999999e-06,
+        "angular_momentum_rel_drift": 0.00125,
+        "velocities_derived": false
+      }
+    },
+    {
+      "system": "OmniPhysGS",
+      "scene_id": "a2_beam_frequency_v1",
+      "scale": 1.25,
+      "status": "PASS",
+      "measured": {
+        "fundamental_frequency_hz": 1.2197357019092767,
+        "rel_error": 0.08056389189643334,
+        "damping_ratio": 0.0024361290369128313,
+        "max_tip_deflection_m": 0.0068123236298561094
+      },
+      "tolerance": {
+        "rel_tolerance": 0.125
+      }
+    },
+    {
+      "system": "OmniPhysGS",
+      "scene_id": "a3_wavespeed_v1",
+      "scale": 1.25,
+      "status": "PASS",
+      "measured": {
+        "bar_wave_speed_m_s": 24.382716049382715,
+        "arrival_time_s": 0.0405,
+        "travel_distance_m": 0.9875,
+        "rel_error": 0.09042821124989735
+      },
+      "tolerance": {
+        "rel_tolerance": 0.1875
+      }
+    },
+    {
+      "system": "OmniPhysGS",
+      "scene_id": "a5_stiffness_v1",
+      "scale": 1.25,
+      "status": "PASS",
+      "measured": {
+        "lateral_strain": -0.006832300339426389,
+        "axial_strain": 0.021052661694978405,
+        "rel_error": 0.08177933957808707
+      },
+      "tolerance": {
+        "rel_tolerance": 0.125
+      }
+    },
+    {
+      "system": "OmniPhysGS",
+      "scene_id": "b1_bimaterial_bar_v1",
+      "scale": 1.25,
+      "status": "FAIL",
+      "measured": {
+        "left_strain": 0.019550468772649765,
+        "right_strain": 0.008630935102701187,
+        "left_strain_rel_error": 0.16079081760565497,
+        "right_strain_rel_error": 1.0498148317715201,
+        "left_inferred_traction_pa": 977.5234386324883,
+        "right_inferred_traction_pa": 1726.1870205402374,
+        "interface_traction_jump_rel": 0.5538045535666,
+        "face_displacement_m": 0.0010000157356262196
+      },
+      "tolerance": {
+        "regional_strain_rel": 0.1875,
+        "interface_traction_jump_rel": 0.1875
+      }
+    },
+    {
+      "system": "OmniPhysGS",
+      "scene_id": "c1_covariance_v1",
+      "scale": 1.25,
+      "status": "FAIL",
+      "measured": {
+        "kinematic_median_rel_frobenius_error": 0.271004426321519,
+        "kinematic_p95_rel_frobenius_error": 0.7361493369302514,
+        "transport_median_rel_frobenius_error": 3.662297007706949e-08,
+        "transport_p95_rel_frobenius_error": 6.360517628229089e-08,
+        "kinematic_status": "FAIL",
+        "transport_status": "PASS",
+        "n_particles_scored": 3375
+      },
+      "tolerance": {
+        "kinematic_median_max": 0.0625,
+        "kinematic_p95_max": 0.125,
+        "transport_median_max": 0.00125,
+        "transport_p95_max": 0.0125
+      }
+    },
+    {
+      "system": "OmniPhysGS",
+      "scene_id": "c2_blobhealth_shear_v1",
+      "scale": 1.25,
+      "status": "INVALID",
+      "measured": {
+        "peak_kinematic_median_rel_frobenius_error": 0.36893323474280426,
+        "peak_kinematic_p95_rel_frobenius_error": 0.402675044647058,
+        "peak_transport_median_rel_frobenius_error": 4.414838754151595e-08,
+        "peak_transport_p95_rel_frobenius_error": 6.394450652954958e-08,
+        "kinematic_status": "FAIL",
+        "transport_status": "PASS",
+        "health_status": "PASS",
+        "min_eigenvalue_ratio": 0.8431709402690906,
+        "degenerate_fraction": 0.0,
+        "worst_particle_id": 973
+      },
+      "tolerance": {
+        "peak_kinematic_median_rel_frobenius_max": 0.0625,
+        "peak_kinematic_p95_rel_frobenius_max": 0.125,
+        "peak_transport_median_rel_frobenius_max": 0.00125,
+        "peak_transport_p95_rel_frobenius_max": 0.0125,
+        "peak_transport_boundary_exclusion_spacings": 2.0,
+        "min_eigenvalue_ratio": 0.0008,
+        "condition_number_max": 12500.0,
+        "degenerate_fraction_max": 0.00125
+      }
+    },
+    {
+      "system": "OmniPhysGS",
+      "scene_id": "c4_captured_frequency_v1",
+      "scale": 1.25,
+      "status": "PASS",
+      "measured": {
+        "fundamental_frequency_hz": 0.969330823760804,
+        "rel_error": 0.06822693628821605,
+        "damping_ratio": 0.0021558754972648758
+      },
+      "tolerance": {
+        "rel_tolerance": 0.25
+      }
+    },
+    {
+      "system": "OmniPhysGS",
+      "scene_id": "a1a_conservation_inplace_v1",
+      "scale": 2.0,
+      "status": "FAIL",
+      "measured": {
+        "linear_momentum_rel_drift": 4.1635624510810675e-06,
+        "angular_momentum_rel_drift": 0.00035106243427202683,
+        "kinetic_energy_rel_change_final": -0.0008191085932740538
+      },
+      "tolerance": {
+        "linear_momentum_rel_drift": 2e-06,
+        "angular_momentum_rel_drift": 0.002,
+        "velocities_derived": false
+      }
+    },
+    {
+      "system": "OmniPhysGS",
+      "scene_id": "a2_beam_frequency_v1",
+      "scale": 2.0,
+      "status": "PASS",
+      "measured": {
+        "fundamental_frequency_hz": 1.2197357019092767,
+        "rel_error": 0.08056389189643334,
+        "damping_ratio": 0.0024361290369128313,
+        "max_tip_deflection_m": 0.0068123236298561094
+      },
+      "tolerance": {
+        "rel_tolerance": 0.2
+      }
+    },
+    {
+      "system": "OmniPhysGS",
+      "scene_id": "a3_wavespeed_v1",
+      "scale": 2.0,
+      "status": "PASS",
+      "measured": {
+        "bar_wave_speed_m_s": 24.382716049382715,
+        "arrival_time_s": 0.0405,
+        "travel_distance_m": 0.9875,
+        "rel_error": 0.09042821124989735
+      },
+      "tolerance": {
+        "rel_tolerance": 0.3
+      }
+    },
+    {
+      "system": "OmniPhysGS",
+      "scene_id": "a5_stiffness_v1",
+      "scale": 2.0,
+      "status": "PASS",
+      "measured": {
+        "lateral_strain": -0.006832300339426389,
+        "axial_strain": 0.021052661694978405,
+        "rel_error": 0.08177933957808707
+      },
+      "tolerance": {
+        "rel_tolerance": 0.2
+      }
+    },
+    {
+      "system": "OmniPhysGS",
+      "scene_id": "b1_bimaterial_bar_v1",
+      "scale": 2.0,
+      "status": "FAIL",
+      "measured": {
+        "left_strain": 0.019550468772649765,
+        "right_strain": 0.008630935102701187,
+        "left_strain_rel_error": 0.16079081760565497,
+        "right_strain_rel_error": 1.0498148317715201,
+        "left_inferred_traction_pa": 977.5234386324883,
+        "right_inferred_traction_pa": 1726.1870205402374,
+        "interface_traction_jump_rel": 0.5538045535666,
+        "face_displacement_m": 0.0010000157356262196
+      },
+      "tolerance": {
+        "regional_strain_rel": 0.3,
+        "interface_traction_jump_rel": 0.3
+      }
+    },
+    {
+      "system": "OmniPhysGS",
+      "scene_id": "c1_covariance_v1",
+      "scale": 2.0,
+      "status": "FAIL",
+      "measured": {
+        "kinematic_median_rel_frobenius_error": 0.271004426321519,
+        "kinematic_p95_rel_frobenius_error": 0.7361493369302514,
+        "transport_median_rel_frobenius_error": 3.662297007706949e-08,
+        "transport_p95_rel_frobenius_error": 6.360517628229089e-08,
+        "kinematic_status": "FAIL",
+        "transport_status": "PASS",
+        "n_particles_scored": 3375
+      },
+      "tolerance": {
+        "kinematic_median_max": 0.1,
+        "kinematic_p95_max": 0.2,
+        "transport_median_max": 0.002,
+        "transport_p95_max": 0.02
+      }
+    },
+    {
+      "system": "OmniPhysGS",
+      "scene_id": "c2_blobhealth_shear_v1",
+      "scale": 2.0,
+      "status": "INVALID",
+      "measured": {
+        "peak_kinematic_median_rel_frobenius_error": 0.36893323474280426,
+        "peak_kinematic_p95_rel_frobenius_error": 0.402675044647058,
+        "peak_transport_median_rel_frobenius_error": 4.414838754151595e-08,
+        "peak_transport_p95_rel_frobenius_error": 6.394450652954958e-08,
+        "kinematic_status": "FAIL",
+        "transport_status": "PASS",
+        "health_status": "PASS",
+        "min_eigenvalue_ratio": 0.8431709402690906,
+        "degenerate_fraction": 0.0,
+        "worst_particle_id": 973
+      },
+      "tolerance": {
+        "peak_kinematic_median_rel_frobenius_max": 0.1,
+        "peak_kinematic_p95_rel_frobenius_max": 0.2,
+        "peak_transport_median_rel_frobenius_max": 0.002,
+        "peak_transport_p95_rel_frobenius_max": 0.02,
+        "peak_transport_boundary_exclusion_spacings": 2.0,
+        "min_eigenvalue_ratio": 0.0005,
+        "condition_number_max": 20000.0,
+        "degenerate_fraction_max": 0.002
+      }
+    },
+    {
+      "system": "OmniPhysGS",
+      "scene_id": "c4_captured_frequency_v1",
+      "scale": 2.0,
+      "status": "PASS",
+      "measured": {
+        "fundamental_frequency_hz": 0.969330823760804,
+        "rel_error": 0.06822693628821605,
+        "damping_ratio": 0.0021558754972648758
+      },
+      "tolerance": {
+        "rel_tolerance": 0.4
+      }
+    },
+    {
+      "system": "PhysDreamer",
+      "scene_id": "a1a_conservation_inplace_v1",
+      "scale": 0.5,
+      "status": "FAIL",
+      "measured": {
+        "linear_momentum_rel_drift": 2.3539108767574923e-05,
+        "angular_momentum_rel_drift": 0.0001830024753712743,
+        "kinetic_energy_rel_change_final": -0.0002515262619339209
+      },
+      "tolerance": {
+        "linear_momentum_rel_drift": 5e-07,
+        "angular_momentum_rel_drift": 0.0005,
+        "velocities_derived": false
+      }
+    },
+    {
+      "system": "PhysDreamer",
+      "scene_id": "a2_beam_frequency_v1",
+      "scale": 0.5,
+      "status": "INVALID",
+      "measured": {
+        "max_tip_deflection_m": 0.04068578044573466
+      },
+      "tolerance": {
+        "regime_max_tip_deflection_m": 0.020000000000000004
+      }
+    },
+    {
+      "system": "PhysDreamer",
+      "scene_id": "a3_wavespeed_v1",
+      "scale": 0.5,
+      "status": "FAIL",
+      "measured": {
+        "bar_wave_speed_m_s": 24.085365853658537,
+        "arrival_time_s": 0.041,
+        "travel_distance_m": 0.9875,
+        "rel_error": 0.07713030623465476
+      },
+      "tolerance": {
+        "rel_tolerance": 0.075
+      }
+    },
+    {
+      "system": "PhysDreamer",
+      "scene_id": "a5_stiffness_v1",
+      "scale": 0.5,
+      "status": "FAIL",
+      "measured": {
+        "lateral_strain": 1.3140695435120975e-06,
+        "axial_strain": 0.021052661694978405,
+        "rel_error": 1.000208060713423
+      },
+      "tolerance": {
+        "rel_tolerance": 0.05
+      }
+    },
+    {
+      "system": "PhysDreamer",
+      "scene_id": "b1_bimaterial_bar_v1",
+      "scale": 0.5,
+      "status": "FAIL",
+      "measured": {
+        "left_strain": 1.2196600437386351e-05,
+        "right_strain": -0.0001229196786884934,
+        "left_strain_rel_error": 0.9992758382441689,
+        "right_strain_rel_error": 1.0291929643189424,
+        "left_inferred_traction_pa": 0.6098300218693176,
+        "right_inferred_traction_pa": -24.58393573769868,
+        "interface_traction_jump_rel": 2.1017481159210316,
+        "face_displacement_m": 0.0010000157356262196
+      },
+      "tolerance": {
+        "regional_strain_rel": 0.075,
+        "interface_traction_jump_rel": 0.075
+      }
+    },
+    {
+      "system": "PhysDreamer",
+      "scene_id": "c1_covariance_v1",
+      "scale": 0.5,
+      "status": "FAIL",
+      "measured": {
+        "kinematic_median_rel_frobenius_error": 0.2709832322453018,
+        "kinematic_p95_rel_frobenius_error": 0.7361382619087986,
+        "transport_median_rel_frobenius_error": 4.89019575116993e-05,
+        "transport_p95_rel_frobenius_error": 8.798296507851186e-05,
+        "kinematic_status": "FAIL",
+        "transport_status": "PASS",
+        "n_particles_scored": 3375
+      },
+      "tolerance": {
+        "kinematic_median_max": 0.025,
+        "kinematic_p95_max": 0.05,
+        "transport_median_max": 0.0005,
+        "transport_p95_max": 0.005
+      }
+    },
+    {
+      "system": "PhysDreamer",
+      "scene_id": "c2_blobhealth_shear_v1",
+      "scale": 0.5,
+      "status": "INVALID",
+      "measured": {
+        "peak_kinematic_median_rel_frobenius_error": 0.36893343291138025,
+        "peak_kinematic_p95_rel_frobenius_error": 0.402674543393494,
+        "peak_transport_median_rel_frobenius_error": 0.00018010914307366958,
+        "peak_transport_p95_rel_frobenius_error": 0.00021814807620807098,
+        "kinematic_status": "FAIL",
+        "transport_status": "PASS",
+        "health_status": "PASS",
+        "min_eigenvalue_ratio": 0.8426000638119804,
+        "degenerate_fraction": 0.0,
+        "worst_particle_id": 973
+      },
+      "tolerance": {
+        "peak_kinematic_median_rel_frobenius_max": 0.025,
+        "peak_kinematic_p95_rel_frobenius_max": 0.05,
+        "peak_transport_median_rel_frobenius_max": 0.0005,
+        "peak_transport_p95_rel_frobenius_max": 0.005,
+        "peak_transport_boundary_exclusion_spacings": 2.0,
+        "min_eigenvalue_ratio": 0.002,
+        "condition_number_max": 5000.0,
+        "degenerate_fraction_max": 0.0005
+      }
+    },
+    {
+      "system": "PhysDreamer",
+      "scene_id": "c4_captured_frequency_v1",
+      "scale": 0.5,
+      "status": "INVALID",
+      "measured": {
+        "max_tip_deflection_m": 0.058703837114237045
+      },
+      "tolerance": {
+        "regime_max_tip_deflection_m": 0.019890168566636952
+      }
+    },
+    {
+      "system": "PhysDreamer",
+      "scene_id": "a1a_conservation_inplace_v1",
+      "scale": 0.75,
+      "status": "FAIL",
+      "measured": {
+        "linear_momentum_rel_drift": 2.3539108767574923e-05,
+        "angular_momentum_rel_drift": 0.0001830024753712743,
+        "kinetic_energy_rel_change_final": -0.0002515262619339209
+      },
+      "tolerance": {
+        "linear_momentum_rel_drift": 7.5e-07,
+        "angular_momentum_rel_drift": 0.00075,
+        "velocities_derived": false
+      }
+    },
+    {
+      "system": "PhysDreamer",
+      "scene_id": "a2_beam_frequency_v1",
+      "scale": 0.75,
+      "status": "INVALID",
+      "measured": {
+        "max_tip_deflection_m": 0.04068578044573466
+      },
+      "tolerance": {
+        "regime_max_tip_deflection_m": 0.020000000000000004
+      }
+    },
+    {
+      "system": "PhysDreamer",
+      "scene_id": "a3_wavespeed_v1",
+      "scale": 0.75,
+      "status": "PASS",
+      "measured": {
+        "bar_wave_speed_m_s": 24.085365853658537,
+        "arrival_time_s": 0.041,
+        "travel_distance_m": 0.9875,
+        "rel_error": 0.07713030623465476
+      },
+      "tolerance": {
+        "rel_tolerance": 0.11249999999999999
+      }
+    },
+    {
+      "system": "PhysDreamer",
+      "scene_id": "a5_stiffness_v1",
+      "scale": 0.75,
+      "status": "FAIL",
+      "measured": {
+        "lateral_strain": 1.3140695435120975e-06,
+        "axial_strain": 0.021052661694978405,
+        "rel_error": 1.000208060713423
+      },
+      "tolerance": {
+        "rel_tolerance": 0.07500000000000001
+      }
+    },
+    {
+      "system": "PhysDreamer",
+      "scene_id": "b1_bimaterial_bar_v1",
+      "scale": 0.75,
+      "status": "FAIL",
+      "measured": {
+        "left_strain": 1.2196600437386351e-05,
+        "right_strain": -0.0001229196786884934,
+        "left_strain_rel_error": 0.9992758382441689,
+        "right_strain_rel_error": 1.0291929643189424,
+        "left_inferred_traction_pa": 0.6098300218693176,
+        "right_inferred_traction_pa": -24.58393573769868,
+        "interface_traction_jump_rel": 2.1017481159210316,
+        "face_displacement_m": 0.0010000157356262196
+      },
+      "tolerance": {
+        "regional_strain_rel": 0.11249999999999999,
+        "interface_traction_jump_rel": 0.11249999999999999
+      }
+    },
+    {
+      "system": "PhysDreamer",
+      "scene_id": "c1_covariance_v1",
+      "scale": 0.75,
+      "status": "FAIL",
+      "measured": {
+        "kinematic_median_rel_frobenius_error": 0.2709832322453018,
+        "kinematic_p95_rel_frobenius_error": 0.7361382619087986,
+        "transport_median_rel_frobenius_error": 4.89019575116993e-05,
+        "transport_p95_rel_frobenius_error": 8.798296507851186e-05,
+        "kinematic_status": "FAIL",
+        "transport_status": "PASS",
+        "n_particles_scored": 3375
+      },
+      "tolerance": {
+        "kinematic_median_max": 0.037500000000000006,
+        "kinematic_p95_max": 0.07500000000000001,
+        "transport_median_max": 0.00075,
+        "transport_p95_max": 0.0075
+      }
+    },
+    {
+      "system": "PhysDreamer",
+      "scene_id": "c2_blobhealth_shear_v1",
+      "scale": 0.75,
+      "status": "INVALID",
+      "measured": {
+        "peak_kinematic_median_rel_frobenius_error": 0.36893343291138025,
+        "peak_kinematic_p95_rel_frobenius_error": 0.402674543393494,
+        "peak_transport_median_rel_frobenius_error": 0.00018010914307366958,
+        "peak_transport_p95_rel_frobenius_error": 0.00021814807620807098,
+        "kinematic_status": "FAIL",
+        "transport_status": "PASS",
+        "health_status": "PASS",
+        "min_eigenvalue_ratio": 0.8426000638119804,
+        "degenerate_fraction": 0.0,
+        "worst_particle_id": 973
+      },
+      "tolerance": {
+        "peak_kinematic_median_rel_frobenius_max": 0.037500000000000006,
+        "peak_kinematic_p95_rel_frobenius_max": 0.07500000000000001,
+        "peak_transport_median_rel_frobenius_max": 0.00075,
+        "peak_transport_p95_rel_frobenius_max": 0.0075,
+        "peak_transport_boundary_exclusion_spacings": 2.0,
+        "min_eigenvalue_ratio": 0.0013333333333333333,
+        "condition_number_max": 7500.0,
+        "degenerate_fraction_max": 0.00075
+      }
+    },
+    {
+      "system": "PhysDreamer",
+      "scene_id": "c4_captured_frequency_v1",
+      "scale": 0.75,
+      "status": "INVALID",
+      "measured": {
+        "max_tip_deflection_m": 0.058703837114237045
+      },
+      "tolerance": {
+        "regime_max_tip_deflection_m": 0.019890168566636952
+      }
+    },
+    {
+      "system": "PhysDreamer",
+      "scene_id": "a1a_conservation_inplace_v1",
+      "scale": 1.0,
+      "status": "FAIL",
+      "measured": {
+        "linear_momentum_rel_drift": 2.3539108767574923e-05,
+        "angular_momentum_rel_drift": 0.0001830024753712743,
+        "kinetic_energy_rel_change_final": -0.0002515262619339209
+      },
+      "tolerance": {
+        "linear_momentum_rel_drift": 1e-06,
+        "angular_momentum_rel_drift": 0.001,
+        "velocities_derived": false
+      }
+    },
+    {
+      "system": "PhysDreamer",
+      "scene_id": "a2_beam_frequency_v1",
+      "scale": 1.0,
+      "status": "INVALID",
+      "measured": {
+        "max_tip_deflection_m": 0.04068578044573466
+      },
+      "tolerance": {
+        "regime_max_tip_deflection_m": 0.020000000000000004
+      }
+    },
+    {
+      "system": "PhysDreamer",
+      "scene_id": "a3_wavespeed_v1",
+      "scale": 1.0,
+      "status": "PASS",
+      "measured": {
+        "bar_wave_speed_m_s": 24.085365853658537,
+        "arrival_time_s": 0.041,
+        "travel_distance_m": 0.9875,
+        "rel_error": 0.07713030623465476
+      },
+      "tolerance": {
+        "rel_tolerance": 0.15
+      }
+    },
+    {
+      "system": "PhysDreamer",
+      "scene_id": "a5_stiffness_v1",
+      "scale": 1.0,
+      "status": "FAIL",
+      "measured": {
+        "lateral_strain": 1.3140695435120975e-06,
+        "axial_strain": 0.021052661694978405,
+        "rel_error": 1.000208060713423
+      },
+      "tolerance": {
+        "rel_tolerance": 0.1
+      }
+    },
+    {
+      "system": "PhysDreamer",
+      "scene_id": "b1_bimaterial_bar_v1",
+      "scale": 1.0,
+      "status": "FAIL",
+      "measured": {
+        "left_strain": 1.2196600437386351e-05,
+        "right_strain": -0.0001229196786884934,
+        "left_strain_rel_error": 0.9992758382441689,
+        "right_strain_rel_error": 1.0291929643189424,
+        "left_inferred_traction_pa": 0.6098300218693176,
+        "right_inferred_traction_pa": -24.58393573769868,
+        "interface_traction_jump_rel": 2.1017481159210316,
+        "face_displacement_m": 0.0010000157356262196
+      },
+      "tolerance": {
+        "regional_strain_rel": 0.15,
+        "interface_traction_jump_rel": 0.15
+      }
+    },
+    {
+      "system": "PhysDreamer",
+      "scene_id": "c1_covariance_v1",
+      "scale": 1.0,
+      "status": "FAIL",
+      "measured": {
+        "kinematic_median_rel_frobenius_error": 0.2709832322453018,
+        "kinematic_p95_rel_frobenius_error": 0.7361382619087986,
+        "transport_median_rel_frobenius_error": 4.89019575116993e-05,
+        "transport_p95_rel_frobenius_error": 8.798296507851186e-05,
+        "kinematic_status": "FAIL",
+        "transport_status": "PASS",
+        "n_particles_scored": 3375
+      },
+      "tolerance": {
+        "kinematic_median_max": 0.05,
+        "kinematic_p95_max": 0.1,
+        "transport_median_max": 0.001,
+        "transport_p95_max": 0.01
+      }
+    },
+    {
+      "system": "PhysDreamer",
+      "scene_id": "c2_blobhealth_shear_v1",
+      "scale": 1.0,
+      "status": "INVALID",
+      "measured": {
+        "peak_kinematic_median_rel_frobenius_error": 0.36893343291138025,
+        "peak_kinematic_p95_rel_frobenius_error": 0.402674543393494,
+        "peak_transport_median_rel_frobenius_error": 0.00018010914307366958,
+        "peak_transport_p95_rel_frobenius_error": 0.00021814807620807098,
+        "kinematic_status": "FAIL",
+        "transport_status": "PASS",
+        "health_status": "PASS",
+        "min_eigenvalue_ratio": 0.8426000638119804,
+        "degenerate_fraction": 0.0,
+        "worst_particle_id": 973
+      },
+      "tolerance": {
+        "peak_kinematic_median_rel_frobenius_max": 0.05,
+        "peak_kinematic_p95_rel_frobenius_max": 0.1,
+        "peak_transport_median_rel_frobenius_max": 0.001,
+        "peak_transport_p95_rel_frobenius_max": 0.01,
+        "peak_transport_boundary_exclusion_spacings": 2.0,
+        "min_eigenvalue_ratio": 0.001,
+        "condition_number_max": 10000.0,
+        "degenerate_fraction_max": 0.001
+      }
+    },
+    {
+      "system": "PhysDreamer",
+      "scene_id": "c4_captured_frequency_v1",
+      "scale": 1.0,
+      "status": "INVALID",
+      "measured": {
+        "max_tip_deflection_m": 0.058703837114237045
+      },
+      "tolerance": {
+        "regime_max_tip_deflection_m": 0.019890168566636952
+      }
+    },
+    {
+      "system": "PhysDreamer",
+      "scene_id": "a1a_conservation_inplace_v1",
+      "scale": 1.25,
+      "status": "FAIL",
+      "measured": {
+        "linear_momentum_rel_drift": 2.3539108767574923e-05,
+        "angular_momentum_rel_drift": 0.0001830024753712743,
+        "kinetic_energy_rel_change_final": -0.0002515262619339209
+      },
+      "tolerance": {
+        "linear_momentum_rel_drift": 1.2499999999999999e-06,
+        "angular_momentum_rel_drift": 0.00125,
+        "velocities_derived": false
+      }
+    },
+    {
+      "system": "PhysDreamer",
+      "scene_id": "a2_beam_frequency_v1",
+      "scale": 1.25,
+      "status": "INVALID",
+      "measured": {
+        "max_tip_deflection_m": 0.04068578044573466
+      },
+      "tolerance": {
+        "regime_max_tip_deflection_m": 0.020000000000000004
+      }
+    },
+    {
+      "system": "PhysDreamer",
+      "scene_id": "a3_wavespeed_v1",
+      "scale": 1.25,
+      "status": "PASS",
+      "measured": {
+        "bar_wave_speed_m_s": 24.085365853658537,
+        "arrival_time_s": 0.041,
+        "travel_distance_m": 0.9875,
+        "rel_error": 0.07713030623465476
+      },
+      "tolerance": {
+        "rel_tolerance": 0.1875
+      }
+    },
+    {
+      "system": "PhysDreamer",
+      "scene_id": "a5_stiffness_v1",
+      "scale": 1.25,
+      "status": "FAIL",
+      "measured": {
+        "lateral_strain": 1.3140695435120975e-06,
+        "axial_strain": 0.021052661694978405,
+        "rel_error": 1.000208060713423
+      },
+      "tolerance": {
+        "rel_tolerance": 0.125
+      }
+    },
+    {
+      "system": "PhysDreamer",
+      "scene_id": "b1_bimaterial_bar_v1",
+      "scale": 1.25,
+      "status": "FAIL",
+      "measured": {
+        "left_strain": 1.2196600437386351e-05,
+        "right_strain": -0.0001229196786884934,
+        "left_strain_rel_error": 0.9992758382441689,
+        "right_strain_rel_error": 1.0291929643189424,
+        "left_inferred_traction_pa": 0.6098300218693176,
+        "right_inferred_traction_pa": -24.58393573769868,
+        "interface_traction_jump_rel": 2.1017481159210316,
+        "face_displacement_m": 0.0010000157356262196
+      },
+      "tolerance": {
+        "regional_strain_rel": 0.1875,
+        "interface_traction_jump_rel": 0.1875
+      }
+    },
+    {
+      "system": "PhysDreamer",
+      "scene_id": "c1_covariance_v1",
+      "scale": 1.25,
+      "status": "FAIL",
+      "measured": {
+        "kinematic_median_rel_frobenius_error": 0.2709832322453018,
+        "kinematic_p95_rel_frobenius_error": 0.7361382619087986,
+        "transport_median_rel_frobenius_error": 4.89019575116993e-05,
+        "transport_p95_rel_frobenius_error": 8.798296507851186e-05,
+        "kinematic_status": "FAIL",
+        "transport_status": "PASS",
+        "n_particles_scored": 3375
+      },
+      "tolerance": {
+        "kinematic_median_max": 0.0625,
+        "kinematic_p95_max": 0.125,
+        "transport_median_max": 0.00125,
+        "transport_p95_max": 0.0125
+      }
+    },
+    {
+      "system": "PhysDreamer",
+      "scene_id": "c2_blobhealth_shear_v1",
+      "scale": 1.25,
+      "status": "INVALID",
+      "measured": {
+        "peak_kinematic_median_rel_frobenius_error": 0.36893343291138025,
+        "peak_kinematic_p95_rel_frobenius_error": 0.402674543393494,
+        "peak_transport_median_rel_frobenius_error": 0.00018010914307366958,
+        "peak_transport_p95_rel_frobenius_error": 0.00021814807620807098,
+        "kinematic_status": "FAIL",
+        "transport_status": "PASS",
+        "health_status": "PASS",
+        "min_eigenvalue_ratio": 0.8426000638119804,
+        "degenerate_fraction": 0.0,
+        "worst_particle_id": 973
+      },
+      "tolerance": {
+        "peak_kinematic_median_rel_frobenius_max": 0.0625,
+        "peak_kinematic_p95_rel_frobenius_max": 0.125,
+        "peak_transport_median_rel_frobenius_max": 0.00125,
+        "peak_transport_p95_rel_frobenius_max": 0.0125,
+        "peak_transport_boundary_exclusion_spacings": 2.0,
+        "min_eigenvalue_ratio": 0.0008,
+        "condition_number_max": 12500.0,
+        "degenerate_fraction_max": 0.00125
+      }
+    },
+    {
+      "system": "PhysDreamer",
+      "scene_id": "c4_captured_frequency_v1",
+      "scale": 1.25,
+      "status": "INVALID",
+      "measured": {
+        "max_tip_deflection_m": 0.058703837114237045
+      },
+      "tolerance": {
+        "regime_max_tip_deflection_m": 0.019890168566636952
+      }
+    },
+    {
+      "system": "PhysDreamer",
+      "scene_id": "a1a_conservation_inplace_v1",
+      "scale": 2.0,
+      "status": "FAIL",
+      "measured": {
+        "linear_momentum_rel_drift": 2.3539108767574923e-05,
+        "angular_momentum_rel_drift": 0.0001830024753712743,
+        "kinetic_energy_rel_change_final": -0.0002515262619339209
+      },
+      "tolerance": {
+        "linear_momentum_rel_drift": 2e-06,
+        "angular_momentum_rel_drift": 0.002,
+        "velocities_derived": false
+      }
+    },
+    {
+      "system": "PhysDreamer",
+      "scene_id": "a2_beam_frequency_v1",
+      "scale": 2.0,
+      "status": "INVALID",
+      "measured": {
+        "max_tip_deflection_m": 0.04068578044573466
+      },
+      "tolerance": {
+        "regime_max_tip_deflection_m": 0.020000000000000004
+      }
+    },
+    {
+      "system": "PhysDreamer",
+      "scene_id": "a3_wavespeed_v1",
+      "scale": 2.0,
+      "status": "PASS",
+      "measured": {
+        "bar_wave_speed_m_s": 24.085365853658537,
+        "arrival_time_s": 0.041,
+        "travel_distance_m": 0.9875,
+        "rel_error": 0.07713030623465476
+      },
+      "tolerance": {
+        "rel_tolerance": 0.3
+      }
+    },
+    {
+      "system": "PhysDreamer",
+      "scene_id": "a5_stiffness_v1",
+      "scale": 2.0,
+      "status": "FAIL",
+      "measured": {
+        "lateral_strain": 1.3140695435120975e-06,
+        "axial_strain": 0.021052661694978405,
+        "rel_error": 1.000208060713423
+      },
+      "tolerance": {
+        "rel_tolerance": 0.2
+      }
+    },
+    {
+      "system": "PhysDreamer",
+      "scene_id": "b1_bimaterial_bar_v1",
+      "scale": 2.0,
+      "status": "FAIL",
+      "measured": {
+        "left_strain": 1.2196600437386351e-05,
+        "right_strain": -0.0001229196786884934,
+        "left_strain_rel_error": 0.9992758382441689,
+        "right_strain_rel_error": 1.0291929643189424,
+        "left_inferred_traction_pa": 0.6098300218693176,
+        "right_inferred_traction_pa": -24.58393573769868,
+        "interface_traction_jump_rel": 2.1017481159210316,
+        "face_displacement_m": 0.0010000157356262196
+      },
+      "tolerance": {
+        "regional_strain_rel": 0.3,
+        "interface_traction_jump_rel": 0.3
+      }
+    },
+    {
+      "system": "PhysDreamer",
+      "scene_id": "c1_covariance_v1",
+      "scale": 2.0,
+      "status": "FAIL",
+      "measured": {
+        "kinematic_median_rel_frobenius_error": 0.2709832322453018,
+        "kinematic_p95_rel_frobenius_error": 0.7361382619087986,
+        "transport_median_rel_frobenius_error": 4.89019575116993e-05,
+        "transport_p95_rel_frobenius_error": 8.798296507851186e-05,
+        "kinematic_status": "FAIL",
+        "transport_status": "PASS",
+        "n_particles_scored": 3375
+      },
+      "tolerance": {
+        "kinematic_median_max": 0.1,
+        "kinematic_p95_max": 0.2,
+        "transport_median_max": 0.002,
+        "transport_p95_max": 0.02
+      }
+    },
+    {
+      "system": "PhysDreamer",
+      "scene_id": "c2_blobhealth_shear_v1",
+      "scale": 2.0,
+      "status": "INVALID",
+      "measured": {
+        "peak_kinematic_median_rel_frobenius_error": 0.36893343291138025,
+        "peak_kinematic_p95_rel_frobenius_error": 0.402674543393494,
+        "peak_transport_median_rel_frobenius_error": 0.00018010914307366958,
+        "peak_transport_p95_rel_frobenius_error": 0.00021814807620807098,
+        "kinematic_status": "FAIL",
+        "transport_status": "PASS",
+        "health_status": "PASS",
+        "min_eigenvalue_ratio": 0.8426000638119804,
+        "degenerate_fraction": 0.0,
+        "worst_particle_id": 973
+      },
+      "tolerance": {
+        "peak_kinematic_median_rel_frobenius_max": 0.1,
+        "peak_kinematic_p95_rel_frobenius_max": 0.2,
+        "peak_transport_median_rel_frobenius_max": 0.002,
+        "peak_transport_p95_rel_frobenius_max": 0.02,
+        "peak_transport_boundary_exclusion_spacings": 2.0,
+        "min_eigenvalue_ratio": 0.0005,
+        "condition_number_max": 20000.0,
+        "degenerate_fraction_max": 0.002
+      }
+    },
+    {
+      "system": "PhysDreamer",
+      "scene_id": "c4_captured_frequency_v1",
+      "scale": 2.0,
+      "status": "INVALID",
+      "measured": {
+        "max_tip_deflection_m": 0.058703837114237045
+      },
+      "tolerance": {
+        "regime_max_tip_deflection_m": 0.019890168566636952
+      }
+    },
+    {
+      "system": "Physics3D",
+      "scene_id": "a1a_conservation_inplace_v1",
+      "scale": 0.5,
+      "status": "FAIL",
+      "measured": {
+        "linear_momentum_rel_drift": 8.55818183170519e-06,
+        "angular_momentum_rel_drift": 7.496184149136139e-05,
+        "kinetic_energy_rel_change_final": -0.0001735400208118243
+      },
+      "tolerance": {
+        "linear_momentum_rel_drift": 5e-07,
+        "angular_momentum_rel_drift": 0.0005,
+        "velocities_derived": false
+      }
+    },
+    {
+      "system": "Physics3D",
+      "scene_id": "a1b_conservation_drifting_v1",
+      "scale": 0.5,
+      "status": "PASS",
+      "measured": {
+        "linear_momentum_rel_drift": 1.001002112622289e-06,
+        "angular_momentum_rel_drift": 7.086229630274154e-05,
+        "kinetic_energy_rel_change_final": -1.4156336247683754e-06,
+        "declared_domain_handling": "co_moving"
+      },
+      "tolerance": {
+        "linear_momentum_rel_drift": 0.0005,
+        "angular_momentum_rel_drift": 0.005,
+        "velocities_derived": false
+      }
+    },
+    {
+      "system": "Physics3D",
+      "scene_id": "a2_beam_frequency_v1",
+      "scale": 0.5,
+      "status": "PASS",
+      "measured": {
+        "fundamental_frequency_hz": 1.1765179822628649,
+        "rel_error": 0.04227731287204628,
+        "damping_ratio": 0.005623139003619246,
+        "max_tip_deflection_m": 0.007002076117399459
+      },
+      "tolerance": {
+        "rel_tolerance": 0.05
+      }
+    },
+    {
+      "system": "Physics3D",
+      "scene_id": "a3_wavespeed_v1",
+      "scale": 0.5,
+      "status": "FAIL",
+      "measured": {
+        "bar_wave_speed_m_s": 24.085365853658537,
+        "arrival_time_s": 0.041,
+        "travel_distance_m": 0.9875,
+        "rel_error": 0.07713030623465476
+      },
+      "tolerance": {
+        "rel_tolerance": 0.075
+      }
+    },
+    {
+      "system": "Physics3D",
+      "scene_id": "a5_stiffness_v1",
+      "scale": 0.5,
+      "status": "PASS",
+      "measured": {
+        "lateral_strain": -0.00645045167101288,
+        "axial_strain": 0.021044005394766196,
+        "rel_error": 0.02174016622284853
+      },
+      "tolerance": {
+        "rel_tolerance": 0.05
+      }
+    },
+    {
+      "system": "Physics3D",
+      "scene_id": "a6_freefall_v1",
+      "scale": 0.5,
+      "status": "FAIL",
+      "measured": {
+        "particle_count": 63256,
+        "max_com_position_rel_error": 0.05074937672228898,
+        "max_com_velocity_rel_error": 0.0759631653603757,
+        "max_bbox_volume_rel_drift": 2.9058858898256545e-05,
+        "max_detF_nonpositive_fraction_after_initial": 0.0,
+        "max_nonfinite_fraction": 0.0
+      },
+      "tolerance": {
+        "com_position_rel_error_max": 0.05,
+        "com_velocity_rel_error_max": 0.05,
+        "bbox_volume_rel_drift_max": 0.005,
+        "detF_nonpositive_fraction_max": 5e-07
+      }
+    },
+    {
+      "system": "Physics3D",
+      "scene_id": "c1_covariance_v1",
+      "scale": 0.5,
+      "status": "PASS",
+      "measured": {
+        "kinematic_median_rel_frobenius_error": 0.008655968964790903,
+        "kinematic_p95_rel_frobenius_error": 0.015625620129897776,
+        "transport_median_rel_frobenius_error": 0.00013628303938622858,
+        "transport_p95_rel_frobenius_error": 0.00033753273510738,
+        "kinematic_status": "PASS",
+        "transport_status": "PASS",
+        "n_particles_scored": 3375
+      },
+      "tolerance": {
+        "kinematic_median_max": 0.025,
+        "kinematic_p95_max": 0.05,
+        "transport_median_max": 0.0005,
+        "transport_p95_max": 0.005
+      }
+    },
+    {
+      "system": "Physics3D",
+      "scene_id": "c2_blobhealth_shear_v1",
+      "scale": 0.5,
+      "status": "INVALID",
+      "measured": {
+        "peak_kinematic_median_rel_frobenius_error": 0.4530286586835872,
+        "peak_kinematic_p95_rel_frobenius_error": 0.6460798954184624,
+        "peak_transport_median_rel_frobenius_error": 0.0007468747182200451,
+        "peak_transport_p95_rel_frobenius_error": 0.0028053603785492725,
+        "kinematic_status": "FAIL",
+        "transport_status": "FAIL",
+        "health_status": "PASS",
+        "min_eigenvalue_ratio": 0.14163428766321157,
+        "degenerate_fraction": 0.0,
+        "worst_particle_id": 996
+      },
+      "tolerance": {
+        "peak_kinematic_median_rel_frobenius_max": 0.025,
+        "peak_kinematic_p95_rel_frobenius_max": 0.05,
+        "peak_transport_median_rel_frobenius_max": 0.0005,
+        "peak_transport_p95_rel_frobenius_max": 0.005,
+        "peak_transport_boundary_exclusion_spacings": 2.0,
+        "min_eigenvalue_ratio": 0.002,
+        "condition_number_max": 5000.0,
+        "degenerate_fraction_max": 0.0005
+      }
+    },
+    {
+      "system": "Physics3D",
+      "scene_id": "c4_captured_frequency_v1",
+      "scale": 0.5,
+      "status": "PASS",
+      "measured": {
+        "fundamental_frequency_hz": 0.9136869220442435,
+        "rel_error": 0.0069059577360352006,
+        "damping_ratio": 0.0079581486783236
+      },
+      "tolerance": {
+        "rel_tolerance": 0.1
+      }
+    },
+    {
+      "system": "Physics3D",
+      "scene_id": "a1a_conservation_inplace_v1",
+      "scale": 0.75,
+      "status": "FAIL",
+      "measured": {
+        "linear_momentum_rel_drift": 8.55818183170519e-06,
+        "angular_momentum_rel_drift": 7.496184149136139e-05,
+        "kinetic_energy_rel_change_final": -0.0001735400208118243
+      },
+      "tolerance": {
+        "linear_momentum_rel_drift": 7.5e-07,
+        "angular_momentum_rel_drift": 0.00075,
+        "velocities_derived": false
+      }
+    },
+    {
+      "system": "Physics3D",
+      "scene_id": "a1b_conservation_drifting_v1",
+      "scale": 0.75,
+      "status": "PASS",
+      "measured": {
+        "linear_momentum_rel_drift": 1.001002112622289e-06,
+        "angular_momentum_rel_drift": 7.086229630274154e-05,
+        "kinetic_energy_rel_change_final": -1.4156336247683754e-06,
+        "declared_domain_handling": "co_moving"
+      },
+      "tolerance": {
+        "linear_momentum_rel_drift": 0.00075,
+        "angular_momentum_rel_drift": 0.0075,
+        "velocities_derived": false
+      }
+    },
+    {
+      "system": "Physics3D",
+      "scene_id": "a2_beam_frequency_v1",
+      "scale": 0.75,
+      "status": "PASS",
+      "measured": {
+        "fundamental_frequency_hz": 1.1765179822628649,
+        "rel_error": 0.04227731287204628,
+        "damping_ratio": 0.005623139003619246,
+        "max_tip_deflection_m": 0.007002076117399459
+      },
+      "tolerance": {
+        "rel_tolerance": 0.07500000000000001
+      }
+    },
+    {
+      "system": "Physics3D",
+      "scene_id": "a3_wavespeed_v1",
+      "scale": 0.75,
+      "status": "PASS",
+      "measured": {
+        "bar_wave_speed_m_s": 24.085365853658537,
+        "arrival_time_s": 0.041,
+        "travel_distance_m": 0.9875,
+        "rel_error": 0.07713030623465476
+      },
+      "tolerance": {
+        "rel_tolerance": 0.11249999999999999
+      }
+    },
+    {
+      "system": "Physics3D",
+      "scene_id": "a5_stiffness_v1",
+      "scale": 0.75,
+      "status": "PASS",
+      "measured": {
+        "lateral_strain": -0.00645045167101288,
+        "axial_strain": 0.021044005394766196,
+        "rel_error": 0.02174016622284853
+      },
+      "tolerance": {
+        "rel_tolerance": 0.07500000000000001
+      }
+    },
+    {
+      "system": "Physics3D",
+      "scene_id": "a6_freefall_v1",
+      "scale": 0.75,
+      "status": "FAIL",
+      "measured": {
+        "particle_count": 63256,
+        "max_com_position_rel_error": 0.05074937672228898,
+        "max_com_velocity_rel_error": 0.0759631653603757,
+        "max_bbox_volume_rel_drift": 2.9058858898256545e-05,
+        "max_detF_nonpositive_fraction_after_initial": 0.0,
+        "max_nonfinite_fraction": 0.0
+      },
+      "tolerance": {
+        "com_position_rel_error_max": 0.07500000000000001,
+        "com_velocity_rel_error_max": 0.07500000000000001,
+        "bbox_volume_rel_drift_max": 0.0075,
+        "detF_nonpositive_fraction_max": 7.5e-07
+      }
+    },
+    {
+      "system": "Physics3D",
+      "scene_id": "c1_covariance_v1",
+      "scale": 0.75,
+      "status": "PASS",
+      "measured": {
+        "kinematic_median_rel_frobenius_error": 0.008655968964790903,
+        "kinematic_p95_rel_frobenius_error": 0.015625620129897776,
+        "transport_median_rel_frobenius_error": 0.00013628303938622858,
+        "transport_p95_rel_frobenius_error": 0.00033753273510738,
+        "kinematic_status": "PASS",
+        "transport_status": "PASS",
+        "n_particles_scored": 3375
+      },
+      "tolerance": {
+        "kinematic_median_max": 0.037500000000000006,
+        "kinematic_p95_max": 0.07500000000000001,
+        "transport_median_max": 0.00075,
+        "transport_p95_max": 0.0075
+      }
+    },
+    {
+      "system": "Physics3D",
+      "scene_id": "c2_blobhealth_shear_v1",
+      "scale": 0.75,
+      "status": "INVALID",
+      "measured": {
+        "peak_kinematic_median_rel_frobenius_error": 0.4530286586835872,
+        "peak_kinematic_p95_rel_frobenius_error": 0.6460798954184624,
+        "peak_transport_median_rel_frobenius_error": 0.0007468747182200451,
+        "peak_transport_p95_rel_frobenius_error": 0.0028053603785492725,
+        "kinematic_status": "FAIL",
+        "transport_status": "PASS",
+        "health_status": "PASS",
+        "min_eigenvalue_ratio": 0.14163428766321157,
+        "degenerate_fraction": 0.0,
+        "worst_particle_id": 996
+      },
+      "tolerance": {
+        "peak_kinematic_median_rel_frobenius_max": 0.037500000000000006,
+        "peak_kinematic_p95_rel_frobenius_max": 0.07500000000000001,
+        "peak_transport_median_rel_frobenius_max": 0.00075,
+        "peak_transport_p95_rel_frobenius_max": 0.0075,
+        "peak_transport_boundary_exclusion_spacings": 2.0,
+        "min_eigenvalue_ratio": 0.0013333333333333333,
+        "condition_number_max": 7500.0,
+        "degenerate_fraction_max": 0.00075
+      }
+    },
+    {
+      "system": "Physics3D",
+      "scene_id": "c4_captured_frequency_v1",
+      "scale": 0.75,
+      "status": "PASS",
+      "measured": {
+        "fundamental_frequency_hz": 0.9136869220442435,
+        "rel_error": 0.0069059577360352006,
+        "damping_ratio": 0.0079581486783236
+      },
+      "tolerance": {
+        "rel_tolerance": 0.15000000000000002
+      }
+    },
+    {
+      "system": "Physics3D",
+      "scene_id": "a1a_conservation_inplace_v1",
+      "scale": 1.0,
+      "status": "FAIL",
+      "measured": {
+        "linear_momentum_rel_drift": 8.55818183170519e-06,
+        "angular_momentum_rel_drift": 7.496184149136139e-05,
+        "kinetic_energy_rel_change_final": -0.0001735400208118243
+      },
+      "tolerance": {
+        "linear_momentum_rel_drift": 1e-06,
+        "angular_momentum_rel_drift": 0.001,
+        "velocities_derived": false
+      }
+    },
+    {
+      "system": "Physics3D",
+      "scene_id": "a1b_conservation_drifting_v1",
+      "scale": 1.0,
+      "status": "PASS",
+      "measured": {
+        "linear_momentum_rel_drift": 1.001002112622289e-06,
+        "angular_momentum_rel_drift": 7.086229630274154e-05,
+        "kinetic_energy_rel_change_final": -1.4156336247683754e-06,
+        "declared_domain_handling": "co_moving"
+      },
+      "tolerance": {
+        "linear_momentum_rel_drift": 0.001,
+        "angular_momentum_rel_drift": 0.01,
+        "velocities_derived": false
+      }
+    },
+    {
+      "system": "Physics3D",
+      "scene_id": "a2_beam_frequency_v1",
+      "scale": 1.0,
+      "status": "PASS",
+      "measured": {
+        "fundamental_frequency_hz": 1.1765179822628649,
+        "rel_error": 0.04227731287204628,
+        "damping_ratio": 0.005623139003619246,
+        "max_tip_deflection_m": 0.007002076117399459
+      },
+      "tolerance": {
+        "rel_tolerance": 0.1
+      }
+    },
+    {
+      "system": "Physics3D",
+      "scene_id": "a3_wavespeed_v1",
+      "scale": 1.0,
+      "status": "PASS",
+      "measured": {
+        "bar_wave_speed_m_s": 24.085365853658537,
+        "arrival_time_s": 0.041,
+        "travel_distance_m": 0.9875,
+        "rel_error": 0.07713030623465476
+      },
+      "tolerance": {
+        "rel_tolerance": 0.15
+      }
+    },
+    {
+      "system": "Physics3D",
+      "scene_id": "a5_stiffness_v1",
+      "scale": 1.0,
+      "status": "PASS",
+      "measured": {
+        "lateral_strain": -0.00645045167101288,
+        "axial_strain": 0.021044005394766196,
+        "rel_error": 0.02174016622284853
+      },
+      "tolerance": {
+        "rel_tolerance": 0.1
+      }
+    },
+    {
+      "system": "Physics3D",
+      "scene_id": "a6_freefall_v1",
+      "scale": 1.0,
+      "status": "PASS",
+      "measured": {
+        "particle_count": 63256,
+        "max_com_position_rel_error": 0.05074937672228898,
+        "max_com_velocity_rel_error": 0.0759631653603757,
+        "max_bbox_volume_rel_drift": 2.9058858898256545e-05,
+        "max_detF_nonpositive_fraction_after_initial": 0.0,
+        "max_nonfinite_fraction": 0.0
+      },
+      "tolerance": {
+        "com_position_rel_error_max": 0.1,
+        "com_velocity_rel_error_max": 0.1,
+        "bbox_volume_rel_drift_max": 0.01,
+        "detF_nonpositive_fraction_max": 1e-06
+      }
+    },
+    {
+      "system": "Physics3D",
+      "scene_id": "c1_covariance_v1",
+      "scale": 1.0,
+      "status": "PASS",
+      "measured": {
+        "kinematic_median_rel_frobenius_error": 0.008655968964790903,
+        "kinematic_p95_rel_frobenius_error": 0.015625620129897776,
+        "transport_median_rel_frobenius_error": 0.00013628303938622858,
+        "transport_p95_rel_frobenius_error": 0.00033753273510738,
+        "kinematic_status": "PASS",
+        "transport_status": "PASS",
+        "n_particles_scored": 3375
+      },
+      "tolerance": {
+        "kinematic_median_max": 0.05,
+        "kinematic_p95_max": 0.1,
+        "transport_median_max": 0.001,
+        "transport_p95_max": 0.01
+      }
+    },
+    {
+      "system": "Physics3D",
+      "scene_id": "c2_blobhealth_shear_v1",
+      "scale": 1.0,
+      "status": "INVALID",
+      "measured": {
+        "peak_kinematic_median_rel_frobenius_error": 0.4530286586835872,
+        "peak_kinematic_p95_rel_frobenius_error": 0.6460798954184624,
+        "peak_transport_median_rel_frobenius_error": 0.0007468747182200451,
+        "peak_transport_p95_rel_frobenius_error": 0.0028053603785492725,
+        "kinematic_status": "FAIL",
+        "transport_status": "PASS",
+        "health_status": "PASS",
+        "min_eigenvalue_ratio": 0.14163428766321157,
+        "degenerate_fraction": 0.0,
+        "worst_particle_id": 996
+      },
+      "tolerance": {
+        "peak_kinematic_median_rel_frobenius_max": 0.05,
+        "peak_kinematic_p95_rel_frobenius_max": 0.1,
+        "peak_transport_median_rel_frobenius_max": 0.001,
+        "peak_transport_p95_rel_frobenius_max": 0.01,
+        "peak_transport_boundary_exclusion_spacings": 2.0,
+        "min_eigenvalue_ratio": 0.001,
+        "condition_number_max": 10000.0,
+        "degenerate_fraction_max": 0.001
+      }
+    },
+    {
+      "system": "Physics3D",
+      "scene_id": "c4_captured_frequency_v1",
+      "scale": 1.0,
+      "status": "PASS",
+      "measured": {
+        "fundamental_frequency_hz": 0.9136869220442435,
+        "rel_error": 0.0069059577360352006,
+        "damping_ratio": 0.0079581486783236
+      },
+      "tolerance": {
+        "rel_tolerance": 0.2
+      }
+    },
+    {
+      "system": "Physics3D",
+      "scene_id": "a1a_conservation_inplace_v1",
+      "scale": 1.25,
+      "status": "FAIL",
+      "measured": {
+        "linear_momentum_rel_drift": 8.55818183170519e-06,
+        "angular_momentum_rel_drift": 7.496184149136139e-05,
+        "kinetic_energy_rel_change_final": -0.0001735400208118243
+      },
+      "tolerance": {
+        "linear_momentum_rel_drift": 1.2499999999999999e-06,
+        "angular_momentum_rel_drift": 0.00125,
+        "velocities_derived": false
+      }
+    },
+    {
+      "system": "Physics3D",
+      "scene_id": "a1b_conservation_drifting_v1",
+      "scale": 1.25,
+      "status": "PASS",
+      "measured": {
+        "linear_momentum_rel_drift": 1.001002112622289e-06,
+        "angular_momentum_rel_drift": 7.086229630274154e-05,
+        "kinetic_energy_rel_change_final": -1.4156336247683754e-06,
+        "declared_domain_handling": "co_moving"
+      },
+      "tolerance": {
+        "linear_momentum_rel_drift": 0.00125,
+        "angular_momentum_rel_drift": 0.0125,
+        "velocities_derived": false
+      }
+    },
+    {
+      "system": "Physics3D",
+      "scene_id": "a2_beam_frequency_v1",
+      "scale": 1.25,
+      "status": "PASS",
+      "measured": {
+        "fundamental_frequency_hz": 1.1765179822628649,
+        "rel_error": 0.04227731287204628,
+        "damping_ratio": 0.005623139003619246,
+        "max_tip_deflection_m": 0.007002076117399459
+      },
+      "tolerance": {
+        "rel_tolerance": 0.125
+      }
+    },
+    {
+      "system": "Physics3D",
+      "scene_id": "a3_wavespeed_v1",
+      "scale": 1.25,
+      "status": "PASS",
+      "measured": {
+        "bar_wave_speed_m_s": 24.085365853658537,
+        "arrival_time_s": 0.041,
+        "travel_distance_m": 0.9875,
+        "rel_error": 0.07713030623465476
+      },
+      "tolerance": {
+        "rel_tolerance": 0.1875
+      }
+    },
+    {
+      "system": "Physics3D",
+      "scene_id": "a5_stiffness_v1",
+      "scale": 1.25,
+      "status": "PASS",
+      "measured": {
+        "lateral_strain": -0.00645045167101288,
+        "axial_strain": 0.021044005394766196,
+        "rel_error": 0.02174016622284853
+      },
+      "tolerance": {
+        "rel_tolerance": 0.125
+      }
+    },
+    {
+      "system": "Physics3D",
+      "scene_id": "a6_freefall_v1",
+      "scale": 1.25,
+      "status": "PASS",
+      "measured": {
+        "particle_count": 63256,
+        "max_com_position_rel_error": 0.05074937672228898,
+        "max_com_velocity_rel_error": 0.0759631653603757,
+        "max_bbox_volume_rel_drift": 2.9058858898256545e-05,
+        "max_detF_nonpositive_fraction_after_initial": 0.0,
+        "max_nonfinite_fraction": 0.0
+      },
+      "tolerance": {
+        "com_position_rel_error_max": 0.125,
+        "com_velocity_rel_error_max": 0.125,
+        "bbox_volume_rel_drift_max": 0.0125,
+        "detF_nonpositive_fraction_max": 1.2499999999999999e-06
+      }
+    },
+    {
+      "system": "Physics3D",
+      "scene_id": "c1_covariance_v1",
+      "scale": 1.25,
+      "status": "PASS",
+      "measured": {
+        "kinematic_median_rel_frobenius_error": 0.008655968964790903,
+        "kinematic_p95_rel_frobenius_error": 0.015625620129897776,
+        "transport_median_rel_frobenius_error": 0.00013628303938622858,
+        "transport_p95_rel_frobenius_error": 0.00033753273510738,
+        "kinematic_status": "PASS",
+        "transport_status": "PASS",
+        "n_particles_scored": 3375
+      },
+      "tolerance": {
+        "kinematic_median_max": 0.0625,
+        "kinematic_p95_max": 0.125,
+        "transport_median_max": 0.00125,
+        "transport_p95_max": 0.0125
+      }
+    },
+    {
+      "system": "Physics3D",
+      "scene_id": "c2_blobhealth_shear_v1",
+      "scale": 1.25,
+      "status": "INVALID",
+      "measured": {
+        "peak_kinematic_median_rel_frobenius_error": 0.4530286586835872,
+        "peak_kinematic_p95_rel_frobenius_error": 0.6460798954184624,
+        "peak_transport_median_rel_frobenius_error": 0.0007468747182200451,
+        "peak_transport_p95_rel_frobenius_error": 0.0028053603785492725,
+        "kinematic_status": "FAIL",
+        "transport_status": "PASS",
+        "health_status": "PASS",
+        "min_eigenvalue_ratio": 0.14163428766321157,
+        "degenerate_fraction": 0.0,
+        "worst_particle_id": 996
+      },
+      "tolerance": {
+        "peak_kinematic_median_rel_frobenius_max": 0.0625,
+        "peak_kinematic_p95_rel_frobenius_max": 0.125,
+        "peak_transport_median_rel_frobenius_max": 0.00125,
+        "peak_transport_p95_rel_frobenius_max": 0.0125,
+        "peak_transport_boundary_exclusion_spacings": 2.0,
+        "min_eigenvalue_ratio": 0.0008,
+        "condition_number_max": 12500.0,
+        "degenerate_fraction_max": 0.00125
+      }
+    },
+    {
+      "system": "Physics3D",
+      "scene_id": "c4_captured_frequency_v1",
+      "scale": 1.25,
+      "status": "PASS",
+      "measured": {
+        "fundamental_frequency_hz": 0.9136869220442435,
+        "rel_error": 0.0069059577360352006,
+        "damping_ratio": 0.0079581486783236
+      },
+      "tolerance": {
+        "rel_tolerance": 0.25
+      }
+    },
+    {
+      "system": "Physics3D",
+      "scene_id": "a1a_conservation_inplace_v1",
+      "scale": 2.0,
+      "status": "FAIL",
+      "measured": {
+        "linear_momentum_rel_drift": 8.55818183170519e-06,
+        "angular_momentum_rel_drift": 7.496184149136139e-05,
+        "kinetic_energy_rel_change_final": -0.0001735400208118243
+      },
+      "tolerance": {
+        "linear_momentum_rel_drift": 2e-06,
+        "angular_momentum_rel_drift": 0.002,
+        "velocities_derived": false
+      }
+    },
+    {
+      "system": "Physics3D",
+      "scene_id": "a1b_conservation_drifting_v1",
+      "scale": 2.0,
+      "status": "PASS",
+      "measured": {
+        "linear_momentum_rel_drift": 1.001002112622289e-06,
+        "angular_momentum_rel_drift": 7.086229630274154e-05,
+        "kinetic_energy_rel_change_final": -1.4156336247683754e-06,
+        "declared_domain_handling": "co_moving"
+      },
+      "tolerance": {
+        "linear_momentum_rel_drift": 0.002,
+        "angular_momentum_rel_drift": 0.02,
+        "velocities_derived": false
+      }
+    },
+    {
+      "system": "Physics3D",
+      "scene_id": "a2_beam_frequency_v1",
+      "scale": 2.0,
+      "status": "PASS",
+      "measured": {
+        "fundamental_frequency_hz": 1.1765179822628649,
+        "rel_error": 0.04227731287204628,
+        "damping_ratio": 0.005623139003619246,
+        "max_tip_deflection_m": 0.007002076117399459
+      },
+      "tolerance": {
+        "rel_tolerance": 0.2
+      }
+    },
+    {
+      "system": "Physics3D",
+      "scene_id": "a3_wavespeed_v1",
+      "scale": 2.0,
+      "status": "PASS",
+      "measured": {
+        "bar_wave_speed_m_s": 24.085365853658537,
+        "arrival_time_s": 0.041,
+        "travel_distance_m": 0.9875,
+        "rel_error": 0.07713030623465476
+      },
+      "tolerance": {
+        "rel_tolerance": 0.3
+      }
+    },
+    {
+      "system": "Physics3D",
+      "scene_id": "a5_stiffness_v1",
+      "scale": 2.0,
+      "status": "PASS",
+      "measured": {
+        "lateral_strain": -0.00645045167101288,
+        "axial_strain": 0.021044005394766196,
+        "rel_error": 0.02174016622284853
+      },
+      "tolerance": {
+        "rel_tolerance": 0.2
+      }
+    },
+    {
+      "system": "Physics3D",
+      "scene_id": "a6_freefall_v1",
+      "scale": 2.0,
+      "status": "PASS",
+      "measured": {
+        "particle_count": 63256,
+        "max_com_position_rel_error": 0.05074937672228898,
+        "max_com_velocity_rel_error": 0.0759631653603757,
+        "max_bbox_volume_rel_drift": 2.9058858898256545e-05,
+        "max_detF_nonpositive_fraction_after_initial": 0.0,
+        "max_nonfinite_fraction": 0.0
+      },
+      "tolerance": {
+        "com_position_rel_error_max": 0.2,
+        "com_velocity_rel_error_max": 0.2,
+        "bbox_volume_rel_drift_max": 0.02,
+        "detF_nonpositive_fraction_max": 2e-06
+      }
+    },
+    {
+      "system": "Physics3D",
+      "scene_id": "c1_covariance_v1",
+      "scale": 2.0,
+      "status": "PASS",
+      "measured": {
+        "kinematic_median_rel_frobenius_error": 0.008655968964790903,
+        "kinematic_p95_rel_frobenius_error": 0.015625620129897776,
+        "transport_median_rel_frobenius_error": 0.00013628303938622858,
+        "transport_p95_rel_frobenius_error": 0.00033753273510738,
+        "kinematic_status": "PASS",
+        "transport_status": "PASS",
+        "n_particles_scored": 3375
+      },
+      "tolerance": {
+        "kinematic_median_max": 0.1,
+        "kinematic_p95_max": 0.2,
+        "transport_median_max": 0.002,
+        "transport_p95_max": 0.02
+      }
+    },
+    {
+      "system": "Physics3D",
+      "scene_id": "c2_blobhealth_shear_v1",
+      "scale": 2.0,
+      "status": "INVALID",
+      "measured": {
+        "peak_kinematic_median_rel_frobenius_error": 0.4530286586835872,
+        "peak_kinematic_p95_rel_frobenius_error": 0.6460798954184624,
+        "peak_transport_median_rel_frobenius_error": 0.0007468747182200451,
+        "peak_transport_p95_rel_frobenius_error": 0.0028053603785492725,
+        "kinematic_status": "FAIL",
+        "transport_status": "PASS",
+        "health_status": "PASS",
+        "min_eigenvalue_ratio": 0.14163428766321157,
+        "degenerate_fraction": 0.0,
+        "worst_particle_id": 996
+      },
+      "tolerance": {
+        "peak_kinematic_median_rel_frobenius_max": 0.1,
+        "peak_kinematic_p95_rel_frobenius_max": 0.2,
+        "peak_transport_median_rel_frobenius_max": 0.002,
+        "peak_transport_p95_rel_frobenius_max": 0.02,
+        "peak_transport_boundary_exclusion_spacings": 2.0,
+        "min_eigenvalue_ratio": 0.0005,
+        "condition_number_max": 20000.0,
+        "degenerate_fraction_max": 0.002
+      }
+    },
+    {
+      "system": "Physics3D",
+      "scene_id": "c4_captured_frequency_v1",
+      "scale": 2.0,
+      "status": "PASS",
+      "measured": {
+        "fundamental_frequency_hz": 0.9136869220442435,
+        "rel_error": 0.0069059577360352006,
+        "damping_ratio": 0.0079581486783236
+      },
+      "tolerance": {
+        "rel_tolerance": 0.4
+      }
+    },
+    {
+      "system": "GASP",
+      "scene_id": "a6_freefall_v1",
+      "scale": 0.5,
+      "status": "PASS",
+      "measured": {
+        "particle_count": 1345818,
+        "max_com_position_rel_error": 0.023373648657532012,
+        "max_com_velocity_rel_error": 0.007753717817921398,
+        "max_bbox_volume_rel_drift": 6.0598046889293045e-06,
+        "max_detF_nonpositive_fraction_after_initial": 0.0,
+        "max_nonfinite_fraction": 0.0
+      },
+      "tolerance": {
+        "com_position_rel_error_max": 0.05,
+        "com_velocity_rel_error_max": 0.05,
+        "bbox_volume_rel_drift_max": 0.005,
+        "detF_nonpositive_fraction_max": 5e-07
+      }
+    },
+    {
+      "system": "GASP",
+      "scene_id": "c5_triangle_shape_transport_v1",
+      "scale": 0.5,
+      "status": "PASS",
+      "measured": {
+        "triangle_count": 448606,
+        "max_com_travel": 2.424410606721505,
+        "max_edge_rel_error_median": 0.0,
+        "max_edge_rel_error_p95": 7.9765348068772e-05,
+        "max_area_rel_error_median": 2.395872786387088e-06,
+        "max_area_rel_error_p95": 0.000302463674672,
+        "max_nonfinite_fraction": 0.0
+      },
+      "tolerance": {
+        "edge_median_max": 0.005,
+        "edge_p95_max": 0.025,
+        "area_median_max": 0.01,
+        "area_p95_max": 0.05
+      }
+    },
+    {
+      "system": "GASP",
+      "scene_id": "c6_rigid_transport_v1",
+      "scale": 0.5,
+      "status": "PASS",
+      "measured": {
+        "triangle_count": 448606,
+        "com_travel": 1.2130110747191372,
+        "direction_cosine": 0.9999999995213061,
+        "path_straightness": 8.477268770533053e-06,
+        "speed_variation": 4.397304650950537e-05,
+        "max_edge_rel_error_median": 0.0,
+        "max_edge_rel_error_p95": 0.0001133148051624,
+        "max_area_rel_error_median": 0.0,
+        "max_area_rel_error_p95": 0.0002503983624263,
+        "max_nonfinite_fraction": 0.0
+      },
+      "tolerance": {
+        "direction_cosine_min": 0.99,
+        "path_straightness_max": 0.01,
+        "speed_variation_max": 0.025,
+        "edge_median_max": 0.005,
+        "edge_p95_max": 0.025,
+        "area_median_max": 0.01,
+        "area_p95_max": 0.05
+      }
+    },
+    {
+      "system": "GASP",
+      "scene_id": "c7_supported_settle_v1",
+      "scale": 0.5,
+      "status": "FAIL",
+      "measured": {
+        "triangle_count": 448606,
+        "settle_frame": 76,
+        "body_length_scale": 4.7373033628108665,
+        "tail_com_drift_rel": 0.014102356528623315,
+        "tail_max_edge_rel_error_median": 0.0052415275034757,
+        "tail_max_edge_rel_error_p95": 0.0170159898327003,
+        "tail_max_area_rel_error_median": 0.0033583898942336,
+        "tail_max_area_rel_error_p95": 0.0153955323908095,
+        "max_nonfinite_fraction": 0.0
+      },
+      "tolerance": {
+        "tail_com_drift_max_rel": 0.01,
+        "edge_median_max": 0.01,
+        "edge_p95_max": 0.05,
+        "area_median_max": 0.02,
+        "area_p95_max": 0.1
+      }
+    },
+    {
+      "system": "GASP",
+      "scene_id": "c8_impact_recovery_v1",
+      "scale": 0.5,
+      "status": "PASS",
+      "measured": {
+        "triangle_count": 448606,
+        "max_com_travel": 6.390379665509572,
+        "peak_area_rel_error_p95": 0.309151811640453,
+        "max_edge_rel_error_p95": 0.0952573165475909,
+        "tail_best_edge_rel_error_median": 0.0104910868760598,
+        "tail_best_area_rel_error_median": 0.0091184888206601,
+        "max_nonfinite_fraction": 0.0
+      },
+      "tolerance": {
+        "transient_edge_p95_max": 0.5,
+        "tail_edge_median_max": 0.025,
+        "tail_area_median_max": 0.05
+      }
+    },
+    {
+      "system": "GASP",
+      "scene_id": "a6_freefall_v1",
+      "scale": 0.75,
+      "status": "PASS",
+      "measured": {
+        "particle_count": 1345818,
+        "max_com_position_rel_error": 0.023373648657532012,
+        "max_com_velocity_rel_error": 0.007753717817921398,
+        "max_bbox_volume_rel_drift": 6.0598046889293045e-06,
+        "max_detF_nonpositive_fraction_after_initial": 0.0,
+        "max_nonfinite_fraction": 0.0
+      },
+      "tolerance": {
+        "com_position_rel_error_max": 0.07500000000000001,
+        "com_velocity_rel_error_max": 0.07500000000000001,
+        "bbox_volume_rel_drift_max": 0.0075,
+        "detF_nonpositive_fraction_max": 7.5e-07
+      }
+    },
+    {
+      "system": "GASP",
+      "scene_id": "c5_triangle_shape_transport_v1",
+      "scale": 0.75,
+      "status": "PASS",
+      "measured": {
+        "triangle_count": 448606,
+        "max_com_travel": 2.424410606721505,
+        "max_edge_rel_error_median": 0.0,
+        "max_edge_rel_error_p95": 7.9765348068772e-05,
+        "max_area_rel_error_median": 2.395872786387088e-06,
+        "max_area_rel_error_p95": 0.000302463674672,
+        "max_nonfinite_fraction": 0.0
+      },
+      "tolerance": {
+        "edge_median_max": 0.0075,
+        "edge_p95_max": 0.037500000000000006,
+        "area_median_max": 0.015,
+        "area_p95_max": 0.07500000000000001
+      }
+    },
+    {
+      "system": "GASP",
+      "scene_id": "c6_rigid_transport_v1",
+      "scale": 0.75,
+      "status": "PASS",
+      "measured": {
+        "triangle_count": 448606,
+        "com_travel": 1.2130110747191372,
+        "direction_cosine": 0.9999999995213061,
+        "path_straightness": 8.477268770533053e-06,
+        "speed_variation": 4.397304650950537e-05,
+        "max_edge_rel_error_median": 0.0,
+        "max_edge_rel_error_p95": 0.0001133148051624,
+        "max_area_rel_error_median": 0.0,
+        "max_area_rel_error_p95": 0.0002503983624263,
+        "max_nonfinite_fraction": 0.0
+      },
+      "tolerance": {
+        "direction_cosine_min": 0.985,
+        "path_straightness_max": 0.015,
+        "speed_variation_max": 0.037500000000000006,
+        "edge_median_max": 0.0075,
+        "edge_p95_max": 0.037500000000000006,
+        "area_median_max": 0.015,
+        "area_p95_max": 0.07500000000000001
+      }
+    },
+    {
+      "system": "GASP",
+      "scene_id": "c7_supported_settle_v1",
+      "scale": 0.75,
+      "status": "PASS",
+      "measured": {
+        "triangle_count": 448606,
+        "settle_frame": 76,
+        "body_length_scale": 4.7373033628108665,
+        "tail_com_drift_rel": 0.014102356528623315,
+        "tail_max_edge_rel_error_median": 0.0052415275034757,
+        "tail_max_edge_rel_error_p95": 0.0170159898327003,
+        "tail_max_area_rel_error_median": 0.0033583898942336,
+        "tail_max_area_rel_error_p95": 0.0153955323908095,
+        "max_nonfinite_fraction": 0.0
+      },
+      "tolerance": {
+        "tail_com_drift_max_rel": 0.015,
+        "edge_median_max": 0.015,
+        "edge_p95_max": 0.07500000000000001,
+        "area_median_max": 0.03,
+        "area_p95_max": 0.15000000000000002
+      }
+    },
+    {
+      "system": "GASP",
+      "scene_id": "c8_impact_recovery_v1",
+      "scale": 0.75,
+      "status": "PASS",
+      "measured": {
+        "triangle_count": 448606,
+        "max_com_travel": 6.390379665509572,
+        "peak_area_rel_error_p95": 0.309151811640453,
+        "max_edge_rel_error_p95": 0.0952573165475909,
+        "tail_best_edge_rel_error_median": 0.0104910868760598,
+        "tail_best_area_rel_error_median": 0.0091184888206601,
+        "max_nonfinite_fraction": 0.0
+      },
+      "tolerance": {
+        "transient_edge_p95_max": 0.75,
+        "tail_edge_median_max": 0.037500000000000006,
+        "tail_area_median_max": 0.07500000000000001
+      }
+    },
+    {
+      "system": "GASP",
+      "scene_id": "a6_freefall_v1",
+      "scale": 1.0,
+      "status": "PASS",
+      "measured": {
+        "particle_count": 1345818,
+        "max_com_position_rel_error": 0.023373648657532012,
+        "max_com_velocity_rel_error": 0.007753717817921398,
+        "max_bbox_volume_rel_drift": 6.0598046889293045e-06,
+        "max_detF_nonpositive_fraction_after_initial": 0.0,
+        "max_nonfinite_fraction": 0.0
+      },
+      "tolerance": {
+        "com_position_rel_error_max": 0.1,
+        "com_velocity_rel_error_max": 0.1,
+        "bbox_volume_rel_drift_max": 0.01,
+        "detF_nonpositive_fraction_max": 1e-06
+      }
+    },
+    {
+      "system": "GASP",
+      "scene_id": "c5_triangle_shape_transport_v1",
+      "scale": 1.0,
+      "status": "PASS",
+      "measured": {
+        "triangle_count": 448606,
+        "max_com_travel": 2.424410606721505,
+        "max_edge_rel_error_median": 0.0,
+        "max_edge_rel_error_p95": 7.9765348068772e-05,
+        "max_area_rel_error_median": 2.395872786387088e-06,
+        "max_area_rel_error_p95": 0.000302463674672,
+        "max_nonfinite_fraction": 0.0
+      },
+      "tolerance": {
+        "edge_median_max": 0.01,
+        "edge_p95_max": 0.05,
+        "area_median_max": 0.02,
+        "area_p95_max": 0.1
+      }
+    },
+    {
+      "system": "GASP",
+      "scene_id": "c6_rigid_transport_v1",
+      "scale": 1.0,
+      "status": "PASS",
+      "measured": {
+        "triangle_count": 448606,
+        "com_travel": 1.2130110747191372,
+        "direction_cosine": 0.9999999995213061,
+        "path_straightness": 8.477268770533053e-06,
+        "speed_variation": 4.397304650950537e-05,
+        "max_edge_rel_error_median": 0.0,
+        "max_edge_rel_error_p95": 0.0001133148051624,
+        "max_area_rel_error_median": 0.0,
+        "max_area_rel_error_p95": 0.0002503983624263,
+        "max_nonfinite_fraction": 0.0
+      },
+      "tolerance": {
+        "direction_cosine_min": 0.98,
+        "path_straightness_max": 0.02,
+        "speed_variation_max": 0.05,
+        "edge_median_max": 0.01,
+        "edge_p95_max": 0.05,
+        "area_median_max": 0.02,
+        "area_p95_max": 0.1
+      }
+    },
+    {
+      "system": "GASP",
+      "scene_id": "c7_supported_settle_v1",
+      "scale": 1.0,
+      "status": "PASS",
+      "measured": {
+        "triangle_count": 448606,
+        "settle_frame": 76,
+        "body_length_scale": 4.7373033628108665,
+        "tail_com_drift_rel": 0.014102356528623315,
+        "tail_max_edge_rel_error_median": 0.0052415275034757,
+        "tail_max_edge_rel_error_p95": 0.0170159898327003,
+        "tail_max_area_rel_error_median": 0.0033583898942336,
+        "tail_max_area_rel_error_p95": 0.0153955323908095,
+        "max_nonfinite_fraction": 0.0
+      },
+      "tolerance": {
+        "tail_com_drift_max_rel": 0.02,
+        "edge_median_max": 0.02,
+        "edge_p95_max": 0.1,
+        "area_median_max": 0.04,
+        "area_p95_max": 0.2
+      }
+    },
+    {
+      "system": "GASP",
+      "scene_id": "c8_impact_recovery_v1",
+      "scale": 1.0,
+      "status": "PASS",
+      "measured": {
+        "triangle_count": 448606,
+        "max_com_travel": 6.390379665509572,
+        "peak_area_rel_error_p95": 0.309151811640453,
+        "max_edge_rel_error_p95": 0.0952573165475909,
+        "tail_best_edge_rel_error_median": 0.0104910868760598,
+        "tail_best_area_rel_error_median": 0.0091184888206601,
+        "max_nonfinite_fraction": 0.0
+      },
+      "tolerance": {
+        "transient_edge_p95_max": 1.0,
+        "tail_edge_median_max": 0.05,
+        "tail_area_median_max": 0.1
+      }
+    },
+    {
+      "system": "GASP",
+      "scene_id": "a6_freefall_v1",
+      "scale": 1.25,
+      "status": "PASS",
+      "measured": {
+        "particle_count": 1345818,
+        "max_com_position_rel_error": 0.023373648657532012,
+        "max_com_velocity_rel_error": 0.007753717817921398,
+        "max_bbox_volume_rel_drift": 6.0598046889293045e-06,
+        "max_detF_nonpositive_fraction_after_initial": 0.0,
+        "max_nonfinite_fraction": 0.0
+      },
+      "tolerance": {
+        "com_position_rel_error_max": 0.125,
+        "com_velocity_rel_error_max": 0.125,
+        "bbox_volume_rel_drift_max": 0.0125,
+        "detF_nonpositive_fraction_max": 1.2499999999999999e-06
+      }
+    },
+    {
+      "system": "GASP",
+      "scene_id": "c5_triangle_shape_transport_v1",
+      "scale": 1.25,
+      "status": "PASS",
+      "measured": {
+        "triangle_count": 448606,
+        "max_com_travel": 2.424410606721505,
+        "max_edge_rel_error_median": 0.0,
+        "max_edge_rel_error_p95": 7.9765348068772e-05,
+        "max_area_rel_error_median": 2.395872786387088e-06,
+        "max_area_rel_error_p95": 0.000302463674672,
+        "max_nonfinite_fraction": 0.0
+      },
+      "tolerance": {
+        "edge_median_max": 0.0125,
+        "edge_p95_max": 0.0625,
+        "area_median_max": 0.025,
+        "area_p95_max": 0.125
+      }
+    },
+    {
+      "system": "GASP",
+      "scene_id": "c6_rigid_transport_v1",
+      "scale": 1.25,
+      "status": "PASS",
+      "measured": {
+        "triangle_count": 448606,
+        "com_travel": 1.2130110747191372,
+        "direction_cosine": 0.9999999995213061,
+        "path_straightness": 8.477268770533053e-06,
+        "speed_variation": 4.397304650950537e-05,
+        "max_edge_rel_error_median": 0.0,
+        "max_edge_rel_error_p95": 0.0001133148051624,
+        "max_area_rel_error_median": 0.0,
+        "max_area_rel_error_p95": 0.0002503983624263,
+        "max_nonfinite_fraction": 0.0
+      },
+      "tolerance": {
+        "direction_cosine_min": 0.975,
+        "path_straightness_max": 0.025,
+        "speed_variation_max": 0.0625,
+        "edge_median_max": 0.0125,
+        "edge_p95_max": 0.0625,
+        "area_median_max": 0.025,
+        "area_p95_max": 0.125
+      }
+    },
+    {
+      "system": "GASP",
+      "scene_id": "c7_supported_settle_v1",
+      "scale": 1.25,
+      "status": "PASS",
+      "measured": {
+        "triangle_count": 448606,
+        "settle_frame": 76,
+        "body_length_scale": 4.7373033628108665,
+        "tail_com_drift_rel": 0.014102356528623315,
+        "tail_max_edge_rel_error_median": 0.0052415275034757,
+        "tail_max_edge_rel_error_p95": 0.0170159898327003,
+        "tail_max_area_rel_error_median": 0.0033583898942336,
+        "tail_max_area_rel_error_p95": 0.0153955323908095,
+        "max_nonfinite_fraction": 0.0
+      },
+      "tolerance": {
+        "tail_com_drift_max_rel": 0.025,
+        "edge_median_max": 0.025,
+        "edge_p95_max": 0.125,
+        "area_median_max": 0.05,
+        "area_p95_max": 0.25
+      }
+    },
+    {
+      "system": "GASP",
+      "scene_id": "c8_impact_recovery_v1",
+      "scale": 1.25,
+      "status": "PASS",
+      "measured": {
+        "triangle_count": 448606,
+        "max_com_travel": 6.390379665509572,
+        "peak_area_rel_error_p95": 0.309151811640453,
+        "max_edge_rel_error_p95": 0.0952573165475909,
+        "tail_best_edge_rel_error_median": 0.0104910868760598,
+        "tail_best_area_rel_error_median": 0.0091184888206601,
+        "max_nonfinite_fraction": 0.0
+      },
+      "tolerance": {
+        "transient_edge_p95_max": 1.25,
+        "tail_edge_median_max": 0.0625,
+        "tail_area_median_max": 0.125
+      }
+    },
+    {
+      "system": "GASP",
+      "scene_id": "a6_freefall_v1",
+      "scale": 2.0,
+      "status": "PASS",
+      "measured": {
+        "particle_count": 1345818,
+        "max_com_position_rel_error": 0.023373648657532012,
+        "max_com_velocity_rel_error": 0.007753717817921398,
+        "max_bbox_volume_rel_drift": 6.0598046889293045e-06,
+        "max_detF_nonpositive_fraction_after_initial": 0.0,
+        "max_nonfinite_fraction": 0.0
+      },
+      "tolerance": {
+        "com_position_rel_error_max": 0.2,
+        "com_velocity_rel_error_max": 0.2,
+        "bbox_volume_rel_drift_max": 0.02,
+        "detF_nonpositive_fraction_max": 2e-06
+      }
+    },
+    {
+      "system": "GASP",
+      "scene_id": "c5_triangle_shape_transport_v1",
+      "scale": 2.0,
+      "status": "PASS",
+      "measured": {
+        "triangle_count": 448606,
+        "max_com_travel": 2.424410606721505,
+        "max_edge_rel_error_median": 0.0,
+        "max_edge_rel_error_p95": 7.9765348068772e-05,
+        "max_area_rel_error_median": 2.395872786387088e-06,
+        "max_area_rel_error_p95": 0.000302463674672,
+        "max_nonfinite_fraction": 0.0
+      },
+      "tolerance": {
+        "edge_median_max": 0.02,
+        "edge_p95_max": 0.1,
+        "area_median_max": 0.04,
+        "area_p95_max": 0.2
+      }
+    },
+    {
+      "system": "GASP",
+      "scene_id": "c6_rigid_transport_v1",
+      "scale": 2.0,
+      "status": "PASS",
+      "measured": {
+        "triangle_count": 448606,
+        "com_travel": 1.2130110747191372,
+        "direction_cosine": 0.9999999995213061,
+        "path_straightness": 8.477268770533053e-06,
+        "speed_variation": 4.397304650950537e-05,
+        "max_edge_rel_error_median": 0.0,
+        "max_edge_rel_error_p95": 0.0001133148051624,
+        "max_area_rel_error_median": 0.0,
+        "max_area_rel_error_p95": 0.0002503983624263,
+        "max_nonfinite_fraction": 0.0
+      },
+      "tolerance": {
+        "direction_cosine_min": 0.96,
+        "path_straightness_max": 0.04,
+        "speed_variation_max": 0.1,
+        "edge_median_max": 0.02,
+        "edge_p95_max": 0.1,
+        "area_median_max": 0.04,
+        "area_p95_max": 0.2
+      }
+    },
+    {
+      "system": "GASP",
+      "scene_id": "c7_supported_settle_v1",
+      "scale": 2.0,
+      "status": "PASS",
+      "measured": {
+        "triangle_count": 448606,
+        "settle_frame": 76,
+        "body_length_scale": 4.7373033628108665,
+        "tail_com_drift_rel": 0.014102356528623315,
+        "tail_max_edge_rel_error_median": 0.0052415275034757,
+        "tail_max_edge_rel_error_p95": 0.0170159898327003,
+        "tail_max_area_rel_error_median": 0.0033583898942336,
+        "tail_max_area_rel_error_p95": 0.0153955323908095,
+        "max_nonfinite_fraction": 0.0
+      },
+      "tolerance": {
+        "tail_com_drift_max_rel": 0.04,
+        "edge_median_max": 0.04,
+        "edge_p95_max": 0.2,
+        "area_median_max": 0.08,
+        "area_p95_max": 0.4
+      }
+    },
+    {
+      "system": "GASP",
+      "scene_id": "c8_impact_recovery_v1",
+      "scale": 2.0,
+      "status": "PASS",
+      "measured": {
+        "triangle_count": 448606,
+        "max_com_travel": 6.390379665509572,
+        "peak_area_rel_error_p95": 0.309151811640453,
+        "max_edge_rel_error_p95": 0.0952573165475909,
+        "tail_best_edge_rel_error_median": 0.0104910868760598,
+        "tail_best_area_rel_error_median": 0.0091184888206601,
+        "max_nonfinite_fraction": 0.0
+      },
+      "tolerance": {
+        "transient_edge_p95_max": 2.0,
+        "tail_edge_median_max": 0.1,
+        "tail_area_median_max": 0.2
+      }
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "system_name": "GaussianFlesh",
+  "system_version": "80f3f8e283cc45f8ded3641efd126af860f16c9d",
+  "spec_version": "1.0.0",
+  "columns_present": [
+    "vx",
+    "vy",
+    "vz",
+    "mass",
+    "phase"
+  ],
+  "wall_clock_seconds": 147.451,
+  "hardware": "NVIDIA GeForce RTX 4070 Laptop GPU, Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+  "notes": "Thermal path: solver_ul.heat_step_physical, SI-exact explicit diffusion (alpha = k/(rho c) integrated over each frame in stability-bounded sub-iterations); Kelvin used directly (all operations affine in T). Dirichlet hot-floor band: 1 grid cell above the body base. Latent heat and melt temperature taken from the scene in SI. DEVIATION: molten-phase mechanical response (kappa=400000 Pa, mu=3000 Pa) is not specified by the scene; wax-like defaults used. Scene axes are z-up; simulated permuted to y-up, exact inverse on export. Heat updates batched every 25 frames: each particle-grid temperature roundtrip adds B-spline smoothing diffusion dx^2/(4 dt); batching shrinks it and the residual is subtracted from the solve conductivity so total effective diffusivity is the scene's k/(rho c). | Material mapping [homogeneous], all: model=thermoelastic_with_melting, E=50000 Pa, nu=0.3, density=1000 kg/m^3, particles=4000; mu = E/(2(1+nu)), lambda = E nu/((1+nu)(1-2nu)), mass = density * spacing^3. | Solver path: UL-MLS-MPM (solver_ul.substep, use_floor=False). frame_dt=0.1 s, substep_dt=0.000364964 s, 274 substeps/frame. Floor contact BC disabled: benchmark scenes have no floor. | Taichi arch=cuda, default_fp=f32 (single precision). numpy seed=0. | Fixed/prescribed boundary regions are enforced by pin kernels in the export module (position and velocity overrides after each substep), not by grid BCs. | Simulation ran in a transformed frame: sim(t) = P @ (scene(t) - v_frame * t) + offset, offset=[-0.0, 0.11801219149676602, -0.0], permutation=[[1.0, 0.0, 0.0], [0.0, 0.0, 1.0], [0.0, -1.0, 0.0]], v_frame=zero (Galilean boost; physics is Galilean-invariant and the boost keeps f32 positions small over a long drift). The exact inverse was applied on export; the submission is in scene coordinates.",
+  "scene_id": "i1_thermal_T400_v1"
+}

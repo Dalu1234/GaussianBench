@@ -1,0 +1,48 @@
+{
+  "scene_id": "c4_captured_frequency_v1",
+  "scorer": "score_c4_captured",
+  "test_class": "capability",
+  "tier": "C",
+  "description": "Physics on captured geometry. The A2 frequency test, but the clean procedural beam is replaced by an elongated IRREGULAR asset (a bowed, surface-noisy rod imitating a captured Gaussian scan) with material assigned uniformly. Purpose: detect systems that pass physics tests on clean procedural blocks but degrade on real captured geometry, where particle spacing is uneven, surfaces are rough, and the cross section varies along the length. The reference frequency is computed from the asset's actual measured section properties (see provenance) with a wider 20 percent tolerance.",
+  "geometry": {
+    "type": "captured_asset",
+    "approx_extent_m": [0.4, 0.07, 0.04],
+    "particle_spacing_m": 0.005,
+    "particle_positions_file": "c4_asset_positions.npy"
+  },
+  "material": {
+    "model_hint": "linear_elastic_or_equivalent",
+    "youngs_modulus_pa": 5.0e5,
+    "poisson_ratio": 0.3,
+    "density_kg_m3": 1000
+  },
+  "boundary_conditions": {
+    "clamp": { "region": "x < 0.01", "type": "fixed" }
+  },
+  "initial_conditions": {
+    "type": "modal_velocity_pluck",
+    "direction": [0, 1, 0],
+    "tip_velocity_m_s": 0.05,
+    "mode_shape": "euler_bernoulli_mode1",
+    "release_at_t": 0.0
+  },
+  "simulation": { "duration_s": 4.0, "output_fps": 240, "gravity": [0, 0, 0] },
+  "pass_criteria": {
+    "quantity": "fundamental_frequency_hz",
+    "reference": "euler_bernoulli_measured_section",
+    "rel_tolerance": 0.20,
+    "damping_report_only": true,
+    "regime_max_tip_deflection_frac_of_length": 0.05,
+    "tip_region_rest_x_frac": 0.95,
+    "centerline_bins": 20
+  },
+  "provenance": {
+    "reference_formula": "f1 = (1.875104^2 / (2*pi*L^2)) * sqrt(E * (I/A) / rho), with I/A = <dy^2>, the mean squared transverse offset of the particles from the local (per-x-bin) centroid",
+    "regime_assumptions": [
+      "slender irregular beam; straight-beam Euler-Bernoulli applied about the bowed centerline (the bow is 4 percent of length, a second-order effect on f1)",
+      "small deflection, linear elastic, uniform material",
+      "section properties measured from the particle distribution itself: I/A equals the area-mean squared distance from the neutral axis, so no bounding-box overestimate of the second moment enters the reference. Bounding dimensions are used only for the length L; total mass enters through the scene density"
+    ],
+    "notes": "Slenderness and irregularity correction, documented: for a prismatic section I = integral(y^2 dA) and A = integral(dA), so E*I/(rho*A) = E*<y^2>/rho exactly; measuring <y^2> per x-bin about the local centroid extends this to a bowed, rough asset without assuming any idealized cross-section shape. Tolerance is 20 percent (vs 10 for A2) to absorb the residual error of applying straight-beam theory to a captured shape."
+  }
+}

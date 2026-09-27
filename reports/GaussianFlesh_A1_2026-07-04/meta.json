@@ -1,0 +1,15 @@
+{
+  "system_name": "GaussianFlesh",
+  "system_version": "7121fc6983089522d391ba2045b1e22f3666205d",
+  "spec_version": "1.0.0",
+  "columns_present": [
+    "vx",
+    "vy",
+    "vz",
+    "mass"
+  ],
+  "wall_clock_seconds": 19.617,
+  "hardware": "NVIDIA GeForce RTX 4070 Laptop GPU, Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+  "notes": "Grid dx coarsened to 0.0691 m so the 10.3 m motion envelope fits the solver's 150^3 node cap. | Material mapping: E=100000 Pa, nu=0.3 converted to mu=38461.5 Pa, lambda=57692.3 Pa (mu = E/(2(1+nu)), lambda = E nu/((1+nu)(1-2nu))). Density 1000 kg/m^3, per-particle mass 0.001 kg from spacing^3 volume. | Solver path: UL-MLS-MPM (solver_ul.substep, use_floor=False). frame_dt=0.00833333 s, substep_dt=0.00166667 s, 5 substeps/frame. Floor contact BC disabled: benchmark scenes have no floor. | Taichi arch=cuda, default_fp=f32 (single precision). numpy seed=0. | Fixed/prescribed boundary regions are enforced by pin kernels in the export module (position and velocity overrides after each substep), not by grid BCs. | Simulation ran in a shifted frame for grid placement: sim = P @ scene + offset, offset=[-5.0, 0.2787288343345733, -1.25], permutation=identity. The exact inverse was applied on export; the submission is in scene coordinates.",
+  "scene_id": "a1_conservation_v1"
+}

@@ -1,0 +1,70 @@
+{
+  "scene_id": "i1_thermal_T370_v1",
+  "scorer": "score_a4_meltfront",
+  "test_class": "capability",
+  "tier": "A",
+  "description": "Melt front propagation vs the Neumann solution of the one-dimensional Stefan problem. A solid column stands on a floor held at a fixed temperature above the melt point; the sides are insulated; gravity is ZERO so the material stays put and the problem remains pure 1D conduction with phase change (a collapsing molten column would invalidate the analytical reference). Systems without thermal support submit nothing and are marked NA. The trajectory MUST include the phase column: the front cannot be inferred from positions alone, because a molten and a solid particle at the same location are indistinguishable without state (SPEC.md section 2.1).",
+  "geometry": {
+    "type": "box",
+    "size_m": [
+      0.05,
+      0.05,
+      0.2
+    ],
+    "particle_spacing_m": 0.005,
+    "particle_positions_file": "a4_column_positions.npy"
+  },
+  "material": {
+    "model_hint": "thermoelastic_with_melting",
+    "youngs_modulus_pa": 50000.0,
+    "poisson_ratio": 0.3,
+    "density_kg_m3": 1000,
+    "thermal": {
+      "conductivity_w_m_k": 100.0,
+      "specific_heat_j_kg_k": 2000.0,
+      "latent_heat_j_kg": 100000.0,
+      "melt_temperature_k": 330.0,
+      "initial_temperature_k": 300.0,
+      "properties_equal_in_both_phases": true
+    }
+  },
+  "boundary_conditions": {
+    "hot_floor": {
+      "region": "z < 0.0025",
+      "type": "fixed_temperature",
+      "temperature_k": 370.0
+    },
+    "sides": "insulated",
+    "top": "insulated"
+  },
+  "initial_conditions": {
+    "at_rest": true,
+    "uniform_temperature_k": 300.0
+  },
+  "simulation": {
+    "duration_s": 60.0,
+    "output_fps": 10,
+    "gravity": [
+      0,
+      0,
+      0
+    ]
+  },
+  "pass_criteria": {
+    "quantity": "melt_front_prefactor",
+    "reference": "neumann_stefan_1d",
+    "r2_min": 0.98,
+    "prefactor_rel_tolerance": 0.15,
+    "transient_discard_frac": 0.1
+  },
+  "provenance": {
+    "reference_formula": "s(t) = 2*lam*sqrt(alpha*t); lam solves St_l/(exp(lam^2)*erf(lam)) - St_s/(exp(lam^2)*erfc(lam)) = lam*sqrt(pi); see reference/stefan.py",
+    "regime_assumptions": [
+      "one-dimensional conduction (insulated sides, uniform floor temperature)",
+      "material stationary (zero gravity, no melt convection)",
+      "equal thermophysical properties in solid and liquid phases",
+      "sharp melt front, no volume change on melting"
+    ],
+    "notes": "Citation: Carslaw and Jaeger, Conduction of Heat in Solids, 2nd ed., chapter 11. The conductivity is deliberately high (100 W/m/K, metal-like) so the front crosses many particle layers within the run; the test grades the mathematics of the phase change, not material realism. The front height staircase is quantized at one particle spacing, which the fit's intercept absorbs; the 15 percent prefactor tolerance covers the residual."
+  }
+}

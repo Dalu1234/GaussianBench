@@ -1,0 +1,36 @@
+{
+  "scene_id": "c6_rigid_transport_v1",
+  "scorer": "score_c6_rigid_transport",
+  "test_class": "code_verification",
+  "tier": "C",
+  "description": "Representation-native Galilean transport. The system's native stable-identity body is given a uniform initial velocity in zero gravity and rolled out through the released pipeline. Uniform motion must remain uniform: the center of mass advects along a straight line at constant speed in the declared direction, while the stable-identity shape metrics (edge lengths, areas) stay at their rest values. This isolates advection/transfer fidelity (grid-crossing noise, transport dissipation, spurious forces) from constitutive response: no force acts, so any deviation is an implementation artifact. The declared direction is deliberately oblique to the native grid axes so cell-crossing error cannot hide along a lattice direction.",
+  "geometry": { "type": "stable_triangle_soup" },
+  "initial_conditions": {
+    "at_rest_shape": true,
+    "uniform_velocity_direction": [1.0, 0.6, 0.3],
+    "note": "Direction is normalized by the submitter and applied in its native simulation frame; the exported center-of-mass path must advance along this direction in scene coordinates. Speed is native (unit-free scoring): the scorer checks straightness, speed constancy, direction, and a minimum travel gate, not an absolute speed."
+  },
+  "simulation": { "duration_s": "native rollout", "output_fps": "native checkpoints", "gravity": [0, 0, 0] },
+  "pass_criteria": {
+    "quantity": "uniform-motion transport of center of mass and stable-identity shape",
+    "min_frames": 20,
+    "min_com_travel": 0.3,
+    "direction_cosine_min": 0.98,
+    "path_straightness_max": 0.02,
+    "speed_variation_max": 0.05,
+    "edge_median_max": 0.01,
+    "edge_p95_max": 0.05,
+    "area_median_max": 0.02,
+    "area_p95_max": 0.1
+  },
+  "provenance": {
+    "reference_formula": "x_com(t) = x_com(0) + v t with constant v parallel to the declared direction; all stable-identity edge lengths and areas constant",
+    "regime_assumptions": [
+      "zero gravity and no boundary contact during the rollout",
+      "stable identity: the same physical element keeps the same index in every frame",
+      "straightness = max perpendicular deviation of the COM from the best-fit line through first and last COM, divided by total travel",
+      "speed variation = max |per-frame COM displacement - median per-frame displacement| / median per-frame displacement, over uniform-cadence checkpoints"
+    ],
+    "notes": "Frozen v1. Submission contract is triangle_metrics.csv exactly as SPEC 2.6 (stable triangle soups export it natively; other stable-identity representations may compute the same columns over their own persistent element structure and declare the mapping in meta.json). A natural controlled fault is leaving the engine's default gravity enabled: the COM path becomes parabolic and the straightness check fails while shape metrics remain healthy."
+  }
+}

@@ -1,0 +1,204 @@
+diff --git a/config/watermelon_config.json b/config/watermelon_config.json
+index 421eb0a..340ba9e 100644
+--- a/config/watermelon_config.json
++++ b/config/watermelon_config.json
+@@ -8,7 +8,7 @@
+     ],
+     "substep_dt": 1e-4,
+     "frame_dt": 3e-2,
+-    "frame_num": 300,
++    "frame_num": 100,
+     "E": 2e3,
+     "nu": 0.38,
+     "friction_angle": 45.0,
+diff --git a/gaussian-splatting b/gaussian-splatting
+--- a/gaussian-splatting
++++ b/gaussian-splatting
+@@ -1 +1 @@
+-Subproject commit 11b81b5096742e2f59fa016ec4c9b602cce44b77
++Subproject commit 11b81b5096742e2f59fa016ec4c9b602cce44b77-dirty
+diff --git a/gs_simulation/watermelon/gs_simulation_watermelon.py b/gs_simulation/watermelon/gs_simulation_watermelon.py
+index 8ffc418..4db8fed 100644
+--- a/gs_simulation/watermelon/gs_simulation_watermelon.py
++++ b/gs_simulation/watermelon/gs_simulation_watermelon.py
+@@ -15,14 +15,21 @@ import subprocess
+ # Gaussian splatting dependencies
+ from utils.sh_utils import eval_sh
+ from scene.gaussian_model import GaussianModel
+-from diff_gaussian_rasterization import (
+-    GaussianRasterizationSettings,
+-    GaussianRasterizer,
+-)
++try:
++    from diff_gaussian_rasterization import (
++        GaussianRasterizationSettings,
++        GaussianRasterizer,
++    )
++except (ImportError, OSError):
++    GaussianRasterizationSettings = None
++    GaussianRasterizer = None
+ from sklearn.neighbors import NearestNeighbors
+ import numpy as np
+ from scene.cameras import Camera as GSCamera
+-from gaussian_renderer import render, GaussianModel
++try:
++    from gaussian_renderer import render
++except (ImportError, OSError):
++    render = None
+ from utils.system_utils import searchForMaxIteration
+ from utils.graphics_utils import focal2fov
+ from utils.shadow_utils import *
+@@ -139,6 +146,8 @@ if __name__ == "__main__":
+     parser.add_argument("--debug", action="store_true")
+     parser.add_argument("--load_from_saved", action="store_true", help="Load simulation data from saved .pt files instead of running the simulation.")
+     args = parser.parse_args()
++    if args.render_img and render is None:
++        raise RuntimeError("--render_img requires the diff-gaussian-rasterization CUDA extension")
+ 
+     if not os.path.exists(args.model_path):
+         AssertionError("Model path does not exist!")
+@@ -429,25 +438,29 @@ if __name__ == "__main__":
+     end_frame = 23000000
+     delta = 0 
+ 
+-    opa_mask = torch.load("/root/autodl-tmp/debug_physgaussian/cdmpmGaussian/opcity_zero_mask.pt", weights_only=True).cuda()
+-    gaussians2 = load_checkpoint("/root/autodl-tmp/debug_physgaussian/cdmpmGaussian/model/garden")
+-    transform_matrix = torch.from_numpy(np.loadtxt("/root/autodl-tmp/debug_physgaussian/cdmpmGaussian/model/garden/transform_matrix.txt")).to(device).float()
+-    pos2 = gaussians2._xyz.detach()
+-    pos2 = (pos2  @ transform_matrix[:3, :3].T  + transform_matrix[:3, 3])*3
+-    pos2[:, 2] -= 2.6
+-    pos2[:, 0] += 2.0
+-    pos2[:, 1] += 1.0
+-    cov3D2 = (rotate_flat_covariance(gaussians2.get_covariance(), transform_matrix[:3, :3])*3**2)
+-    rot2 = torch.tensor(transform_matrix[:3, :3], dtype=torch.float32, device="cuda").detach().clone().unsqueeze(0).expand(gaussians2._xyz.shape[0], 3, 3)
+-    opacity_render2 = gaussians2.get_opacity
+-    shs_render2 = 1.0 * gaussians2.get_features
+-    
+-    combined_mask = filter_points_verbose(pos2) 
+-    pos2 = pos2[combined_mask]
+-    cov3D2 = cov3D2[combined_mask]
+-    rot2 = rot2[combined_mask]  # 3D旋转矩阵的mask
+-    opacity_render2 = opacity_render2[combined_mask]
+-    shs_render2 = shs_render2[combined_mask]
++    if args.render_img:
++        garden_path = os.path.join(os.path.dirname(args.model_path), "garden")
++        gaussians2 = load_checkpoint(garden_path)
++        transform_matrix = torch.from_numpy(
++            np.loadtxt(os.path.join(garden_path, "transform_matrix.txt"))
++        ).to(device).float()
++        pos2 = gaussians2._xyz.detach()
++        pos2 = (pos2 @ transform_matrix[:3, :3].T + transform_matrix[:3, 3]) * 3
++        pos2[:, 2] -= 2.6
++        pos2[:, 0] += 2.0
++        pos2[:, 1] += 1.0
++        cov3D2 = rotate_flat_covariance(
++            gaussians2.get_covariance(), transform_matrix[:3, :3]
++        ) * 3**2
++        rot2 = torch.tensor(transform_matrix[:3, :3], dtype=torch.float32, device="cuda").detach().clone().unsqueeze(0).expand(gaussians2._xyz.shape[0], 3, 3)
++        opacity_render2 = gaussians2.get_opacity
++        shs_render2 = 1.0 * gaussians2.get_features
++        combined_mask = filter_points_verbose(pos2)
++        pos2 = pos2[combined_mask]
++        cov3D2 = cov3D2[combined_mask]
++        rot2 = rot2[combined_mask]
++        opacity_render2 = opacity_render2[combined_mask]
++        shs_render2 = shs_render2[combined_mask]
+     
+     
+     for frame in tqdm(range(frame_num)):
+@@ -455,26 +468,27 @@ if __name__ == "__main__":
+         # frame = 21 +frame
+         if frame > 30 :
+             delta = frame - 30
+-        current_camera = get_camera_view(
+-            model_path,
+-            default_camera_index=camera_params["default_camera_index"],
+-            center_view_world_space=viewpoint_center_worldspace,
+-            observant_coordinates=observant_coordinates,
+-            show_hint=camera_params["show_hint"],
+-            init_azimuthm=camera_params["init_azimuthm"],
+-            init_elevation=camera_params["init_elevation"],
+-            init_radius=camera_params["init_radius"],
+-            move_camera=camera_params["move_camera"],
+-            current_frame=frame,
+-            delta_a=camera_params["delta_a"],
+-            delta_e=camera_params["delta_e"],
+-            delta_r=camera_params["delta_r"],
+-            width=600,
+-            height=600
+-        )
+-        rasterize = initialize_resterize(
+-            current_camera, gaussians, pipeline, background
+-        )
++        if args.render_img:
++            current_camera = get_camera_view(
++                model_path,
++                default_camera_index=camera_params["default_camera_index"],
++                center_view_world_space=viewpoint_center_worldspace,
++                observant_coordinates=observant_coordinates,
++                show_hint=camera_params["show_hint"],
++                init_azimuthm=camera_params["init_azimuthm"],
++                init_elevation=camera_params["init_elevation"],
++                init_radius=camera_params["init_radius"],
++                move_camera=camera_params["move_camera"],
++                current_frame=frame,
++                delta_a=camera_params["delta_a"],
++                delta_e=camera_params["delta_e"],
++                delta_r=camera_params["delta_r"],
++                width=600,
++                height=600,
++            )
++            rasterize = initialize_resterize(
++                current_camera, gaussians, pipeline, background
++            )
+         
+         
+         
+@@ -491,8 +505,8 @@ if __name__ == "__main__":
+                 save_to_h5=args.output_h5,
+             )
+             
+-        select_id = filter_gaussian_points_by_ellipsoid(tensor = mpm_init_pos, ellipsoid_center=torch.tensor([-0.1, 0.0, 0.0]), ellipsoid_axes=torch.tensor([0.22, 0.22, 0.22]), ellipsoid_greater=False)[1]
+         if args.render_img:
++            select_id = filter_gaussian_points_by_ellipsoid(tensor = mpm_init_pos, ellipsoid_center=torch.tensor([-0.1, 0.0, 0.0]), ellipsoid_axes=torch.tensor([0.22, 0.22, 0.22]), ellipsoid_greater=False)[1]
+             # Define a new base directory within args.output_path for detailed tensor data
+             per_frame_tensor_output_base_dir = os.path.join(args.output_path, "gaussian_frame_data")
+             os.makedirs(per_frame_tensor_output_base_dir, exist_ok=True)
+diff --git a/utils/render_utils.py b/utils/render_utils.py
+index 628091d..02785ef 100644
+--- a/utils/render_utils.py
++++ b/utils/render_utils.py
+@@ -16,12 +16,19 @@ from tqdm import tqdm
+ # Gaussian splatting dependencies
+ from utils.sh_utils import eval_sh
+ from scene.gaussian_model import GaussianModel
+-from diff_gaussian_rasterization import (
+-    GaussianRasterizationSettings,
+-    GaussianRasterizer,
+-)
++try:
++    from diff_gaussian_rasterization import (
++        GaussianRasterizationSettings,
++        GaussianRasterizer,
++    )
++except (ImportError, OSError):
++    GaussianRasterizationSettings = None
++    GaussianRasterizer = None
+ from scene.cameras import Camera as GSCamera
+-from gaussian_renderer import render, GaussianModel
++try:
++    from gaussian_renderer import render
++except (ImportError, OSError):
++    render = None
+ from utils.system_utils import searchForMaxIteration
+ from utils.graphics_utils import focal2fov
+ from utils.render_utils import * 
+@@ -33,6 +40,8 @@ def initialize_resterize(
+     bg_color: torch.Tensor,
+     scaling_modifier=1.0,
+ ):
++    if GaussianRasterizer is None:
++        raise RuntimeError("rendering requires diff-gaussian-rasterization")
+     # Set up rasterization configuration
+     tanfovx = math.tan(viewpoint_camera.FoVx * 0.5)
+     tanfovy = math.tan(viewpoint_camera.FoVy * 0.5)

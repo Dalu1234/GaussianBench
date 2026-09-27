@@ -1,0 +1,51 @@
+{
+  "scene_id": "c2_blobhealth_shear_v1",
+  "scorer": "score_c2_blobhealth",
+  "test_class": "capability",
+  "tier": "C",
+  "description": "Covariance transport and blob health under large deformation: simple shear to gamma = 1.0 and back to zero. Kinematic realization is scored from positions, covariance transport is scored against each entrant's exported deformation gradient, and health metrics reject collapse or extreme anisotropy over the full rollout. Requires trajectory.parquet deformation gradients and covariances.parquet at full output_fps coverage.",
+  "geometry": {
+    "type": "box",
+    "size_m": [0.1, 0.1, 0.1],
+    "particle_spacing_m": 0.01,
+    "particle_positions_file": "c2_block_positions.npy"
+  },
+  "material": {
+    "model_hint": "soft_elastic",
+    "youngs_modulus_pa": 5.0e4,
+    "poisson_ratio": 0.3,
+    "density_kg_m3": 1000
+  },
+  "boundary_conditions": {
+    "shear_drive": {
+      "type": "prescribed_simple_shear",
+      "plane": "xy",
+      "gamma_peak": 1.0,
+      "profile": "triangle",
+      "note": "x += gamma(t) * y with gamma rising linearly to gamma_peak at t = duration/2 and back to 0 at t = duration; drive the bottom and top faces, interior follows"
+    }
+  },
+  "initial_conditions": { "at_rest": true },
+  "simulation": { "duration_s": 2.0, "output_fps": 60, "gravity": [0, 0, 0] },
+  "pass_criteria": {
+    "quantity": "peak_shear_kinematic_realization_covariance_transport_and_health",
+    "reference": "fit local F_i from peak positions only for kinematic realization; compare each exported Sigma_peak with the entrant-native exported F_i Sigma_0 F_i^T; eigenvalues stay bounded away from degeneracy over the full rollout",
+    "peak_frame": 60,
+    "peak_kinematic_median_rel_frobenius_max": 0.05,
+    "peak_kinematic_p95_rel_frobenius_max": 0.10,
+    "peak_transport_median_rel_frobenius_max": 0.001,
+    "peak_transport_p95_rel_frobenius_max": 0.01,
+    "peak_transport_boundary_exclusion_spacings": 2,
+    "min_eigenvalue_ratio": 1.0e-3,
+    "condition_number_max": 1.0e4,
+    "degenerate_fraction_max": 0.001
+  },
+  "provenance": {
+    "reference_formula": "at peak shear, Sigma_i = F_i(native) Sigma_i(0) F_i(native)^T. Health metrics are min_t,i lambda_min(Sigma_i(t)) / median_i lambda_med(Sigma_i(0)) and the fraction of particle-frames with cond(Sigma) = lambda_max/lambda_min > condition_number_max",
+    "regime_assumptions": [
+      "the prescribed shear is volume preserving, so no covariance eigenvalue should collapse for a correct push-forward",
+      "for an initially isotropic Gaussian at gamma = 1, the eigenvalues relative to rest are (3-sqrt(5))/2 = 0.381966, 1, and (3+sqrt(5))/2 = 2.618034; the covariance condition number is 6.854102, far below the degeneracy threshold"
+    ],
+    "notes": "The peak-shear check is a code-verification probe and rejects a frozen covariance field. The full-trajectory health metrics remain a capability check for rendering-state degeneracy."
+  }
+}

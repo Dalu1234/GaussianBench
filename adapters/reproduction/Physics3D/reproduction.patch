@@ -1,0 +1,281 @@
+diff --git a/mpm_solver_warp/mpm_solver_warp.py b/mpm_solver_warp/mpm_solver_warp.py
+index f8ba889..db0a787 100644
+--- a/mpm_solver_warp/mpm_solver_warp.py
++++ b/mpm_solver_warp/mpm_solver_warp.py
+@@ -200,6 +200,16 @@ class MPM_Simulator_WARP:
+             inputs=[self.mpm_state.particle_F_N_trial],
+             device=device,
+         )
++        # Reproduction fix: the persistent Maxwell deformation state must
++        # start from the same identity as its trial state.  The released
++        # loader left particle_F_N at zero, so the first update performed
++        # SVD/log on a singular zero tensor and produced non-finite state.
++        wp.launch(
++            kernel=set_mat33_to_identity,
++            dim=self.n_particles,
++            inputs=[self.mpm_state.particle_F_N],
++            device=device,
++        )
+         
+         # initial deformation gradient is set to identity
+ 
+@@ -263,8 +273,14 @@ class MPM_Simulator_WARP:
+             inputs=[self.mpm_state.particle_F_N_trial],
+             device=device,
+         )
+-        
+-        # initial trial deformation gradient is set to identity
++        wp.launch(
++            kernel=set_mat33_to_identity,
++            dim=self.n_particles,
++            inputs=[self.mpm_state.particle_F_N],
++            device=device,
++        )
++
++        # initial trial and persistent deformation gradients are identity
+ 
+         print("Particles initialized from torch data.")
+         print("Total particles: ", self.n_particles)
+@@ -324,6 +340,8 @@ class MPM_Simulator_WARP:
+         if "material" in kwargs:
+             if kwargs["material"] == "jelly":
+                 self.mpm_model.material = 0
++            elif kwargs["material"] == "jelly_base":
++                self.mpm_model.material = 6
+             elif kwargs["material"] == "metal":
+                 self.mpm_model.material = 1
+             elif kwargs["material"] == "sand":
+@@ -1204,4 +1222,4 @@ class MPM_Simulator_WARP:
+                 state.grid_v_out[grid_x, grid_y, grid_z] = wp.vec3(0.0, 0.0, 0.0)
+ 
+         self.grid_postprocess.append(modify_grid_v_before_g2p)
+-        self.modify_bc.append(None)
+\ No newline at end of file
++        self.modify_bc.append(None)
+diff --git a/mpm_solver_warp/mpm_utils.py b/mpm_solver_warp/mpm_utils.py
+index 1015cf5..aaed84e 100644
+--- a/mpm_solver_warp/mpm_utils.py
++++ b/mpm_solver_warp/mpm_utils.py
+@@ -466,25 +466,34 @@ def compute_stress_from_F_trial(
+             state.particle_F[p] = von_mises_return_mapping_with_damage(
+                 state.particle_F_trial[p], model, p
+             )
+-        else:  # elastic
++        elif model.material == 6:  # base corotated branch, no learned residual
++            state.particle_F[p] = state.particle_F_trial[p]
++        else:  # elastic plus learned Maxwell residual
+             U_N = wp.mat33(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
+             V_N = wp.mat33(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
+-            sig_N_trial = wp.vec3(0.0)
+-            wp.svd3(state.particle_F_N_trial[p], U_N, sig_N_trial, V_N)
+-            alpha = (2.0 * model.mu_N[p]) / model.viscosity[p]
+-            beta = 2.0 * (2.0 * model.mu_N[p] + 3.0 * model.lam_N[p]) / (9.0 * model.viscosity[p]) - (2.0 * model.mu_N[p]) / (3.0 * model.viscosity[p]) 
+-            A = 1.0 / (1.0 + dt * alpha)
+-            B = (dt * beta) / (1.0 + dt * (alpha + 3.0 * beta))
+-            sig_N_trial = wp.vec3(
+-                wp.max(sig_N_trial[0], 0.01), wp.max(sig_N_trial[1], 0.01), wp.max(sig_N_trial[2], 0.01)
+-            )  # add this to prevent NaN in extrem cases
+-            epsilon_trial = wp.vec3(wp.log(sig_N_trial[0]), wp.log(sig_N_trial[1]), wp.log(sig_N_trial[2]))
+-            trace_epsilon_trial = epsilon_trial[0] + epsilon_trial[1] + epsilon_trial[2]
+-            trace_epsilon_trial_vec = wp.vec3(trace_epsilon_trial, trace_epsilon_trial, trace_epsilon_trial)
+-            epsilon_N = A * (epsilon_trial - B * trace_epsilon_trial_vec)
+-            sig_new = wp.vec3(wp.exp(epsilon_N[0]), wp.exp(epsilon_N[1]), wp.exp(epsilon_N[2]))
+-            state.particle_F_N[p] = U_N * wp.diag(sig_new) * wp.transpose(V_N)
+-            state.particle_F[p] = state.particle_F_trial[p] #+ state.particle_F_N[p] # add
++            epsilon_N = wp.vec3(0.0)
++            trace_epsilon_trial_vec = wp.vec3(0.0)
++            state.particle_F[p] = state.particle_F_trial[p]
++            # A zero residual modulus is the exact pure-corotated case used
++            # by GaussianBench. Avoid sending that case through the released
++            # Maxwell SVD/log path, which is mathematically a no-op but can
++            # trigger a device fault in Warp 0.10.1.
++            if model.mu_N[p] != 0.0 or model.lam_N[p] != 0.0:
++                sig_N_trial = wp.vec3(0.0)
++                wp.svd3(state.particle_F_N_trial[p], U_N, sig_N_trial, V_N)
++                alpha = (2.0 * model.mu_N[p]) / model.viscosity[p]
++                beta = 2.0 * (2.0 * model.mu_N[p] + 3.0 * model.lam_N[p]) / (9.0 * model.viscosity[p]) - (2.0 * model.mu_N[p]) / (3.0 * model.viscosity[p])
++                A = 1.0 / (1.0 + dt * alpha)
++                B = (dt * beta) / (1.0 + dt * (alpha + 3.0 * beta))
++                sig_N_trial = wp.vec3(
++                    wp.max(sig_N_trial[0], 0.01), wp.max(sig_N_trial[1], 0.01), wp.max(sig_N_trial[2], 0.01)
++                )
++                epsilon_trial = wp.vec3(wp.log(sig_N_trial[0]), wp.log(sig_N_trial[1]), wp.log(sig_N_trial[2]))
++                trace_epsilon_trial = epsilon_trial[0] + epsilon_trial[1] + epsilon_trial[2]
++                trace_epsilon_trial_vec = wp.vec3(trace_epsilon_trial, trace_epsilon_trial, trace_epsilon_trial)
++                epsilon_N = A * (epsilon_trial - B * trace_epsilon_trial_vec)
++                sig_new = wp.vec3(wp.exp(epsilon_N[0]), wp.exp(epsilon_N[1]), wp.exp(epsilon_N[2]))
++                state.particle_F_N[p] = U_N * wp.diag(sig_new) * wp.transpose(V_N)
+ 
+         # also compute stress here
+         J = wp.determinant(state.particle_F[p])
+@@ -498,12 +507,17 @@ def compute_stress_from_F_trial(
+             stress = kirchoff_stress_FCR(
+                 state.particle_F[p], U, V, J, model.mu[p], model.lam[p]
+             )
+-            tau_N = 2.0 * model.mu_N[p] * epsilon_N + model.lam_N[p] * trace_epsilon_trial_vec
+-            stress = stress + U_N * wp.diag(tau_N) * wp.transpose(V_N)
++            if model.mu_N[p] != 0.0 or model.lam_N[p] != 0.0:
++                tau_N = 2.0 * model.mu_N[p] * epsilon_N + model.lam_N[p] * trace_epsilon_trial_vec
++                stress = stress + U_N * wp.diag(tau_N) * wp.transpose(V_N)
+         if model.material == 5:
+             stress = kirchoff_stress_FCR(
+                 state.particle_F[p], U, V, J, model.mu[p], model.lam[p]
+             )
++        if model.material == 6:
++            stress = kirchoff_stress_FCR(
++                state.particle_F[p], U, V, J, model.mu[p], model.lam[p]
++            )
+         if model.material == 1:
+             stress = kirchoff_stress_StVK(
+                 state.particle_F[p], U, V, sig, model.mu[p], model.lam[p]
+@@ -689,4 +703,4 @@ def update_param(param: wp.array(dtype=float), grad: wp.array(dtype=float), lr:
+     log_param = wp.log10(param[tid])
+     log_param -= grad[tid] * lr
+     log_param = wp.clamp(log_param, -1., upper)
+-    param[tid] = wp.pow(10., log_param)
+\ No newline at end of file
++    param[tid] = wp.pow(10., log_param)
+diff --git a/mpm_solver_warp/warp_utils.py b/mpm_solver_warp/warp_utils.py
+index feaf5c2..f42cefc 100644
+--- a/mpm_solver_warp/warp_utils.py
++++ b/mpm_solver_warp/warp_utils.py
+@@ -254,16 +254,8 @@ def torch2warp_quat(t, copy=False, dtype=warp.types.float32, dvc="cuda:0"):
+             "Error aliasing Torch tensor to Warp array. Torch tensor must be float32 or int32 type"
+         )
+     assert t.shape[1] == 4
+-    a = warp.types.array(
+-        ptr=t.data_ptr(),
+-        dtype=wp.quat,
+-        shape=t.shape[0],
+-        copy=False,
+-        owner=False,
+-        requires_grad=t.requires_grad,
+-        # device=t.device.type)
+-        device=dvc,
+-    )
++    a = warp.types.array(ptr=t.data_ptr(), dtype=wp.quat, shape=t.shape[0],
++        copy=False, owner=False, requires_grad=t.requires_grad, device=dvc)
+     a.tensor = t
+     return a
+ 
+@@ -274,16 +266,8 @@ def torch2warp_float(t, copy=False, dtype=warp.types.float32, dvc="cuda:0"):
+         raise RuntimeError(
+             "Error aliasing Torch tensor to Warp array. Torch tensor must be float32 or int32 type"
+         )
+-    a = warp.types.array(
+-        ptr=t.data_ptr(),
+-        dtype=warp.types.float32,
+-        shape=t.shape[0],
+-        copy=False,
+-        owner=False,
+-        requires_grad=t.requires_grad,
+-        # device=t.device.type)
+-        device=dvc,
+-    )
++    a = warp.types.array(ptr=t.data_ptr(), dtype=warp.types.float32, shape=t.shape[0],
++        copy=False, owner=False, requires_grad=t.requires_grad, device=dvc)
+     a.tensor = t
+     return a
+ 
+@@ -295,16 +279,8 @@ def torch2warp_vec3(t, copy=False, dtype=warp.types.float32, dvc="cuda:0"):
+             "Error aliasing Torch tensor to Warp array. Torch tensor must be float32 or int32 type"
+         )
+     assert t.shape[1] == 3
+-    a = warp.types.array(
+-        ptr=t.data_ptr(),
+-        dtype=wp.vec3,
+-        shape=t.shape[0],
+-        copy=False,
+-        owner=False,
+-        requires_grad=t.requires_grad,
+-        # device=t.device.type)
+-        device=dvc,
+-    )
++    a = warp.types.array(ptr=t.data_ptr(), dtype=wp.vec3, shape=t.shape[0],
++        copy=False, owner=False, requires_grad=t.requires_grad, device=dvc)
+     a.tensor = t
+     return a
+ 
+@@ -316,15 +292,7 @@ def torch2warp_mat33(t, copy=False, dtype=warp.types.float32, dvc="cuda:0"):
+             "Error aliasing Torch tensor to Warp array. Torch tensor must be float32 or int32 type"
+         )
+     assert t.shape[1] == 3
+-    a = warp.types.array(
+-        ptr=t.data_ptr(),
+-        dtype=wp.mat33,
+-        shape=t.shape[0],
+-        copy=False,
+-        owner=False,
+-        requires_grad=t.requires_grad,
+-        # device=t.device.type)
+-        device=dvc,
+-    )
++    a = warp.types.array(ptr=t.data_ptr(), dtype=wp.mat33, shape=t.shape[0],
++        copy=False, owner=False, requires_grad=t.requires_grad, device=dvc)
+     a.tensor = t
+     return a
+diff --git a/simulation.py b/simulation.py
+index 4c45413..cd29362 100644
+--- a/simulation.py
++++ b/simulation.py
+@@ -50,7 +50,10 @@ from video_distillation.prompt_processors import ModelscopePromptProcessor
+ wp.init()
+ wp.config.verify_cuda = True
+ 
+-ti.init(arch=ti.cuda, device_memory_GB=8.0)
++# The released code reserves the entire nominal VRAM capacity.  On 8 GB cards
++# Warp and PyTorch have already allocated CUDA context memory, making 8.0 GB
++# impossible to reserve.  Keep headroom and allow larger cards to opt in.
++ti.init(arch=ti.cuda, device_memory_GB=float(os.environ.get("PHYSICS3D_TAICHI_GB", "5.5")))
+ 
+ 
+ class PipelineParamsNoparse:
+@@ -95,6 +98,10 @@ if __name__ == "__main__":
+     parser.add_argument("--output_ply", action="store_true")
+     parser.add_argument("--output_h5", action="store_true")
+     parser.add_argument("--debug", action="store_true")
++    parser.add_argument("--max_batches", type=int, default=50, help="Optimization batches; lower values enable a quick smoke run.")
++    parser.add_argument("--frames_per_stage", type=int, default=16, help="Rendered frames per optimization batch.")
++    parser.add_argument("--simulate_only", action="store_true", help="Run the native MPM solver without loading video-diffusion guidance.")
++    parser.add_argument("--simulation_frames", type=int, default=8, help="Frames to export in --simulate_only mode.")
+     args = parser.parse_args()
+ 
+     if not os.path.exists(args.model_path):
+@@ -395,6 +402,26 @@ if __name__ == "__main__":
+     shs_render = shs
+     height = None
+     width = None
++
++    if args.simulate_only:
++        if args.output_path is None:
++            raise ValueError("--simulate_only requires --output_path")
++        if not (args.output_ply or args.output_h5):
++            raise ValueError("--simulate_only requires --output_ply and/or --output_h5")
++        print(f"Running Physics3D MPM-only rollout for {args.simulation_frames} frames.")
++        mpm_solver.finalize_mu_lam()
++        for frame in range(1, min(frame_num, args.simulation_frames) + 1):
++            for _ in range(step_per_frame):
++                mpm_solver.p2g2p(frame, substep_dt, device=device)
++            save_data_at_frame(
++                mpm_solver,
++                directory_to_save,
++                frame,
++                save_to_ply=args.output_ply,
++                save_to_h5=args.output_h5,
++            )
++        print("Physics3D MPM-only rollout complete.")
++        sys.exit(0)
+     
+     yaml_confs = OmegaConf.load(args.guidance_config)
+     yaml_confs.prompt_processor.prompt = args.prompt
+@@ -403,8 +430,8 @@ if __name__ == "__main__":
+     prompt_utils = prompt_processor()
+     
+     stage_num = 8
+-    frame_per_stage = 16
+-    for batch in range(50):
++    frame_per_stage = args.frames_per_stage
++    for batch in range(args.max_batches):
+         loss_value = 0.
+         img_list = []
+         tape.reset()

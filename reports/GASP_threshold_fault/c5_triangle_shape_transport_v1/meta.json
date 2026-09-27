@@ -1,0 +1,7 @@
+{
+  "system": "GASP",
+  "representation": "GASP triangle soup",
+  "source_directory": "comparison_runs/gasp_teddy_bad_threshold/triangles",
+  "intervention": "shape threshold 1.0 to 0.5",
+  "stable_triangle_order": true
+}

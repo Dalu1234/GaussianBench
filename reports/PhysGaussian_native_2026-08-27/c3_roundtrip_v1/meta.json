@@ -1,0 +1,15 @@
+{
+  "system_name": "PhysGaussian",
+  "system_version": "8339ed6aa2cd5d50e1001a254a3d95aea678a956",
+  "spec_version": "1.1.0",
+  "columns_present": [
+    "vx",
+    "vy",
+    "vz",
+    "mass"
+  ],
+  "wall_clock_seconds": 7.644,
+  "hardware": "NVIDIA GeForce RTX 4070 Laptop GPU, Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+  "notes": "Solver: PhysGaussian UL MLS-MPM (Warp, cuda, f32), material 'jelly' (fixed corotated) with scene E=50000, nu=0.3, density=1000 passed straight through (the solver derives Lame parameters itself). frame_dt=0.0166667, substep_dt=0.000574713, 29 substeps/frame, grid 20^3, grid damping disabled. | C3 boundary: unilateral floor and descending top plate applied to PhysGaussian's grid after grid update and before G2P, with a particle-level no-penetration clamp after each substep. The plate reaches 80% rest height at 1.0 s, holds to 1.5 s, then is removed exactly as specified by the scene. | Simulation ran in a transformed frame: sim(t) = P @ (scene(t) - v_frame * t) + offset, offset=[0.15947535144641273, 0.11335245430567069, 0.15922921659817868], permutation=identity, v_frame=zero (Galilean boost; physics is Galilean-invariant and the boost keeps f32 positions small over a long drift). The exact inverse was applied on export; the submission is in scene coordinates.",
+  "scene_id": "c3_roundtrip_v1"
+}

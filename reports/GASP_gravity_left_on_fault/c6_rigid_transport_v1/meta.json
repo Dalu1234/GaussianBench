@@ -1,0 +1,11 @@
+{
+  "system_name": "GASP",
+  "system_version": "186c9c912df8b4a4258810e6e4754e8cfcf0c53d",
+  "spec_version": "1.2.0",
+  "representation": "GASP triangle soup (released teddy pseudomesh, 448606 stable triangles)",
+  "wall_clock_seconds": 129.65,
+  "solver": "released taichi_elements MPMSolver 64^3, taichi (1, 7, 4), python 3.13.5",
+  "intervention": "gravity_left_on",
+  "stable_triangle_order": true,
+  "notes": "Released GASP Taichi pipeline: native teddy pseudomesh vertices simulated by released taichi_elements MPMSolver (material=elastic, E_scale=1.0, res 64^3, frame step 0.01 s x 40 frames), with GASP's released per-frame triangle size-control rule (threshold=1.0) applied after every step exactly as in taichi_examples/demo/3d.py. Placement: released Rescale scale=0.4, offset=[0.2, 0.25, 0.2]; exports use the released Rescale.inverse into the same frame as the frozen C5 submission. Gravity=released default (0,-9.8,0); uniform native initial velocity [np.float64(0.20704297718068607), np.float64(0.12233569975823788), np.float64(0.06831677806234844)] chosen as D^-1 d so the exported COM direction equals the scene's declared direction; CONTROLLED FAULT: gravity_left_on"
+}

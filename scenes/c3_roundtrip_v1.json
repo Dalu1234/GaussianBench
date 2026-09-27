@@ -1,0 +1,48 @@
+{
+  "scene_id": "c3_roundtrip_v1",
+  "scorer": "score_c3_roundtrip",
+  "test_class": "capability",
+  "tier": "C",
+  "description": "Appearance round trip. The asset is squashed to 80 percent of its rest height under displacement control (top plate down over 1 s, hold 0.5 s), released, and allowed to settle. Elastic deformation is fully recoverable, so a render of the settled final state from the identical camera must match the frame-0 render; residual image difference measures appearance damage caused by the physics coupling (covariance drift, particle disorder, opacity corruption), which positions alone cannot reveal. Rendering is done by the submitter's OWN renderer, deliberately: the contract under test is their physics-to-appearance link, not our renderer. The bundled asset is a PROCEDURAL jittered ellipsoid; a captured Gaussian-splat asset with a clear license should replace it in a future scene version.",
+  "geometry": {
+    "type": "blob",
+    "approx_extent_m": [0.12, 0.1, 0.16],
+    "particle_spacing_m": 0.008,
+    "particle_positions_file": "c3_blob_positions.npy"
+  },
+  "material": {
+    "model_hint": "soft_elastic",
+    "youngs_modulus_pa": 5.0e4,
+    "poisson_ratio": 0.3,
+    "density_kg_m3": 1000
+  },
+  "boundary_conditions": {
+    "floor": { "region": "y < 0.004", "type": "fixed" },
+    "squash_plate": {
+      "type": "displacement_controlled_plate",
+      "axis": "y",
+      "target_height_frac": 0.8,
+      "press_end_s": 1.0,
+      "hold_end_s": 1.5,
+      "then": "remove_plate"
+    }
+  },
+  "initial_conditions": { "at_rest": true },
+  "simulation": { "duration_s": 4.0, "output_fps": 60, "gravity": [0, 0, 0] },
+  "pass_criteria": {
+    "quantity": "render_similarity_before_after",
+    "reference": "identical renders (fully recoverable elastic deformation)",
+    "psnr_min_db": 35.0,
+    "ssim_min": 0.97,
+    "squash_verify_height_frac_max": 0.82
+  },
+  "provenance": {
+    "reference_formula": "PSNR = 10*log10(255^2 / MSE); SSIM per Wang et al., IEEE Trans. Image Processing 13(4), 2004, gaussian window sigma = 1.5, K1 = 0.01, K2 = 0.03",
+    "regime_assumptions": [
+      "purely elastic material: zero plasticity, so the deformation is fully recoverable",
+      "settle window (2.5 s after release) long enough for residual ringing to decay below visual relevance",
+      "identical camera, resolution, tone mapping, and background between the two renders (submitter contract)"
+    ],
+    "notes": "The scorer verifies from the trajectory that the squash actually reached the commanded compression before comparing images, so a static submission with two identical renders cannot pass by doing nothing."
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "scene_id": "a3_wavespeed_v1",
+  "scorer": "score_a3_wavespeed",
+  "test_class": "solution_verification",
+  "tier": "A",
+  "description": "Longitudinal wave speed in a long thin bar. The bar starts at rest; a short half-sine displacement push is prescribed at the x-min end face; the scorer times the first motion of the far-end particle set and divides travel distance by arrival time. output_fps is deliberately high (2000) because arrival detection at finite frame rates is the dominant error source.",
+  "geometry": {
+    "type": "box",
+    "size_m": [1.0, 0.02, 0.02],
+    "particle_spacing_m": 0.005,
+    "particle_positions_file": "a3_bar_positions.npy"
+  },
+  "material": {
+    "model_hint": "linear_elastic_or_equivalent",
+    "youngs_modulus_pa": 5.0e5,
+    "poisson_ratio": 0.3,
+    "density_kg_m3": 1000
+  },
+  "boundary_conditions": {
+    "pulse": {
+      "region": "x < 0.005",
+      "type": "prescribed_displacement_pulse",
+      "direction": [1, 0, 0],
+      "amplitude_m": 0.001,
+      "shape": "half_sine",
+      "start_s": 0.0,
+      "width_s": 0.002,
+      "formula": "ux(t) = A * sin(pi * t / W) for 0 <= t <= W, else 0"
+    }
+  },
+  "initial_conditions": { "at_rest": true },
+  "simulation": { "duration_s": 0.1, "output_fps": 2000, "gravity": [0, 0, 0] },
+  "pass_criteria": {
+    "quantity": "bar_wave_speed_m_s",
+    "reference": "c = sqrt(E / rho), thin bar",
+    "rel_tolerance": 0.15,
+    "noise_floor_m": 1.0e-5,
+    "far_region_x_frac": 0.98
+  },
+  "provenance": {
+    "reference_formula": "c_bar = sqrt(E / rho)",
+    "regime_assumptions": [
+      "thin bar: lateral dimensions (0.02 m) far smaller than the pulse wavelength (c * W ~ 0.045 m), so lateral surfaces relax freely and the 1D uniaxial-stress modulus E applies. The bulk P-wave speed sqrt(E (1 - nu) / ((1 + nu)(1 - 2 nu) rho)) would be the reference only if lateral strain were confined, which it is not in a thin free bar",
+      "linear elastic, small amplitude (0.1 percent of bar length)"
+    ],
+    "notes": "Tolerance is 15 percent, looser than A2, because first-arrival detection is coarse: the threshold crossing lags the true wavefront by the time the front needs to accumulate noise_floor_m of displacement, and the frame grid quantizes the crossing. output_fps = 2000 keeps the quantization under 1 percent of the travel time; the threshold lag justifies the remaining margin."
+  }
+}

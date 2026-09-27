@@ -1,0 +1,49 @@
+{
+  "scene_id": "a1b_conservation_drifting_v1",
+  "scorer": "score_a1_conservation",
+  "test_class": "code_verification",
+  "tier": "A",
+  "description": "Drifting conservation: the original A1 scene, relabeled and re-scoped in v0.2.0. A free elastic ball in zero gravity with rigid spin AND a 1.15 m/s linear drift sustained for 10 s (an 11.5 m travel envelope). This scene tests the particle-grid transfer AND the simulator's ability to handle a small body translating far across its computational domain, as a compound quantity. Fixed-grid methods without co-moving or sparse-domain support are expected to struggle here; that struggle is itself informative about the system's domain handling, not a benchmark defect. The transfer scheme in isolation is tested by a1a_conservation_inplace_v1 at tight tolerances. Submitters MUST declare their domain-handling strategy in meta.json (see pass_criteria.requires_meta_declaration); undeclared submissions score INVALID.",
+  "geometry": {
+    "type": "sphere",
+    "radius_m": 0.05,
+    "particle_spacing_m": 0.01,
+    "particle_positions_file": "a1_ball_positions.npy"
+  },
+  "material": {
+    "model_hint": "any_elastic",
+    "youngs_modulus_pa": 1.0e5,
+    "poisson_ratio": 0.3,
+    "density_kg_m3": 1000
+  },
+  "boundary_conditions": {},
+  "initial_conditions": {
+    "linear_velocity_m_s": [1.0, 0.5, 0.25],
+    "angular_velocity_rad_s": [0.0, 0.0, 4.0],
+    "angular_velocity_about": "center_of_mass"
+  },
+  "simulation": { "duration_s": 10.0, "output_fps": 120, "gravity": [0, 0, 0] },
+  "pass_criteria": {
+    "quantity": "momentum_drift",
+    "reference": "conservation_laws",
+    "linear_momentum_rel_drift_native": 1.0e-3,
+    "linear_momentum_rel_drift_derived": 1.0e-3,
+    "angular_momentum_rel_drift": 1.0e-2,
+    "energy_growth_flag_rel": 0.01,
+    "requires_meta_declaration": {
+      "notes.domain_handling": ["fixed", "co_moving", "sparse", "mesh_free", "other"]
+    }
+  },
+  "provenance": {
+    "reference_formula": "p(t) = sum(m_i v_i) = p(0); L_spin(t) = sum(m_i (x_i - x_cm(t)) x (v_i - v_cm(t))) = L_spin(0). Erratum v0.2.1: L is spin angular momentum about the instantaneous center of mass. The v0.2.0 formula (about the initial center of mass) made this scene's pass criteria mathematically inconsistent: a linear momentum drift merely AT its own 1e-3 tolerance induces an apparent L drift of order 3 through the M*(x_cm(t)-x_cm0) x v_cm cross term with the 11.5 m lever arm, 300x the L tolerance. Spin angular momentum is equally conserved and immune to that cross term.",
+    "regime_assumptions": [
+      "no external forces or torques",
+      "no contact",
+      "material damping set to zero",
+      "the body translates 11.5 m: the computational domain must either cover the full envelope or follow the body"
+    ],
+    "split_history": "Created in v0.2.0 from a1_conservation_v1: the physical scene (positions file, initial conditions, material, duration) is IDENTICAL to v1; only the scene_id, tolerances, and declaration requirement changed. The original scene conflated transfer conservation with domain handling; a1a_conservation_inplace_v1 now tests the transfer in isolation.",
+    "tolerance_relaxation_rationale": "Tolerances are relaxed relative to v1 (linear 1e-6 to 1e-3, angular 1e-3 to 1e-2) because this scene now deliberately measures a compound quantity: transfer conservation plus domain handling. At an 11.5 m drift envelope, domain-handling error (grid coarsening, boundary crossings, re-centering) dominates over transfer error for most practical systems. The tight-tolerance test of the transfer scheme alone did not disappear; it moved to a1a_conservation_inplace_v1, which retains the original 1e-6 / 1e-3 tiers. This is a re-scoping, not a post-hoc relaxation to admit a failing entrant: a submission that passes a1a and fails a1b has a correct transfer and limited domain handling, which is exactly the distinction the split exists to expose.",
+    "notes": "The required meta.json declaration (notes.domain_handling, one of fixed / co_moving / sparse / mesh_free / other) lets reports group results by domain strategy, so a 'fixed' entrant's numbers are read in the right context. The declaration is about honesty of interpretation, not a handicap: any strategy may PASS."
+  }
+}

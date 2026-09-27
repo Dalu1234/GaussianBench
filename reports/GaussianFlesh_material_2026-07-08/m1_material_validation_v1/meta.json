@@ -1,0 +1,9 @@
+{
+  "system_name": "GaussianFlesh",
+  "system_version": "80f3f8e283cc45f8ded3641efd126af860f16c9d",
+  "spec_version": "1.1.0",
+  "hardware": "Windows-11-10.0.26200-SP0",
+  "notes": {
+    "text": "Uniaxial Cauchy stress of GaussianFlesh's fixed-corotated constitutive law (P = 2 mu (F-R) + lam (J-1) J F^-T), with mu = 2*C10 = 1417326 Pa (independent, from the paper's ASTM D412 Yeoh fit) and nu = 0.45 (E = 4110245 Pa). Transverse traction-free (P_yy = 0 solved per stretch). Evaluated from the constitutive law directly: for homogeneous deformation the MPM solver reproduces it exactly, so this is the sim's true material behavior, free of pull-rate/damping artifacts. DEVIATION: nu = 0.45 (near-incompressible) rather than strictly 0.5; E is 3 percent below the incompressible limit and the small volumetric response aids the large-strain match."
+  }
+}

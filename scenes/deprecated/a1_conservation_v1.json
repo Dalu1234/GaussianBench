@@ -1,0 +1,43 @@
+{
+  "scene_id": "a1_conservation_v1",
+  "scorer": "score_a1_conservation",
+  "test_class": "code_verification",
+  "tier": "A",
+  "description": "Free elastic ball in zero gravity, no contact, no damping. Initial rigid translation plus rigid rotation about the center of mass. Linear and angular momentum must be conserved; kinetic energy may oscillate (elastic exchange) but must not grow.",
+  "geometry": {
+    "type": "sphere",
+    "radius_m": 0.05,
+    "particle_spacing_m": 0.01,
+    "particle_positions_file": "a1_ball_positions.npy"
+  },
+  "material": {
+    "model_hint": "any_elastic",
+    "youngs_modulus_pa": 1.0e5,
+    "poisson_ratio": 0.3,
+    "density_kg_m3": 1000
+  },
+  "boundary_conditions": {},
+  "initial_conditions": {
+    "linear_velocity_m_s": [1.0, 0.5, 0.25],
+    "angular_velocity_rad_s": [0.0, 0.0, 4.0],
+    "angular_velocity_about": "center_of_mass"
+  },
+  "simulation": { "duration_s": 10.0, "output_fps": 120, "gravity": [0, 0, 0] },
+  "pass_criteria": {
+    "quantity": "momentum_drift",
+    "reference": "conservation_laws",
+    "linear_momentum_rel_drift_native": 1.0e-6,
+    "linear_momentum_rel_drift_derived": 1.0e-4,
+    "angular_momentum_rel_drift": 1.0e-3,
+    "energy_growth_flag_rel": 0.01
+  },
+  "provenance": {
+    "reference_formula": "p(t) = sum(m_i v_i) = p(0); L(t) = sum(m_i (x_i - x_cm0) x v_i) = L(0)",
+    "regime_assumptions": [
+      "no external forces or torques",
+      "no contact",
+      "material damping set to zero"
+    ],
+    "notes": "APIC transfers conserve angular momentum by construction, so MPM/APIC systems should sit near machine precision. Dissipative transfer schemes (PIC blending) show characteristic exponential decay of L. The scorer reports the decay curve either way."
+  }
+}

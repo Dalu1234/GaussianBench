@@ -1,0 +1,46 @@
+{
+  "scene_id": "a1a_conservation_inplace_v1",
+  "scorer": "score_a1_conservation",
+  "test_class": "code_verification",
+  "tier": "A",
+  "description": "In-place conservation: a free elastic ball in zero gravity with rigid spin about its center of mass and EXACTLY ZERO linear velocity. Created in v0.2.0 by splitting the original a1_conservation_v1, which conflated two distinct diagnostics: whether the particle-grid transfer conserves momentum, and whether the simulator's domain handling can track a small body translating far across a fixed grid. Holding the body in place removes the second concern entirely, so this scene tests the transfer scheme purely, at the original tight tolerances. The drifting variant lives on as a1b_conservation_drifting_v1.",
+  "geometry": {
+    "type": "sphere",
+    "radius_m": 0.05,
+    "particle_spacing_m": 0.01,
+    "particle_positions_file": "a1_ball_positions.npy"
+  },
+  "material": {
+    "model_hint": "any_elastic",
+    "youngs_modulus_pa": 1.0e5,
+    "poisson_ratio": 0.3,
+    "density_kg_m3": 1000
+  },
+  "boundary_conditions": {},
+  "initial_conditions": {
+    "linear_velocity_m_s": [0.0, 0.0, 0.0],
+    "angular_velocity_rad_s": [0.0, 0.0, 4.0],
+    "angular_velocity_about": "center_of_mass"
+  },
+  "simulation": { "duration_s": 10.0, "output_fps": 120, "gravity": [0, 0, 0] },
+  "pass_criteria": {
+    "quantity": "momentum_drift",
+    "reference": "conservation_laws",
+    "linear_momentum_rel_drift_native": 1.0e-6,
+    "linear_momentum_rel_drift_derived": 1.0e-4,
+    "angular_momentum_rel_drift": 1.0e-3,
+    "energy_growth_flag_rel": 0.01,
+    "energy_monotone_growth_fails": true
+  },
+  "provenance": {
+    "reference_formula": "p(t) = sum(m_i v_i) = p(0); L_spin(t) = sum(m_i (x_i - x_cm(t)) x (v_i - v_cm(t))) = L_spin(0). Erratum v0.2.1: L is spin angular momentum about the instantaneous center of mass; the v0.2.0 formula (about the initial center of mass) was contaminated by allowed linear-momentum drift through a cross term, see scorer docstring.",
+    "regime_assumptions": [
+      "no external forces or torques",
+      "no contact",
+      "material damping set to zero",
+      "body remains at its initial location (zero net momentum), so any fixed computational domain sized to the body suffices"
+    ],
+    "split_history": "Created in v0.2.0 by removing the translation from a1_conservation_v1 (initial linear velocity [1, 0.5, 0.25] set to [0, 0, 0]; rigid spin, duration, material, geometry, and positions file unchanged). Reason: the original scene could fail a correct transfer scheme for domain-handling reasons alone. A fixed-grid entrant had to coarsen its grid to cover the 11.5 m drift envelope, leaving the 0.05 m body spanning about one grid cell, where rotation cannot be represented at all. That failure mode says nothing about transfer conservation, which is what A1 was written to verify. With zero translation the body stays resolvable by any reasonable grid, so a violation here is attributable to the transfer scheme itself, and the original tight tolerances apply cleanly. The linear momentum reference is exactly zero here, so its drift metric is measured against the angular reference scale (see scorer docstring).",
+    "notes": "APIC transfers conserve angular momentum by construction, so MPM/APIC systems should sit near machine precision. Dissipative transfer schemes (PIC blending) show characteristic exponential decay of L. The scorer reports the decay curve either way. Unlike v1, monotone kinetic energy growth beyond 1 percent is a FAIL here, not just a flag: with the body in place, sustained energy growth can only come from the integration scheme."
+  }
+}

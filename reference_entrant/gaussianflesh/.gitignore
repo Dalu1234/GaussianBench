@@ -1,0 +1,26 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# GaussianBench submission output (regenerable via export/run_all_scenes.py)
+bench_results/
+bench_results_dry/
+bench_probe_a/
+bench_probe_b/
+
+# Rendered videos and poster material (large, regenerable)
+poster_assets/
+comparison_runs/
+benchmarks/
+*.mp4
+.pytest-tmp/
+pytest-cache-files-*/
+# Local/generated simulator output
+captures/
+results/
+*.log
+results*.txt
+results.json
+models/*.task
+SSJCTS14_extracted.txt
+Untitled

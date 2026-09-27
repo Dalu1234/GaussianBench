@@ -1,0 +1,16 @@
+numpy
+scipy
+pandas
+pyarrow
+h5py
+matplotlib
+pillow
+pytest
+taichi==1.7.4
+pyvista
+scikit-image
+pygame
+opencv-python
+mediapipe
+torch
+warp-lang==1.8.1

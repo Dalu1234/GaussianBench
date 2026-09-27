@@ -1,0 +1,14 @@
+cff-version: 1.2.0
+message: "If you use GaussianBench, please cite the accompanying paper."
+title: "GaussianBench: Physics-Fidelity Evaluation for Gaussian Scene Representations"
+type: software
+authors:
+  - family-names: "Dumebi-Kachikwu"
+    given-names: "Chukwudalu"
+year: 2026
+license: MIT
+version: 0.6.0
+abstract: >-
+  GaussianBench is a state-level physics-fidelity benchmark for
+  physics-integrated Gaussian scene representations.
+repository-code: "https://github.com/Star-Laboratories/gaussianbench"

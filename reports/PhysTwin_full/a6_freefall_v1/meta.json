@@ -1,0 +1,10 @@
+{
+  "system_name": "PhysTwin",
+  "system_version": "81c718790a37e5e0102eb77af2c6edd34a9db25f",
+  "spec_version": "1.2.0",
+  "wall_clock_seconds": 0.958,
+  "hardware": "NVIDIA GeForce RTX 4070 Laptop GPU",
+  "notes": {
+    "text": "Released SpringMassSystemWarp on a deterministic native 216-particle body, 2021 released-radius-style undirected springs, dt=5e-05, 800 substeps/frame. PhysTwin has no deformation-gradient state; detF_nonpositive_fraction is the empty-set fraction 0, while bounding-volume and nonfinite health remain directly measured."
+  }
+}

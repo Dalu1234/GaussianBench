@@ -1,0 +1,45 @@
+{
+  "scene_id": "m1_material_validation_v1",
+  "scorer": "score_m1_material",
+  "test_class": "model_validation",
+  "tier": "A",
+  "description": "The suite's first model_validation entry: does the entrant's material reproduce a REAL measured rubber? The reference is a natural-rubber specimen characterized independently by an ASTM D412 uniaxial tensile test (Azarniya & Rahimi 2022) and fit to a 3-term Yeoh model. The entrant reports its OWN uniaxial Cauchy stress vs stretch; the scorer compares to the measured curve. Uniaxial tension is chosen deliberately over a structural test (beam bending, etc.): it has no clamp, no bending, and no boundary-condition confound, so any gap is cleanly attributable to the constitutive law itself. This isolability is what makes it a valid model_validation target, where structural tests are not.",
+  "geometry": {
+    "type": "uniaxial_specimen",
+    "note": "Homogeneous deformation; no frozen particle positions are needed. The entrant runs a uniaxial-stress protocol (one face pulled, transverse faces traction-free) or evaluates its constitutive law directly, since for homogeneous deformation the two coincide."
+  },
+  "material": {
+    "model_hint": "hyperelastic_or_equivalent",
+    "reference_model": "yeoh_3term",
+    "yeoh_C10_pa": 708663.01,
+    "yeoh_C20_pa": 19707.6,
+    "yeoh_C30_pa": -149.15,
+    "initial_shear_modulus_pa": 1417326.0,
+    "initial_youngs_modulus_pa": 4251978.0,
+    "density_kg_m3": 1100.0
+  },
+  "simulation": {
+    "type": "quasi_static_uniaxial_tension",
+    "transverse": "traction_free",
+    "stretch_range": [1.0, 2.5],
+    "gravity": [0, 0, 0]
+  },
+  "pass_criteria": {
+    "quantity": "uniaxial_cauchy_stress",
+    "reference": "measured_yeoh_natural_rubber_ASTM_D412",
+    "median_rel_tolerance": 0.15,
+    "max_stretch": 2.5,
+    "min_points": 5
+  },
+  "provenance": {
+    "reference_formula": "sigma(l) = 2 (l^2 - 1/l) [C10 + 2 C20 (I1-3) + 3 C30 (I1-3)^2], I1 = l^2 + 2/l; incompressible uniaxial Cauchy stress (see reference/yeoh_rubber.py)",
+    "source": "O. Azarniya, G. H. Rahimi, Mechanics Based Design of Structures and Machines, 2022, doi:10.1080/15397734.2022.2121721. ASTM D412 uniaxial tensile test, 3-term Yeoh fit (Table 2; Fig 9 shows the fit tracks the measured curve).",
+    "regime_assumptions": [
+      "incompressible uniaxial tension, quasi-static, isothermal",
+      "the reference Yeoh curve stands in for the measured stress-strain data, which it tracks tightly (source Fig 9)",
+      "tolerance 15 percent budgets the ~6 percent experimental scatter (source: tensile std dev under 6 percent) plus constitutive-model tolerance"
+    ],
+    "why_this_target": "Structural tests such as a clamped-clamped beam are dominated by boundary-condition modeling (the clamp fixture stiffens the response by ~45 percent over ideal beam theory in this same specimen), so a sim-vs-experiment gap there cannot be attributed to the material. Uniaxial tension removes the boundary confound and makes the constitutive law the sole variable, which is the requirement for a clean model validation.",
+    "submission_format": "results/<system>/m1_material_validation_v1/stress_strain.csv (or .parquet) with columns 'stretch' (>= 1) and 'cauchy_stress_pa' (load-direction Cauchy stress, transverse traction-free). Systems that cannot report stress do not submit and are marked NA."
+  }
+}

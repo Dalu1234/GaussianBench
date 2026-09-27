@@ -1,0 +1,14 @@
+{
+  "system": "GASP",
+  "system_name": "GASP",
+  "system_version": "186c9c912df8b4a4258810e6e4754e8cfcf0c53d",
+  "spec_version": "1.2.0",
+  "columns_present": ["frame", "source_frame", "com_x", "com_y", "com_z", "bbox_volume", "edge_rel_error_median", "edge_rel_error_p95", "area_rel_error_median", "area_rel_error_p95", "nonfinite_fraction", "triangle_count"],
+  "wall_clock_seconds": null,
+  "hardware": "NVIDIA GeForce RTX 4070 Laptop GPU",
+  "representation": "GASP triangle soup",
+  "source_directory": "comparison_runs/gasp_teddy/triangles",
+  "intervention": "none",
+  "stable_triangle_order": true,
+  "notes": "Converted from the released stable teddy triangle export. Historical wall-clock timing was not retained; no score depends on runtime."
+}

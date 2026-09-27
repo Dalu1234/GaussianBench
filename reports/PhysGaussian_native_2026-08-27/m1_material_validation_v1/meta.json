@@ -1,0 +1,11 @@
+{
+  "system_name": "PhysGaussian",
+  "system_version": "8339ed6aa2cd5d50e1001a254a3d95aea678a956",
+  "spec_version": "1.1.0",
+  "columns_present": ["stretch", "cauchy_stress_pa"],
+  "wall_clock_seconds": null,
+  "hardware": "Windows-10-10.0.26200-SP0",
+  "notes": {
+    "text": "Direct homogeneous uniaxial evaluation of PhysGaussian's jelly fixed-corotated law as implemented in mpm_solver_warp/mpm_utils.py: tau = 2 mu (F-R) F^T + lambda J(J-1)I. mu=2*C10=1417326 Pa and nu=0.45; the transverse stretch is solved independently at every axial stretch so transverse PK1/Cauchy stress is zero. Direct constitutive evaluation is equivalent to the homogeneous quasi-static MPM limit and avoids pull-rate and fixture artifacts."
+  }
+}

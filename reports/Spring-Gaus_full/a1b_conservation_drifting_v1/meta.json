@@ -1,0 +1,17 @@
+{
+  "system_name": "Spring-Gaus",
+  "system_version": "62a1bb5dbe83fe4396efa7048d3226754ac8fe1d",
+  "spec_version": "1.2.0",
+  "columns_present": [
+    "vx",
+    "vy",
+    "vz",
+    "mass"
+  ],
+  "wall_clock_seconds": 9.029,
+  "hardware": "NVIDIA GeForce RTX 4070 Laptop GPU",
+  "notes": {
+    "domain_handling": "mesh_free",
+    "text": "Released Spring_Mass.step with released k-nearest spring construction. 16 neighbors, fixed pre-run stiffness 0.00592842817, dt=0.00138888889, 6 substeps/frame. No checkpoint or verdict-fitted parameter. Only constitutive-calibration-independent A1 scenes entered."
+  }
+}

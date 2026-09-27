@@ -1,0 +1,22 @@
+{
+  "scene_id": "c5_triangle_shape_transport_v1",
+  "scorer": "score_c5_triangle_transport",
+  "test_class": "capability",
+  "tier": "C",
+  "description": "Representation-native shape transport for Gaussian parameterizations backed by stable triangle soup. The object must undergo substantial motion while triangle edge lengths and areas remain finite and stable.",
+  "geometry": {"type": "stable_triangle_soup"},
+  "simulation": {"duration_s": "native rollout", "output_fps": "native checkpoints", "gravity": [0, -9.8, 0]},
+  "pass_criteria": {
+    "quantity": "triangle edge and area transport",
+    "min_com_travel": 0.5,
+    "edge_median_max": 0.01,
+    "edge_p95_max": 0.05,
+    "area_median_max": 0.02,
+    "area_p95_max": 0.1
+  },
+  "provenance": {
+    "reference_formula": "relative edge error = |l_t/l_0 - 1|; relative area error = |A_t/A_0 - 1|",
+    "regime_assumptions": ["stable triangle identity", "nonzero initial edge lengths and areas"],
+    "notes": "The motion gate prevents a static triangle soup from passing. The released GASP TeddyBear Taichi trajectory is the frozen first external submission."
+  }
+}

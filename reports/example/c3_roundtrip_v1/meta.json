@@ -1,0 +1,9 @@
+{
+  "system_name": "example-analytic",
+  "system_version": "0",
+  "spec_version": "1.0.0",
+  "columns_present": [],
+  "wall_clock_seconds": 0.0,
+  "hardware": "none",
+  "notes": "Closed-form motion, bundled example, not a simulator."
+}

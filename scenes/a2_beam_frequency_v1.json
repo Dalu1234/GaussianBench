@@ -1,0 +1,48 @@
+{
+  "scene_id": "a2_beam_frequency_v1",
+  "scorer": "score_a2_frequency",
+  "test_class": "solution_verification",
+  "tier": "A",
+  "description": "Slender cantilever, small transverse pluck, release, no gravity. Fundamental frequency vs the Euler-Bernoulli analytical value. The pluck is prescribed as an initial VELOCITY profile shaped like the first bending mode, not an initial displacement, so that frame 0 positions remain exactly the shipped rest configuration (the frozen initial-positions contract of SPEC.md section 3). A velocity pluck excites the same fundamental and any residual higher-mode content is rejected by the FFT peak pick.",
+  "geometry": {
+    "type": "box",
+    "size_m": [0.4, 0.05, 0.05],
+    "particle_spacing_m": 0.005,
+    "particle_positions_file": "a2_beam_positions.npy"
+  },
+  "material": {
+    "model_hint": "linear_elastic_or_equivalent",
+    "youngs_modulus_pa": 5.0e5,
+    "poisson_ratio": 0.3,
+    "density_kg_m3": 1000
+  },
+  "boundary_conditions": {
+    "clamp": { "region": "x < 0.01", "type": "fixed" }
+  },
+  "initial_conditions": {
+    "type": "modal_velocity_pluck",
+    "direction": [0, 1, 0],
+    "tip_velocity_m_s": 0.05,
+    "mode_shape": "euler_bernoulli_mode1",
+    "formula": "vy(x) = V * phi1(x/L) / phi1(1), phi1(s) = cosh(b*s) - cos(b*s) - sigma*(sinh(b*s) - sin(b*s)), b = 1.875104, sigma = (cosh(b) - cos(b)) / (sinh(b) + sin(b))",
+    "release_at_t": 0.0
+  },
+  "simulation": { "duration_s": 4.0, "output_fps": 240, "gravity": [0, 0, 0] },
+  "pass_criteria": {
+    "quantity": "fundamental_frequency_hz",
+    "reference": "euler_bernoulli_cantilever",
+    "rel_tolerance": 0.10,
+    "damping_report_only": true,
+    "regime_max_tip_deflection_frac_of_length": 0.05,
+    "tip_region_rest_x_frac": 0.95
+  },
+  "provenance": {
+    "reference_formula": "f1 = (1.875104^2 / (2*pi*L^2)) * sqrt(E*I / (rho*A)), I = w*h^3/12 for bending across h",
+    "regime_assumptions": [
+      "small deflection (tip deflection under 5 percent of length, enforced by the scorer as a regime guard)",
+      "slender beam, L/h = 8",
+      "linear elastic, no damping specified (measured decay is numerical dissipation, report-only)"
+    ],
+    "notes": "Young's modulus enters the formula directly. No plane-strain E/(1-nu^2) correction is applied because the beam's lateral faces are free, which is the uniaxial-stress condition Euler-Bernoulli assumes."
+  }
+}

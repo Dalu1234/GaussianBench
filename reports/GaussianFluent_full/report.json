@@ -1,0 +1,333 @@
+[
+  {
+    "scene_id": "a1a_conservation_inplace_v1",
+    "test_class": "code_verification",
+    "tier": "A",
+    "status": "FAIL",
+    "measured": {
+      "linear_momentum_rel_drift": 0.01725270587580785,
+      "angular_momentum_rel_drift": 1.0190645640858542,
+      "kinetic_energy_rel_change_final": -0.9997405552062463
+    },
+    "reference": {
+      "linear_momentum_rel_drift": 0.0,
+      "angular_momentum_rel_drift": 0.0
+    },
+    "tolerance": {
+      "linear_momentum_rel_drift": 1e-06,
+      "angular_momentum_rel_drift": 0.001,
+      "velocities_derived": false
+    },
+    "notes": [
+      "Angular momentum magnitude trace |L(t)|/|L(0)|: {'t=0.00s': 1.0, 't=2.50s': 0.0030264414781387863, 't=5.00s': 0.0022821757538660685, 't=7.50s': 0.001684384108081549, 't=10.00s': 0.0011213366111166865}"
+    ],
+    "plots": []
+  },
+  {
+    "scene_id": "a1b_conservation_drifting_v1",
+    "test_class": "code_verification",
+    "tier": "A",
+    "status": "FAIL",
+    "measured": {
+      "linear_momentum_rel_drift": 0.003036722493114002,
+      "angular_momentum_rel_drift": 1.0190644715531463,
+      "kinetic_energy_rel_change_final": -0.008342682226284759,
+      "declared_domain_handling": "co_moving"
+    },
+    "reference": {
+      "linear_momentum_rel_drift": 0.0,
+      "angular_momentum_rel_drift": 0.0
+    },
+    "tolerance": {
+      "linear_momentum_rel_drift": 0.001,
+      "angular_momentum_rel_drift": 0.01,
+      "velocities_derived": false
+    },
+    "notes": [
+      "Angular momentum magnitude trace |L(t)|/|L(0)|: {'t=0.00s': 1.0, 't=2.50s': 0.0030269333073355974, 't=5.00s': 0.002279198378290836, 't=7.50s': 0.0017040200403225549, 't=10.00s': 0.001046064733513582}"
+    ],
+    "plots": []
+  },
+  {
+    "scene_id": "a2_beam_frequency_v1",
+    "test_class": "solution_verification",
+    "tier": "A",
+    "status": "FAIL",
+    "measured": {
+      "fundamental_frequency_hz": 0.2606768656479946,
+      "rel_error": 0.7690663575469305,
+      "damping_ratio": 0.21105684689148277,
+      "max_tip_deflection_m": 0.015342738538359602
+    },
+    "reference": {
+      "fundamental_frequency_hz": 1.1287955400476979
+    },
+    "tolerance": {
+      "rel_tolerance": 0.1
+    },
+    "notes": [
+      "Damping ratio (report-only, numerical dissipation): zeta = 0.2111.",
+      "Young's modulus used directly in the Euler-Bernoulli formula (uniaxial stress, lateral faces free; no E/(1-nu^2) correction)."
+    ],
+    "plots": []
+  },
+  {
+    "scene_id": "a3_wavespeed_v1",
+    "test_class": "solution_verification",
+    "tier": "A",
+    "status": "FAIL",
+    "measured": {
+      "arrival_detected": false
+    },
+    "reference": {
+      "bar_wave_speed_m_s": 22.360679774997898
+    },
+    "tolerance": {
+      "rel_tolerance": 0.15
+    },
+    "notes": [
+      "The far end never moved above the noise floor (1e-05 m) within the run, or moved at frame 0 (which would mean the initial condition was not at rest). No wave arrived; the pulse boundary condition may be missing."
+    ],
+    "plots": []
+  },
+  {
+    "scene_id": "a4_meltfront_v1",
+    "test_class": "capability",
+    "tier": "A",
+    "status": "NA",
+    "measured": {},
+    "reference": {},
+    "tolerance": {},
+    "notes": [
+      "No submission directory found. For capability tests this means the system does not support the capability."
+    ],
+    "plots": []
+  },
+  {
+    "scene_id": "a5_stiffness_v1",
+    "test_class": "solution_verification",
+    "tier": "A",
+    "status": "PASS",
+    "measured": {
+      "lateral_strain": -0.006296618043312052,
+      "axial_strain": 0.021044034118715072,
+      "rel_error": 0.002628170405108359
+    },
+    "reference": {
+      "lateral_strain": -0.0063132102356145215,
+      "poisson_ratio": 0.3
+    },
+    "tolerance": {
+      "rel_tolerance": 0.1
+    },
+    "notes": [
+      "Axial strain at hold: 0.02104 (from measured face displacements over the rest gauge length 0.0950 m).",
+      "Lateral strain measured on core region x in [30%, 70%] of length: eps_y=-0.00630, eps_z=-0.00630.",
+      "Reminder: lateral faces must be traction-free (uniaxial stress). Near-zero contraction usually means your lateral boundaries are clamped; declare boundary handling in meta.json."
+    ],
+    "plots": []
+  },
+  {
+    "scene_id": "a6_freefall_v1",
+    "test_class": "solution_verification",
+    "tier": "A",
+    "status": "NA",
+    "measured": {},
+    "reference": {},
+    "tolerance": {},
+    "notes": [
+      "No submission directory found. For capability tests this means the system does not support the capability."
+    ],
+    "plots": []
+  },
+  {
+    "scene_id": "b1_bimaterial_bar_v1",
+    "test_class": "solution_verification",
+    "tier": "B",
+    "status": "NA",
+    "measured": {},
+    "reference": {},
+    "tolerance": {},
+    "notes": [
+      "No submission directory found. For capability tests this means the system does not support the capability."
+    ],
+    "plots": []
+  },
+  {
+    "scene_id": "c1_covariance_v1",
+    "test_class": "code_verification",
+    "tier": "C",
+    "status": "PASS",
+    "measured": {
+      "kinematic_median_rel_frobenius_error": 0.008642948612742746,
+      "kinematic_p95_rel_frobenius_error": 0.011746791184623493,
+      "transport_median_rel_frobenius_error": 0.00011192760106282729,
+      "transport_p95_rel_frobenius_error": 0.0003135601937290075,
+      "kinematic_status": "PASS",
+      "transport_status": "PASS",
+      "n_particles_scored": 3375
+    },
+    "reference": {
+      "kinematic_target": "F_fit from positions vs F_target",
+      "transport_map": "F_native Sigma_0 F_native^T",
+      "F_target_diag": [
+        1.5,
+        1.0,
+        0.8
+      ]
+    },
+    "tolerance": {
+      "kinematic_median_max": 0.05,
+      "kinematic_p95_max": 0.1,
+      "transport_median_max": 0.001,
+      "transport_p95_max": 0.01
+    },
+    "notes": [
+      "Excluded 4625 particles within 2 spacings of a prescribed face; fitted and scored local F on 3375 particles; transport uses the entrant's exported internal F. Kinematics pass; pure covariance transport passes."
+    ],
+    "plots": []
+  },
+  {
+    "scene_id": "c2_blobhealth_melt_v1",
+    "test_class": "capability",
+    "tier": "C",
+    "status": "NA",
+    "measured": {},
+    "reference": {},
+    "tolerance": {},
+    "notes": [
+      "No submission directory found. For capability tests this means the system does not support the capability."
+    ],
+    "plots": []
+  },
+  {
+    "scene_id": "c2_blobhealth_shear_v1",
+    "test_class": "capability",
+    "tier": "C",
+    "status": "INVALID",
+    "measured": {
+      "peak_kinematic_median_rel_frobenius_error": 0.12366121346132092,
+      "peak_kinematic_p95_rel_frobenius_error": 0.19968904909745766,
+      "peak_transport_median_rel_frobenius_error": 0.0008145593891341019,
+      "peak_transport_p95_rel_frobenius_error": 0.0014648209684435952,
+      "kinematic_status": "FAIL",
+      "transport_status": "PASS",
+      "health_status": "PASS",
+      "min_eigenvalue_ratio": 0.18001708535895325,
+      "degenerate_fraction": 0.0,
+      "worst_particle_id": 999
+    },
+    "reference": {
+      "kinematic_target": "F_fit from positions vs F_peak",
+      "peak_covariance_map": "F_native Sigma_0 F_native^T",
+      "peak_gamma": 1.0,
+      "healthy_min_eigenvalue_ratio": 1.0,
+      "healthy_degenerate_fraction": 0.0
+    },
+    "tolerance": {
+      "peak_kinematic_median_rel_frobenius_max": 0.05,
+      "peak_kinematic_p95_rel_frobenius_max": 0.1,
+      "peak_transport_median_rel_frobenius_max": 0.001,
+      "peak_transport_p95_rel_frobenius_max": 0.01,
+      "peak_transport_boundary_exclusion_spacings": 2.0,
+      "min_eigenvalue_ratio": 0.001,
+      "condition_number_max": 10000.0,
+      "degenerate_fraction_max": 0.001
+    },
+    "notes": [
+      "Peak frame 60: median/p95 kinematic realization error 1.237e-01/1.997e-01; pure covariance transport error 8.146e-04/1.465e-03 using entrant-native F on 180 interior particles after excluding 2 spacings from each face. Worst health particle id 999; the scorer regenerates the eigenvalue history when the full native export is rescored."
+    ],
+    "plots": []
+  },
+  {
+    "scene_id": "c3_roundtrip_v1",
+    "test_class": "capability",
+    "tier": "C",
+    "status": "NA",
+    "measured": {},
+    "reference": {},
+    "tolerance": {},
+    "notes": [
+      "No submission directory found. For capability tests this means the system does not support the capability."
+    ],
+    "plots": []
+  },
+  {
+    "scene_id": "c4_captured_frequency_v1",
+    "test_class": "capability",
+    "tier": "C",
+    "status": "NA",
+    "measured": {},
+    "reference": {},
+    "tolerance": {},
+    "notes": [
+      "No submission directory found. For capability tests this means the system does not support the capability."
+    ],
+    "plots": []
+  },
+  {
+    "scene_id": "c5_triangle_shape_transport_v1",
+    "test_class": "capability",
+    "tier": "C",
+    "status": "NA",
+    "measured": {},
+    "reference": {},
+    "tolerance": {},
+    "notes": [
+      "No submission directory found. For capability tests this means the system does not support the capability."
+    ],
+    "plots": []
+  },
+  {
+    "scene_id": "c6_rigid_transport_v1",
+    "test_class": "code_verification",
+    "tier": "C",
+    "status": "NA",
+    "measured": {},
+    "reference": {},
+    "tolerance": {},
+    "notes": [
+      "No submission directory found. For capability tests this means the system does not support the capability."
+    ],
+    "plots": []
+  },
+  {
+    "scene_id": "c7_supported_settle_v1",
+    "test_class": "capability",
+    "tier": "C",
+    "status": "NA",
+    "measured": {},
+    "reference": {},
+    "tolerance": {},
+    "notes": [
+      "No submission directory found. For capability tests this means the system does not support the capability."
+    ],
+    "plots": []
+  },
+  {
+    "scene_id": "c8_impact_recovery_v1",
+    "test_class": "capability",
+    "tier": "C",
+    "status": "NA",
+    "measured": {},
+    "reference": {},
+    "tolerance": {},
+    "notes": [
+      "No submission directory found. For capability tests this means the system does not support the capability."
+    ],
+    "plots": []
+  },
+  {
+    "scene_id": "m1_material_validation_v1",
+    "test_class": "model_validation",
+    "tier": "A",
+    "status": "NA",
+    "measured": {},
+    "reference": {},
+    "tolerance": {},
+    "notes": [
+      "No submission directory found. For capability tests this means the system does not support the capability."
+    ],
+    "plots": []
+  }
+]

@@ -1,0 +1,13 @@
+{
+  "system_name": "GASP",
+  "system_version": "186c9c912df8b4a4258810e6e4754e8cfcf0c53d",
+  "spec_version": "1.2.0",
+  "columns_present": ["frame", "time", "com_x", "com_y", "com_z", "com_vx", "com_vy", "com_vz", "bbox_volume", "detF_nonpositive_fraction", "nonfinite_fraction", "particle_count"],
+  "hardware": "NVIDIA GeForce RTX 4070 Laptop GPU",
+  "representation": "GASP triangle soup (released teddy pseudomesh, 448606 stable triangles)",
+  "wall_clock_seconds": 119.104,
+  "solver": "released taichi_elements MPMSolver 64^3, taichi (1, 7, 4), python 3.13.5",
+  "intervention": "none",
+  "stable_triangle_order": true,
+  "notes": "Released GASP Taichi pipeline: native teddy pseudomesh vertices simulated by released taichi_elements MPMSolver (material=elastic, E_scale=1.0, res 64^3, frame step 0.04 s x 4 frames), with GASP's released per-frame triangle size-control rule (threshold=1.0) applied after every step exactly as in taichi_examples/demo/3d.py. Placement: released Rescale scale=0.3, offset=[0.35, 0.35, 0.55]; exports use the released Rescale.inverse into the same frame as the frozen C5 submission. Gravity=(0.0, 0.0, -9.8); A6 body metrics are in native solver units (meters), computed from released solver state including per-particle F read from the solver's own field"
+}

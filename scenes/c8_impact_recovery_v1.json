@@ -1,0 +1,30 @@
+{
+  "scene_id": "c8_impact_recovery_v1",
+  "scorer": "score_c8_impact_recovery",
+  "test_class": "capability",
+  "tier": "C",
+  "description": "Representation-native robustness and elastic recovery through a hard contact impact. The system's native stable-identity body falls under native gravity onto the system's own released floor/boundary using a soft elastic setting from the released parameter surface, deforms substantially at impact (a deformation gate makes a too-gentle run INVALID rather than a cheap PASS), and must then recover: the state stays finite throughout, identity/count never changes, transient shape error stays bounded (no runaway), and by the tail of the rollout the median shape error returns below a recovery bound. Unlike C5, which demands near-rigid transport fidelity at every frame, C8 deliberately drives the representation through large deformation and grades survival and recovery.",
+  "geometry": { "type": "stable_triangle_soup" },
+  "initial_conditions": { "released_from_height_under_native_gravity": true, "soft_elastic_native_material": true },
+  "simulation": { "duration_s": "native rollout", "output_fps": "native checkpoints", "gravity": "native" },
+  "pass_criteria": {
+    "quantity": "finiteness, bounded transient deformation, and tail recovery of stable-identity shape metrics through impact",
+    "min_frames": 40,
+    "min_com_travel": 0.3,
+    "min_peak_area_p95": 0.05,
+    "transient_edge_p95_max": 1.0,
+    "tail_frac": 0.25,
+    "tail_edge_median_max": 0.05,
+    "tail_area_median_max": 0.1
+  },
+  "provenance": {
+    "reference_formula": "peak area_rel_error_p95 >= min_peak_area_p95 (impact actually deformed the body); edge_rel_error_p95 <= transient_edge_p95_max at every frame; min over the last tail_frac of frames of edge_rel_error_median <= tail_edge_median_max and of area_rel_error_median <= tail_area_median_max (elastic recovery)",
+    "regime_assumptions": [
+      "elastic constitutive setting from the released parameter surface (an inelastic material cannot recover and correctly fails)",
+      "the floor is part of the system's released pipeline",
+      "stable identity: the same physical element keeps the same index in every frame",
+      "the recovery bound uses the best-recovered frame in the tail because the body may still be oscillating at the final checkpoint"
+    ],
+    "notes": "Frozen v1. Submission contract is triangle_metrics.csv exactly as SPEC 2.6. A natural controlled fault is running the same drop with a released inelastic material (e.g. sand): the impact gate still passes but the tail recovery bounds fail because plastic flow never returns the shape to rest."
+  }
+}

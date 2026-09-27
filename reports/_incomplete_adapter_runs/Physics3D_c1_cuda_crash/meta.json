@@ -1,0 +1,24 @@
+{
+  "system_name": "Physics3D",
+  "system_version": "8339ed6aa2cd5d50e1001a254a3d95aea678a956",
+  "spec_version": "1.1.0",
+  "columns_present": [
+    "vx",
+    "vy",
+    "vz",
+    "mass",
+    "F00",
+    "F01",
+    "F02",
+    "F10",
+    "F11",
+    "F12",
+    "F20",
+    "F21",
+    "F22"
+  ],
+  "wall_clock_seconds": 18.62,
+  "hardware": "NVIDIA GeForce RTX 4070 Laptop GPU, Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+  "notes": "Solver: Physics3D native UL MLS-MPM (Warp, cuda, f32), material 'jelly' (fixed corotated) with scene E=100000, nu=0.3, density=1000 passed straight through (the solver derives Lame parameters itself). frame_dt=0.0166667, substep_dt=9.98004e-05, 167 substeps/frame, grid 21^3, grid damping disabled. | Affine ramp: two-layer particle shell velocity-prescribed per substep in exact rest coordinates, plus a custom grid Dirichlet kernel (registered through the solver's own grid_postprocess mechanism) applying the exact affine velocity field over the moving boundary shell; particle-only prescriptions are mass-diluted by the transfer stencil and do not transmit. | Simulation ran in a transformed frame: sim(t) = P @ (scene(t) - v_frame * t) + offset, offset=[0.10395448267190434, 0.10395448267190434, 0.10395448267190434], permutation=identity, v_frame=zero (Galilean boost; physics is Galilean-invariant and the boost keeps f32 positions small over a long drift). The exact inverse was applied on export; the submission is in scene coordinates.",
+  "scene_id": "c1_covariance_v1"
+}

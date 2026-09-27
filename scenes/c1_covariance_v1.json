@@ -1,0 +1,47 @@
+{
+  "scene_id": "c1_covariance_v1",
+  "scorer": "score_c1_covariance",
+  "test_class": "code_verification",
+  "tier": "C",
+  "description": "Covariance push-forward correctness with kinematic attribution. The block is subjected to a prescribed uniform deformation ramp: every face is displacement-controlled so the interior target deformation gradient is F_target = diag(1.5, 1.0, 0.8). The scorer fits a local deformation gradient from submitted positions for kinematic realization, then scores pure covariance transport against each entrant's exported internal F_i Sigma_0 F_i^T. Requires trajectory.parquet deformation gradients and covariances.parquet with at least frame 0 and the final frame.",
+  "geometry": {
+    "type": "box",
+    "size_m": [0.1, 0.1, 0.1],
+    "particle_spacing_m": 0.005,
+    "particle_positions_file": "c1_block_positions.npy"
+  },
+  "material": {
+    "model_hint": "any_elastic",
+    "youngs_modulus_pa": 1.0e5,
+    "poisson_ratio": 0.3,
+    "density_kg_m3": 1000
+  },
+  "boundary_conditions": {
+    "all_faces": {
+      "type": "displacement_ramp_affine",
+      "F_target": [[1.5, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 0.8]],
+      "about": [0.0, 0.0, 0.0],
+      "ramp_end_s": 1.0,
+      "note": "x(t) = (I + ramp(t) * (F_target - I)) x0 prescribed on all six faces; the homogeneous solution satisfies the same map in the interior"
+    }
+  },
+  "initial_conditions": { "at_rest": true },
+  "simulation": { "duration_s": 1.0, "output_fps": 60, "gravity": [0, 0, 0] },
+  "pass_criteria": {
+    "quantity": "kinematic_realization_and_observed_deformation_covariance_transport",
+    "reference": "fit local F_i from positions and compare it with F_target for kinematic realization; compare sigma_final with entrant-native exported F_i * sigma_rest * F_i^T for transport",
+    "kinematic_median_max": 5.0e-2,
+    "kinematic_p95_max": 1.0e-1,
+    "transport_median_max": 1.0e-3,
+    "transport_p95_max": 1.0e-2,
+    "boundary_exclusion_spacings": 2
+  },
+  "provenance": {
+    "reference_formula": "Sigma' = F Sigma F^T, the push-forward of a Gaussian covariance under the linear map F (continuum kinematics of an affine deformation)",
+    "regime_assumptions": [
+      "interior deformation homogeneous (guaranteed by prescribing the affine map on all faces of an elastic block)",
+      "homogeneity is only approximate within 2 particle spacings of a prescribed face, so the scorer excludes those particles and says so"
+    ],
+    "notes": "Tolerances are looser than pure floating-point arithmetic would demand because near-boundary disturbances can propagate slightly inward; the exclusion zone plus median/p95 metrics keep the test sharp without punishing benign boundary noise."
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "system_name": "PhysDreamer",
+  "system_version": "95beb71f9f1b037b05d7c364d1943dde10b0efbd",
+  "spec_version": "1.2.0",
+  "columns_present": [
+    "vx",
+    "vy",
+    "vz",
+    "mass",
+    "F00",
+    "F01",
+    "F02",
+    "F10",
+    "F11",
+    "F12",
+    "F20",
+    "F21",
+    "F22"
+  ],
+  "wall_clock_seconds": 60.266,
+  "hardware": "NVIDIA GeForce RTX 4070 Laptop GPU",
+  "notes": "Released PhysDreamer physdreamer/warp_mpm solver. | Translation-only placement [0.3000099112466975, 0.49205665408881133, 0.5000976655875781] inverted on export. | Native fixed grid [0,1.0]^3 at 100^3, dt=9.46969697e-05, 44 substeps/frame. | Tier C covariance is the released first-order native covariance update, not reconstructed by the adapter."
+}

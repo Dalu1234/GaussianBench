@@ -1,0 +1,30 @@
+{
+  "scene_id": "c7_supported_settle_v1",
+  "scorer": "score_c7_supported_settle",
+  "test_class": "capability",
+  "tier": "C",
+  "description": "Representation-native long-horizon rest stability under contact. The system's native stable-identity body rests on the system's own released static support (stationary material, floor plane, or equivalent) under its native gravity, for a long rollout. After a declared settling prefix the body must be statically stable: the center of mass stays put up to a small drift bound scaled by the body's own size, the stable-identity shape metrics stay bounded, the state stays finite, and element identity/count never changes. This measures contact stability, creeping drift, and jitter growth over a horizon much longer than the impact-scale scenes.",
+  "geometry": { "type": "stable_triangle_soup" },
+  "initial_conditions": { "resting_on_released_static_support": true },
+  "simulation": { "duration_s": "native rollout", "output_fps": "native checkpoints", "gravity": "native" },
+  "pass_criteria": {
+    "quantity": "post-settling center-of-mass drift and stable-identity shape boundedness under sustained contact",
+    "min_frames": 80,
+    "settle_frac": 0.5,
+    "tail_com_drift_max_rel": 0.02,
+    "edge_median_max": 0.02,
+    "edge_p95_max": 0.1,
+    "area_median_max": 0.04,
+    "area_p95_max": 0.2
+  },
+  "provenance": {
+    "reference_formula": "for frames after settle_frac of the rollout: max ||x_com(t) - x_com(t_settle)|| <= tail_com_drift_max_rel * L, with L = cbrt(bbox_volume at frame 0) the body's own length scale",
+    "regime_assumptions": [
+      "the support is part of the system's released pipeline, not an adapter-side constraint",
+      "native gravity is on for the entire rollout",
+      "stable identity: the same physical element keeps the same index in every frame",
+      "the drift bound is evaluated only after the declared settling prefix; the transient is unconstrained except for finiteness"
+    ],
+    "notes": "Frozen v1. Submission contract is triangle_metrics.csv exactly as SPEC 2.6 plus the bbox_volume column (already emitted by the released GASP adapter) used solely for the body length scale. A natural controlled fault is an over-aggressive shape-control threshold: sustained contact deformation makes the clamp fire continuously and the shape metrics leave their bounds."
+  }
+}

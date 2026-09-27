@@ -1,0 +1,13 @@
+{
+  "system": "GaussianFluent",
+  "source_revision": "de7e10675b9dce58952241087bb15cce9bc3f6ef",
+  "asset": "released watermelon model",
+  "protocol": "native released Warp MPM demo, four display frames",
+  "precision": "f32 CUDA",
+  "gpu": "NVIDIA GeForce RTX 4070 Laptop GPU",
+  "particles": 1381100,
+  "frame_dt_seconds": 0.03,
+  "frames_advanced": 4,
+  "native_output": "external_methods/GaussianFluent/output/watermelon_bench_smoke/simulation_ply",
+  "benchmark_classification": "external native-trajectory diagnostic"
+}

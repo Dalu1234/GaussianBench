@@ -1,0 +1,256 @@
+[
+  {
+    "scene_id": "a1a_conservation_inplace_v1",
+    "test_class": "code_verification",
+    "tier": "A",
+    "status": "NA",
+    "measured": {},
+    "reference": {},
+    "tolerance": {},
+    "notes": [
+      "No submission directory found. For capability tests this means the system does not support the capability."
+    ],
+    "plots": []
+  },
+  {
+    "scene_id": "a1b_conservation_drifting_v1",
+    "test_class": "code_verification",
+    "tier": "A",
+    "status": "NA",
+    "measured": {},
+    "reference": {},
+    "tolerance": {},
+    "notes": [
+      "No submission directory found. For capability tests this means the system does not support the capability."
+    ],
+    "plots": []
+  },
+  {
+    "scene_id": "a2_beam_frequency_v1",
+    "test_class": "solution_verification",
+    "tier": "A",
+    "status": "NA",
+    "measured": {},
+    "reference": {},
+    "tolerance": {},
+    "notes": [
+      "No submission directory found. For capability tests this means the system does not support the capability."
+    ],
+    "plots": []
+  },
+  {
+    "scene_id": "a3_wavespeed_v1",
+    "test_class": "solution_verification",
+    "tier": "A",
+    "status": "NA",
+    "measured": {},
+    "reference": {},
+    "tolerance": {},
+    "notes": [
+      "No submission directory found. For capability tests this means the system does not support the capability."
+    ],
+    "plots": []
+  },
+  {
+    "scene_id": "a4_meltfront_v1",
+    "test_class": "capability",
+    "tier": "A",
+    "status": "NA",
+    "measured": {},
+    "reference": {},
+    "tolerance": {},
+    "notes": [
+      "No submission directory found. For capability tests this means the system does not support the capability."
+    ],
+    "plots": []
+  },
+  {
+    "scene_id": "a5_stiffness_v1",
+    "test_class": "solution_verification",
+    "tier": "A",
+    "status": "NA",
+    "measured": {},
+    "reference": {},
+    "tolerance": {},
+    "notes": [
+      "No submission directory found. For capability tests this means the system does not support the capability."
+    ],
+    "plots": []
+  },
+  {
+    "scene_id": "a6_freefall_v1",
+    "test_class": "solution_verification",
+    "tier": "A",
+    "status": "NA",
+    "measured": {},
+    "reference": {},
+    "tolerance": {},
+    "notes": [
+      "No submission directory found. For capability tests this means the system does not support the capability."
+    ],
+    "plots": []
+  },
+  {
+    "scene_id": "b1_bimaterial_bar_v1",
+    "test_class": "solution_verification",
+    "tier": "B",
+    "status": "NA",
+    "measured": {},
+    "reference": {},
+    "tolerance": {},
+    "notes": [
+      "No submission directory found. For capability tests this means the system does not support the capability."
+    ],
+    "plots": []
+  },
+  {
+    "scene_id": "c1_covariance_v1",
+    "test_class": "code_verification",
+    "tier": "C",
+    "status": "NA",
+    "measured": {},
+    "reference": {},
+    "tolerance": {},
+    "notes": [
+      "No submission directory found. For capability tests this means the system does not support the capability."
+    ],
+    "plots": []
+  },
+  {
+    "scene_id": "c2_blobhealth_melt_v1",
+    "test_class": "capability",
+    "tier": "C",
+    "status": "NA",
+    "measured": {},
+    "reference": {},
+    "tolerance": {},
+    "notes": [
+      "No submission directory found. For capability tests this means the system does not support the capability."
+    ],
+    "plots": []
+  },
+  {
+    "scene_id": "c2_blobhealth_shear_v1",
+    "test_class": "capability",
+    "tier": "C",
+    "status": "NA",
+    "measured": {},
+    "reference": {},
+    "tolerance": {},
+    "notes": [
+      "No submission directory found. For capability tests this means the system does not support the capability."
+    ],
+    "plots": []
+  },
+  {
+    "scene_id": "c3_roundtrip_v1",
+    "test_class": "capability",
+    "tier": "C",
+    "status": "NA",
+    "measured": {},
+    "reference": {},
+    "tolerance": {},
+    "notes": [
+      "No submission directory found. For capability tests this means the system does not support the capability."
+    ],
+    "plots": []
+  },
+  {
+    "scene_id": "c4_captured_frequency_v1",
+    "test_class": "capability",
+    "tier": "C",
+    "status": "NA",
+    "measured": {},
+    "reference": {},
+    "tolerance": {},
+    "notes": [
+      "No submission directory found. For capability tests this means the system does not support the capability."
+    ],
+    "plots": []
+  },
+  {
+    "scene_id": "c5_triangle_shape_transport_v1",
+    "test_class": "capability",
+    "tier": "C",
+    "status": "NA",
+    "measured": {},
+    "reference": {},
+    "tolerance": {},
+    "notes": [
+      "No submission directory found. For capability tests this means the system does not support the capability."
+    ],
+    "plots": []
+  },
+  {
+    "scene_id": "c6_rigid_transport_v1",
+    "test_class": "code_verification",
+    "tier": "C",
+    "status": "FAIL",
+    "measured": {
+      "triangle_count": 448606,
+      "com_travel": 2.666378369787415,
+      "direction_cosine": -0.11590126892112046,
+      "path_straightness": 0.20992948173724568,
+      "speed_variation": 2.7139064691545296,
+      "max_edge_rel_error_median": 0.0102032247620292,
+      "max_edge_rel_error_p95": 0.0395079517470397,
+      "max_area_rel_error_median": 0.0062561208302457,
+      "max_area_rel_error_p95": 0.0352201886098492,
+      "max_nonfinite_fraction": 0.0
+    },
+    "reference": {
+      "com_path": "straight line at constant speed along the declared direction",
+      "edge_and_area_relative_error": 0.0
+    },
+    "tolerance": {
+      "direction_cosine_min": 0.98,
+      "path_straightness_max": 0.02,
+      "speed_variation_max": 0.05,
+      "edge_median_max": 0.01,
+      "edge_p95_max": 0.05,
+      "area_median_max": 0.02,
+      "area_p95_max": 0.1
+    },
+    "notes": [],
+    "plots": []
+  },
+  {
+    "scene_id": "c7_supported_settle_v1",
+    "test_class": "capability",
+    "tier": "C",
+    "status": "NA",
+    "measured": {},
+    "reference": {},
+    "tolerance": {},
+    "notes": [
+      "No submission directory found. For capability tests this means the system does not support the capability."
+    ],
+    "plots": []
+  },
+  {
+    "scene_id": "c8_impact_recovery_v1",
+    "test_class": "capability",
+    "tier": "C",
+    "status": "NA",
+    "measured": {},
+    "reference": {},
+    "tolerance": {},
+    "notes": [
+      "No submission directory found. For capability tests this means the system does not support the capability."
+    ],
+    "plots": []
+  },
+  {
+    "scene_id": "m1_material_validation_v1",
+    "test_class": "model_validation",
+    "tier": "A",
+    "status": "NA",
+    "measured": {},
+    "reference": {},
+    "tolerance": {},
+    "notes": [
+      "No submission directory found. For capability tests this means the system does not support the capability."
+    ],
+    "plots": []
+  }
+]

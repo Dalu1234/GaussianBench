@@ -1,0 +1,7 @@
+{
+  "system": "GASP",
+  "representation": "GASP triangle soup",
+  "source_directory": "comparison_runs/gasp_teddy/triangles",
+  "intervention": "none",
+  "stable_triangle_order": true
+}

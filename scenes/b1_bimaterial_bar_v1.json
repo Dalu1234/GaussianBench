@@ -1,0 +1,75 @@
+{
+  "scene_id": "b1_bimaterial_bar_v1",
+  "scorer": "score_b1_bimaterial_bar",
+  "test_class": "solution_verification",
+  "tier": "B",
+  "description": "Two equal-length materials in series under a small displacement-controlled extension. The left half uses corotated elasticity and the right half stable Neo-Hookean elasticity. In the small-strain regime, axial traction is continuous and each region's strain is sigma/E. This scene quantitatively tests per-particle constitutive dispatch and shared-grid coupling across a material interface.",
+  "geometry": {
+    "type": "box",
+    "size_m": [0.1, 0.04, 0.04],
+    "particle_spacing_m": 0.005,
+    "particle_positions_file": "b1_bimaterial_bar_positions.npy"
+  },
+  "material": {
+    "interface_x_m": 0.05,
+    "regions": [
+      {
+        "name": "soft_corotated",
+        "region": "x < 0.05",
+        "model_hint": "corotated",
+        "youngs_modulus_pa": 50000.0,
+        "poisson_ratio": 0.3,
+        "density_kg_m3": 1000.0
+      },
+      {
+        "name": "stiff_stable_neohookean",
+        "region": "x > 0.05",
+        "model_hint": "stable_neohookean",
+        "youngs_modulus_pa": 200000.0,
+        "poisson_ratio": 0.3,
+        "density_kg_m3": 1000.0
+      }
+    ]
+  },
+  "boundary_conditions": {
+    "fixed_face": {
+      "region": "x < 0.005",
+      "type": "fixed"
+    },
+    "prescribed_face": {
+      "region": "x > 0.095",
+      "type": "displacement_ramp",
+      "displacement_m": [0.001, 0.0, 0.0],
+      "ramp_end_s": 0.5,
+      "then": "hold"
+    },
+    "lateral_faces": "traction_free"
+  },
+  "initial_conditions": {
+    "at_rest": true
+  },
+  "simulation": {
+    "duration_s": 1.0,
+    "output_fps": 60,
+    "gravity": [0.0, 0.0, 0.0]
+  },
+  "pass_criteria": {
+    "left_core_x_frac": [0.125, 0.375],
+    "right_core_x_frac": [0.625, 0.875],
+    "hold_window_frac": 0.25,
+    "prescribed_face_tolerance_rel": 0.05,
+    "regional_strain_rel_tolerance": 0.15,
+    "interface_traction_jump_rel_tolerance": 0.15
+  },
+  "provenance": {
+    "reference_formula": "For two equal-area bars in series, sigma = Delta/(L1/E1 + L2/E2), epsilon_i = sigma/E_i, and traction is continuous at the interface.",
+    "regime_assumptions": [
+      "small strain (approximately one percent total extension)",
+      "quasi-static displacement ramp",
+      "equal cross-sectional area",
+      "traction-free lateral faces",
+      "perfectly bonded material interface"
+    ],
+    "notes": "Regional axial strain is estimated by linear regression over the central half of each material region, excluding equal quarter-region bands next to the clamps and interface. Interface traction is inferred as E_i times the measured small strain in each region."
+  }
+}

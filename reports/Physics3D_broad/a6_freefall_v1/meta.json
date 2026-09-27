@@ -1,0 +1,13 @@
+{
+  "system": "Physics3D",
+  "system_name": "Physics3D",
+  "system_version": "32d92183e2918f26384ec60e410a8145d6efafd9",
+  "spec_version": "1.2.0",
+  "columns_present": ["frame", "time", "com_x", "com_y", "com_z", "com_vx", "com_vy", "com_vz", "bbox_volume", "detF_median", "detF_nonpositive_fraction", "nonfinite_fraction", "particle_count"],
+  "wall_clock_seconds": null,
+  "hardware": "NVIDIA GeForce RTX 4070 Laptop GPU",
+  "representation": "Physics3D Gaussian MPM particles",
+  "source_directory": "external_methods/Physics3D/output/ball_mpm_rollout/simulation_ply",
+  "intervention": "none",
+  "gravity_scale": 1.0
+}

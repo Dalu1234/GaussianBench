@@ -1,0 +1,49 @@
+{
+  "scene_id": "a5_stiffness_v1",
+  "scorer": "score_a5_stiffness",
+  "test_class": "solution_verification",
+  "tier": "A",
+  "description": "Uniaxial stress block under displacement control. One face fixed, the opposite face displaced axially by a prescribed delta over 0.5 s, then held (quasi-static ramp). LATERAL FACES FREE. Because the lateral faces are traction-free this is uniaxial STRESS, and the kinematic reference is the Poisson contraction: lateral_strain = -nu * axial_strain. Design note: the force-based stiffness measurement was deliberately traded for this kinematic check so black boxes that only output positions can run the test; a force-based version can live in Tier B later.",
+  "geometry": {
+    "type": "box",
+    "size_m": [0.1, 0.1, 0.1],
+    "particle_spacing_m": 0.005,
+    "particle_positions_file": "a5_block_positions.npy"
+  },
+  "material": {
+    "model_hint": "linear_elastic_or_equivalent",
+    "youngs_modulus_pa": 1.0e5,
+    "poisson_ratio": 0.3,
+    "density_kg_m3": 1000
+  },
+  "boundary_conditions": {
+    "fixed_face": { "region": "x < 0.005", "type": "fixed" },
+    "prescribed_face": {
+      "region": "x > 0.095",
+      "type": "displacement_ramp",
+      "displacement_m": [0.002, 0.0, 0.0],
+      "ramp_end_s": 0.5,
+      "then": "hold"
+    },
+    "lateral_faces": "traction_free"
+  },
+  "initial_conditions": { "at_rest": true },
+  "simulation": { "duration_s": 1.5, "output_fps": 120, "gravity": [0, 0, 0] },
+  "pass_criteria": {
+    "quantity": "poisson_lateral_contraction",
+    "reference": "lateral_strain = -nu * axial_strain",
+    "rel_tolerance": 0.10,
+    "hold_window_frac": 0.25,
+    "core_region_x_frac": [0.3, 0.7],
+    "prescribed_face_tolerance_rel": 0.05
+  },
+  "provenance": {
+    "reference_formula": "eps_lat = -nu * eps_axial for uniaxial stress (Hooke's law); axial strain from the prescribed face displacement over the rest gauge length",
+    "regime_assumptions": [
+      "linear elastic, strain about 2 percent",
+      "quasi-static (scorer averages over the hold window; ramp is slow vs the block's lowest period)",
+      "uniaxial stress: lateral faces carry zero traction"
+    ],
+    "notes": "WARNING for submitters: if your system cannot leave the lateral boundaries traction-free (for example a background grid that clamps them), the block cannot contract laterally, this test will read wrong, and your modulus tests elsewhere will read stiff due to Poisson contamination. Declare your boundary handling in meta.json notes."
+  }
+}

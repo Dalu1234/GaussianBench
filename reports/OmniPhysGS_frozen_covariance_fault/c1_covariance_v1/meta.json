@@ -1,0 +1,23 @@
+{
+  "system_name": "OmniPhysGS frozen-covariance fault",
+  "system_version": "5ab915b014467b911581b0c6df351713d3114a08",
+  "spec_version": "1.2.0",
+  "columns_present": [
+    "vx",
+    "vy",
+    "vz",
+    "mass",
+    "F00",
+    "F01",
+    "F02",
+    "F10",
+    "F11",
+    "F12",
+    "F20",
+    "F21",
+    "F22"
+  ],
+  "wall_clock_seconds": 59.205,
+  "hardware": "NVIDIA GeForce RTX 4070 Laptop GPU",
+  "notes": "Released OmniPhysGS MPMModel and constitutive modules. | Translation-only placement offset [0.5, 0.5, 0.5] was inverted on export. | Native fixed grid: 100^3, dt=0.000213675214, 78 substeps/frame. | Covariance uses the released OmniPhysGS F Sigma0 F^T rendering contract. | CONTROLLED FAULT: covariance held at frame-zero values; trajectory and entrant-native F are unchanged."
+}

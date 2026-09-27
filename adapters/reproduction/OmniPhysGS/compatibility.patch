@@ -1,0 +1,71 @@
+diff --git a/src/constitutive_models/abstract.py b/src/constitutive_models/abstract.py
+index 93a84f7..315e866 100644
+--- a/src/constitutive_models/abstract.py
++++ b/src/constitutive_models/abstract.py
+@@ -3,9 +3,6 @@ from typing import *
+ import torch
+ import torch.nn as nn
+ from torch import Tensor
+-from omegaconf import DictConfig
+-from einops.layers.torch import Rearrange
+-
+ from src.mpm_core.warp import SVD
+ 
+ class Material(nn.Module):
+@@ -15,7 +12,9 @@ class Material(nn.Module):
+         self.useless = nn.Parameter(torch.Tensor([1.0]))
+         self.svd = SVD()
+ 
+-        self.transpose = Rearrange('b d1 d2 -> b d2 d1', d1=self.dim, d2=self.dim)
++    @staticmethod
++    def transpose(value: Tensor) -> Tensor:
++        return value.transpose(1, 2)
+ 
+     def forward(self, F: Tensor, log_E: Optional[Tensor]=None, nu: Optional[Tensor]=None) -> Tensor:
+         raise NotImplementedError
+diff --git a/src/mpm_core/mpm_model.py b/src/mpm_core/mpm_model.py
+index 3856bc0..2cd451e 100644
+--- a/src/mpm_core/mpm_model.py
++++ b/src/mpm_core/mpm_model.py
+@@ -3,7 +3,10 @@ from typing import *
+ import numpy as np
+ import torch
+ from torch import Tensor
+-from omegaconf import DictConfig
++try:
++    from omegaconf import DictConfig
++except ImportError:  # GaussianBench standalone-core compatibility
++    DictConfig = Dict
+ 
+ class MPMModel:
+     def __init__(
+@@ -159,4 +162,4 @@ class MPMModel:
+         pass
+     
+     def post_grid_operation(self) -> None:
+-        pass
+\ No newline at end of file
++        pass
+diff --git a/src/mpm_core/set_boundary_conditions.py b/src/mpm_core/set_boundary_conditions.py
+index 1eae9cf..203ef7b 100644
+--- a/src/mpm_core/set_boundary_conditions.py
++++ b/src/mpm_core/set_boundary_conditions.py
+@@ -1,7 +1,10 @@
+ from typing import *
+ 
+ from functools import partial
+-from omegaconf import DictConfig
++try:
++    from omegaconf import DictConfig
++except ImportError:  # GaussianBench standalone-core compatibility
++    DictConfig = Dict
+ import torch
+ from torch import Tensor
+ 
+@@ -447,4 +450,4 @@ def add_surface_collider(
+         )
+                     
+             
+-        
+\ No newline at end of file
++        

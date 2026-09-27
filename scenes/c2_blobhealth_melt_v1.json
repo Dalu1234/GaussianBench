@@ -1,0 +1,47 @@
+{
+  "scene_id": "c2_blobhealth_melt_v1",
+  "scorer": "score_c2_blobhealth",
+  "test_class": "capability",
+  "tier": "C",
+  "description": "Blob health under violent deformation, scene (b): reuses the A4 melt setup (same geometry, thermal material, and hot floor; see a4_meltfront_v1) but with gravity ON so the melt actually flows, and grades covariance health instead of the melt front. Molten flow is the harshest covariance workout available in this suite: large rotations, extreme stretches, topology-adjacent motion. Systems without thermal support submit nothing and are marked NA. Requires covariances.parquet at full output_fps coverage.",
+  "geometry": {
+    "type": "box",
+    "size_m": [0.05, 0.05, 0.2],
+    "particle_spacing_m": 0.005,
+    "particle_positions_file": "a4_column_positions.npy"
+  },
+  "material": {
+    "model_hint": "thermoelastic_with_melting",
+    "youngs_modulus_pa": 5.0e4,
+    "poisson_ratio": 0.3,
+    "density_kg_m3": 1000,
+    "thermal": {
+      "conductivity_w_m_k": 100.0,
+      "specific_heat_j_kg_k": 2000.0,
+      "latent_heat_j_kg": 1.0e5,
+      "melt_temperature_k": 330.0,
+      "initial_temperature_k": 300.0,
+      "properties_equal_in_both_phases": true
+    }
+  },
+  "boundary_conditions": {
+    "hot_floor": { "region": "z < 0.0025", "type": "fixed_temperature", "temperature_k": 400 },
+    "sides": "insulated"
+  },
+  "initial_conditions": { "at_rest": true, "uniform_temperature_k": 300 },
+  "simulation": { "duration_s": 60.0, "output_fps": 10, "gravity": [0, 0, -9.81] },
+  "pass_criteria": {
+    "quantity": "covariance_eigenvalue_health",
+    "reference": "eigenvalues stay bounded away from degeneracy",
+    "min_eigenvalue_ratio": 1.0e-3,
+    "condition_number_max": 1.0e4,
+    "degenerate_fraction_max": 0.001
+  },
+  "provenance": {
+    "reference_formula": "health metrics as in c2_blobhealth_shear_v1",
+    "regime_assumptions": [
+      "capability test, N/A allowed for systems without thermal support"
+    ],
+    "notes": "The melt front itself is graded by a4_meltfront_v1; this scene only watches the Gaussians."
+  }
+}

@@ -1,0 +1,5 @@
+pytest>=9.1
+pandas>=3.0
+pyarrow>=24.0
+h5py>=3.16
+warp-lang==1.8.1

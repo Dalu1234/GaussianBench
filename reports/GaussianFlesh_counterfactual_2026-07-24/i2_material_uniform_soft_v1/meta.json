@@ -1,0 +1,15 @@
+{
+  "system_name": "GaussianFlesh",
+  "system_version": "80f3f8e283cc45f8ded3641efd126af860f16c9d",
+  "spec_version": "1.0.0",
+  "columns_present": [
+    "vx",
+    "vy",
+    "vz",
+    "mass"
+  ],
+  "wall_clock_seconds": 45.793,
+  "hardware": "NVIDIA GeForce RTX 4070 Laptop GPU, Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+  "notes": "Material mapping [uniform_soft_left], x < 0.05: model=corotated, E=50000 Pa, nu=0.3, density=1000 kg/m^3, particles=640; mu = E/(2(1+nu)), lambda = E nu/((1+nu)(1-2nu)), mass = density * spacing^3. | Material mapping [uniform_soft_right], x > 0.05: model=corotated, E=50000 Pa, nu=0.3, density=1000 kg/m^3, particles=640; mu = E/(2(1+nu)), lambda = E nu/((1+nu)(1-2nu)), mass = density * spacing^3. | Solver path: UL-MLS-MPM (solver_ul.substep, use_floor=False). frame_dt=0.0166667 s, substep_dt=0.000362319 s, 46 substeps/frame. Floor contact BC disabled: benchmark scenes have no floor. | Taichi arch=cuda, default_fp=f32 (single precision). numpy seed=0. | Fixed/prescribed boundary regions are enforced by pin kernels in the export module (position and velocity overrides after each substep), not by grid BCs. | Lateral faces: traction-free honored. The body floats in the grid interior with the floor BC disabled; the grid boundary guard only zeroes weights at the domain edge, which the body never approaches. | Simulation ran in a transformed frame: sim(t) = P @ (scene(t) - v_frame * t) + offset, offset=[-0.05000000000000001, 0.12821214264281428, -0.0], permutation=identity, v_frame=zero (Galilean boost; physics is Galilean-invariant and the boost keeps f32 positions small over a long drift). The exact inverse was applied on export; the submission is in scene coordinates.",
+  "scene_id": "i2_material_uniform_soft_v1"
+}

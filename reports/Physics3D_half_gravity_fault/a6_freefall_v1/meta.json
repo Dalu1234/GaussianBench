@@ -1,0 +1,7 @@
+{
+  "system": "Physics3D",
+  "representation": "Physics3D Gaussian MPM particles",
+  "source_directory": "external_methods/Physics3D/output/ball_mpm_rollout/simulation_ply",
+  "intervention": "controlled gravity scale 0.5",
+  "gravity_scale": 0.5
+}

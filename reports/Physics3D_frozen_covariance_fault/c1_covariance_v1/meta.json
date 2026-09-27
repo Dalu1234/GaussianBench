@@ -1,0 +1,28 @@
+{
+  "system_name": "Physics3D frozen-covariance fault",
+  "system_version": "32d92183e2918f26384ec60e410a8145d6efafd9",
+  "harness_commit": "8339ed6aa2cd5d50e1001a254a3d95aea678a956",
+  "spec_version": "1.1.0",
+  "columns_present": [
+    "vx",
+    "vy",
+    "vz",
+    "mass",
+    "F00",
+    "F01",
+    "F02",
+    "F10",
+    "F11",
+    "F12",
+    "F20",
+    "F21",
+    "F22"
+  ],
+  "wall_clock_seconds": 6.795,
+  "hardware": "NVIDIA GeForce RTX 4070 Laptop GPU, Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+  "notes": "Solver: Physics3D native UL MLS-MPM (Warp, cuda, f32), material 'jelly_base' (fixed corotated) with scene E=100000, nu=0.3, density=1000 passed as E/1e7 in the solver's native E units (see parameter-mapping note) (the solver derives Lame parameters itself). frame_dt=0.0166667, substep_dt=0.000252525, 66 substeps/frame, grid 21^3, grid damping disabled. | Parameter mapping: scene E [Pa] passed to the solver as E/1e7 because Physics3D's released compute_mu_lam_from_E_nu stores E in units of 1e7 Pa (native ball config E=0.2); the resulting Lame parameters equal the scene's physical values exactly. | Reproduction fix: initialized released particle_F_N persistent Maxwell state to identity, matching particle_F_N_trial. The released loader left particle_F_N at zero, causing SVD/log of a singular state on the first constitutive update. Maxwell residual moduli are zero for the benchmark's declared pure corotated material. | Affine ramp: two-layer particle shell velocity-prescribed per substep in exact rest coordinates, plus a custom grid Dirichlet kernel (registered through the solver's own grid_postprocess mechanism) applying the exact affine velocity field over the moving boundary shell; particle-only prescriptions are mass-diluted by the transfer stencil and do not transmit. | Simulation ran in a transformed frame: sim(t) = P @ (scene(t) - v_frame * t) + offset, offset=[0.10395448267190434, 0.10395448267190434, 0.10395448267190434], permutation=identity, v_frame=zero (Galilean boost; physics is Galilean-invariant and the boost keeps f32 positions small over a long drift). The exact inverse was applied on export; the submission is in scene coordinates. | CONTROLLED FAULT: covariance held at frame-zero values; trajectory and entrant-native F are unchanged.",
+  "scene_id": "c1_covariance_v1",
+  "source_tree_status": "clean upstream revision with the packaged compatibility patch applied",
+  "compatibility_patch": "adapters/reproduction/Physics3D/reproduction.patch",
+  "compatibility_patch_sha256": "bcf9163211d00424628d86cbf7389399382939166510a7fe3cb329e0f8dda42a"
+}

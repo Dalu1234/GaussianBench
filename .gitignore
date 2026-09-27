@@ -1,0 +1,31 @@
+__pycache__/
+*.py[cod]
+*.so
+*.dll
+.pytest_cache/
+.pytest-tmp/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+.venv/
+venv/
+
+# Generated benchmark submissions and plots
+results/
+held_out_variants/
+*.parquet
+
+# Local simulator outputs
+captures/
+comparison_runs/
+poster_assets/
+bench_results*/
+*.mp4
+*.log
+
+# Editors and operating systems
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

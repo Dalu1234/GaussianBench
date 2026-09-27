@@ -1,0 +1,22 @@
+{
+  "scene_id": "a6_freefall_v1",
+  "scorer": "score_a6_freefall",
+  "test_class": "solution_verification",
+  "tier": "A",
+  "description": "Short-horizon free fall of a Gaussian MPM body. Center-of-mass position and velocity are compared with the constant-gravity solution while bounding volume and deformation-gradient health detect state corruption.",
+  "geometry": {"type": "native_gaussian_particle_body"},
+  "initial_conditions": {"at_rest": true},
+  "simulation": {"duration_s": 0.16, "output_fps": 25, "gravity": [0, 0, -9.8]},
+  "pass_criteria": {
+    "quantity": "free-fall center-of-mass trajectory and state health",
+    "com_position_rel_error_max": 0.1,
+    "com_velocity_rel_error_max": 0.1,
+    "bbox_volume_rel_drift_max": 0.01,
+    "detF_nonpositive_fraction_max": 1e-6
+  },
+  "provenance": {
+    "reference_formula": "x_com(t)=x_com(0)+0.5*g*t^2 and v_com(t)=g*t",
+    "regime_assumptions": ["released from rest", "no contact during scoring window", "uniform gravity"],
+    "notes": "Ten-percent dynamics tolerance accommodates the released Physics3D grid damping over the short native rollout; the half-gravity intervention remains far outside it."
+  }
+}
